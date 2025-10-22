@@ -8,7 +8,8 @@
 }
 
 body {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800; /* ExtraBold */
   line-height: 1.6;
   background-color: #F8F1E9;
   color: #2C2C2C;
@@ -44,19 +45,17 @@ body {
 }
 
 .logo {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
   font-size: 2.5em;
-  font-weight: 700;
-  background: linear-gradient(45deg, #E6B800, #FFD700);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  transition: transform 0.3s ease, filter 0.3s ease;
+  color: #E6B800;
+  text-decoration: none;
+  transition: transform 0.3s ease, color 0.3s ease;
 }
 
 .logo:hover {
   transform: scale(1.05);
-  filter: drop-shadow(0 0 10px rgba(230, 184, 0, 0.5));
+  color: #FFD700;
 }
 
 .nav-links {
@@ -68,7 +67,7 @@ body {
 .nav-links a {
   color: #F8F1E9;
   text-decoration: none;
-  font-weight: 600;
+  font-weight: 800;
   font-size: 1.1em;
   position: relative;
   transition: color 0.3s ease;
@@ -106,7 +105,7 @@ body {
    Hero Section
 ------------------------------ */
 .hero {
-  background: linear-gradient(rgba(27, 38, 59, 0.6), rgba(27, 38, 59, 0.6)), url('https://via.placeholder.com/1600x600/1B263B/F8F1E9?text=ASTYL+Tee') center/cover no-repeat;
+  background: linear-gradient(rgba(27, 38, 59, 0.6), rgba(27, 38, 59, 0.6)), #1B263B; /* Fallback background */
   min-height: 80vh;
   display: flex;
   align-items: center;
@@ -124,7 +123,8 @@ body {
 }
 
 .hero-content h1 {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
   font-size: 4.5em;
   text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
   background: linear-gradient(45deg, #F8F1E9, #E6B800);
@@ -134,10 +134,10 @@ body {
   margin-bottom: 0.3em;
 }
 
-.hero-content h3 {
-  font-family: 'Poppins', sans-serif;
+.hero-content .slogan {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
   font-size: 2em;
-  font-weight: 300;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
   animation: fadeSlideUp 1s ease-out forwards;
   animation-delay: 0.6s;
@@ -152,7 +152,7 @@ body {
   color: #1B263B;
   text-decoration: none;
   border-radius: 50px;
-  font-weight: 600;
+  font-weight: 800;
   font-size: 1.1em;
   transition: all 0.3s ease;
   box-shadow: 0 4px 15px rgba(255, 111, 97, 0.4);
@@ -207,7 +207,8 @@ body {
 }
 
 .products h2 {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
   text-align: center;
   font-size: 3em;
   margin-bottom: 2em;
@@ -236,7 +237,7 @@ body {
   background: #F8F1E9;
   border-radius: 15px;
   box-shadow: 0 8px 25px rgba(27, 38, 59, 0.1);
-  padding: 1em;
+  padding: 2em;
   text-align: center;
   transition: transform 0.3s ease;
 }
@@ -245,23 +246,9 @@ body {
   transform: translateY(-8px);
 }
 
-.product-image {
-  width: 100%;
-  height: 400px;
-  object-fit: cover;
-  border-radius: 10px;
-}
-
 .product-card p {
-  font-size: 1.1em;
+  font-size: 1.2em;
   color: #2C2C2C;
-  margin-top: 0.5em;
-}
-
-/* Instagram Embed Styling */
-.instagram-media {
-  margin: auto !important;
-  max-width: 100% !important;
 }
 
 /* ------------------------------
@@ -273,7 +260,8 @@ body {
 }
 
 .experiences h2 {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
   text-align: center;
   font-size: 3em;
   margin-bottom: 2em;
@@ -320,7 +308,8 @@ body {
 }
 
 .experience-card h4 {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
   font-size: 1.5em;
   margin-bottom: 0.5em;
   color: #1B263B;
@@ -355,9 +344,14 @@ body {
 }
 
 .instagram-profile-embed h4 {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
   color: #1B263B;
   margin-bottom: 1em;
+}
+
+.instagram-profile-embed p {
+  font-size: 1.1em;
 }
 
 /* ------------------------------
@@ -369,7 +363,8 @@ body {
 }
 
 .about h2 {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
   font-size: 3em;
   text-align: center;
   margin-bottom: 2em;
@@ -402,16 +397,8 @@ body {
   line-height: 1.8;
 }
 
-.about-image {
-  width: 100%;
-  height: 300px;
-  object-fit: cover;
-  border-radius: 10px;
-  box-shadow: 0 4px 15px rgba(27, 38, 59, 0.1);
-}
-
 .about p.highlight {
-  font-weight: 700;
+  font-weight: 800;
   color: #FF6F61;
   font-size: 1.3em;
   grid-column: 1 / -1;
@@ -427,7 +414,8 @@ body {
 }
 
 .testimonials h2 {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
   font-size: 3em;
   margin-bottom: 2em;
   color: #1B263B;
@@ -445,7 +433,8 @@ body {
 }
 
 .testimonials blockquote {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
   font-style: italic;
   font-size: 1.5em;
   color: #2C2C2C;
@@ -458,7 +447,7 @@ body {
 }
 
 .testimonials p {
-  font-weight: 600;
+  font-weight: 800;
   color: #FF6F61;
   font-size: 1.2em;
 }
@@ -485,14 +474,15 @@ footer p {
   gap: 1em;
 }
 
-.social-links img {
-  width: 30px;
-  height: 30px;
-  transition: transform 0.3s ease;
+.social-links a {
+  color: #F8F1E9;
+  text-decoration: none;
+  font-weight: 800;
+  transition: color 0.3s ease;
 }
 
-.social-links img:hover {
-  transform: scale(1.2);
+.social-links a:hover {
+  color: #E6B800;
 }
 
 /* ------------------------------
@@ -503,7 +493,7 @@ footer p {
     font-size: 3em;
   }
 
-  .hero-content h3 {
+  .hero-content .slogan {
     font-size: 1.5em;
   }
 
@@ -545,14 +535,13 @@ footer p {
     grid-template-columns: 1fr;
   }
 
-  .product-image,
-  .about-image {
-    height: 250px;
-  }
-
   .testimonials blockquote {
     font-size: 1.3em;
     padding: 1.5em;
+  }
+
+  .logo {
+    font-size: 2em;
   }
 }
 
@@ -565,7 +554,7 @@ footer p {
     font-size: 2.5em;
   }
 
-  .hero-content h3 {
+  .hero-content .slogan {
     font-size: 1.2em;
   }
 
@@ -580,5 +569,9 @@ footer p {
 
   .instagram-profile-embed {
     padding: 1em;
+  }
+
+  .logo {
+    font-size: 1.8em;
   }
 }
