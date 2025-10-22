@@ -27,14 +27,14 @@ body {
 /* ------------------------------
    Navbar
 ------------------------------ */
-.navbar {
-  background: #1a1a1a; /* Solid dark color */
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-  padding: 1em 0;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-}
+        .navbar {
+            background-color: #000;
+            padding: 15px 0;
+            width: 100%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
 .navbar .container {
   display: flex;
   justify-content: space-between;
@@ -441,5 +441,6 @@ footer p {
     font-size: 1.3em;
   }
 }
+
 
 
