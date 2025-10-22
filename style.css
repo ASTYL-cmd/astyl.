@@ -46,7 +46,7 @@ body {
 }
 
 .logo {
-  font-family: 'BankGothic', sans-serif;
+  font-family: 'Arial', sans-serif;
   font-size: 2.5em;
   font-weight: bold;
   color: #0077cc;
@@ -283,3 +283,4 @@ footer {
   font-size: 0.95em;
   letter-spacing: 0.5px;
 }
+
