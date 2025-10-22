@@ -48,6 +48,47 @@
     </div>
   </section>
 
+  <!-- Products Section (New: Showcases Instagram Products) -->
+  <section class="products">
+    <div class="container">
+      <h2>Our Premium T-Shirts</h2>
+      <div class="product-grid">
+        <!-- Embedded Instagram Feed for Dynamic Products -->
+        <div class="instagram-embed">
+          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/[POST_ID_HERE]?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14"></blockquote>
+          <script async src="//www.instagram.com/embed.js"></script>
+          <!-- Repeat for multiple posts; replace [POST_ID_HERE] with actual e.g., C_ABC123 -->
+          <!-- Fallback Static Images (Replace src with your downloads) -->
+          <img src="https://via.placeholder.com/400x500/001f3f/d4af37?text=Black+ASTYL+Tee" alt="Black ASTYL T-Shirt" class="product-image">
+          <img src="https://via.placeholder.com/400x500/f5f5f5/001f3f?text=White+Custom+Tee" alt="White Custom ASTYL T-Shirt" class="product-image">
+          <img src="https://via.placeholder.com/400x500/d4af37/001f3f?text=Gold+Accent+Tee" alt="Gold Accent ASTYL T-Shirt" class="product-image">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experiences Section -->
+  <section class="experiences">
+    <div class="container">
+      <h2>Meet the ASTYL Team</h2>
+      <div class="experience-grid">
+        <div class="experience-card">
+          <a href="https://www.instagram.com/the.atul.mishra"><h4>Atul Mishra</h4></a>
+          <p>Founder & Designer</p>
+        </div>
+        <div class="experience-card">
+          <a href="https://www.instagram.com/honeybaba8055"><h4>Sidharth Yadav</h4></a>
+          <p>Co-Founder & Manager</p>
+        </div>
+      </div>
+      <!-- Full Instagram Profile Embed for More Products -->
+      <div class="instagram-profile-embed">
+        <h4>Follow Our Latest Products on Instagram</h4>
+        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/astyl.2/" data-instgrm-version="14"></blockquote>
+        <script async src="//www.instagram.com/embed.js"></script>
+      </div>
+    </div>
+  </section>
   <!-- About Section -->
   <section class="about">
     <div class="container">
