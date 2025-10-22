@@ -37,14 +37,9 @@
     <div class="container">
       <h2>Our Premium T-Shirts</h2>
       <div class="product-grid">
-        <!-- Instagram Post Embed -->
-        <div class="product-card">
-          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DLmlkSWTd42/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14"></blockquote>
-          <script async src="//www.instagram.com/embed.js"></script>
-        </div>
         <!-- Placeholder for Additional Products -->
         <div class="product-card">
-          <img src="https://via.placeholder.com/400x500/1B263B/F8F1E9?text=Black+ASTYL+Tee" alt="Black ASTYL T-Shirt" class="product-image">
+          <a href="https://ibb.co/C57gwn7Z"><img src="https://i.ibb.co/N6j5FLjP/ASTYL.png" alt="ASTYL" border="0"></a><br /><a target='_blank' href='https://imgbb.com/'>imgbb free vs pro</a><br />
           <p>Premium Black Tee</p>
         </div>
         <div class="product-card">
