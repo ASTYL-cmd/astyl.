@@ -1,273 +1,444 @@
+/* ------------------------------
+   Basic Reset
+------------------------------ */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    font-family: 'Poppins', sans-serif;
-    line-height: 1.6;
-    color: #333;
-    background-color: #f8f9fa;
+  font-family: 'Poppins', sans-serif;
+  line-height: 1.6;
+  background-color: #f9f9f9;
+  color: #222;
+  scroll-behavior: smooth;
 }
 
+/* ------------------------------
+   Container
+------------------------------ */
 .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
 }
 
-/* Header / Navbar */
+/* ------------------------------
+   Navbar
+------------------------------ */
 .navbar {
-    background-color: #fff;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 1000;
+  background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  padding: 1em 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
 .navbar .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.logo img {
-    height: 50px;
-    width: auto;
+.logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5em;
+  font-weight: 700;
+  background: linear-gradient(45deg, #ff6b6b, #ffe66d);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.logo:hover {
+  transform: scale(1.05);
+  filter: drop-shadow(0 0 10px rgba(255, 107, 107, 0.5));
 }
 
 .nav-links {
-    display: flex;
-    list-style: none;
-    gap: 2rem;
+  list-style: none;
+  display: flex;
+  gap: 2em;
 }
 
 .nav-links a {
-    text-decoration: none;
-    color: #333;
-    font-weight: 500;
-    transition: color 0.3s ease;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.1em;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(45deg, #ff6b6b, #ffe66d);
+  transition: width 0.3s ease;
 }
 
 .nav-links a:hover {
-    color: #e74c3c;
+  color: #ffe66d;
 }
 
-/* Hero Section */
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* ------------------------------
+   Hero Section
+------------------------------ */
 .hero {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: #fff;
-    text-align: center;
-    padding: 150px 0 100px;
-    margin-top: 70px;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://via.placeholder.com/1600x600/ff6b6b/ffffff?text=ASTYL+Hero') center/cover no-repeat;
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  position: relative;
 }
 
-.hero h1 {
-    font-size: 3.5rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
+.hero-content {
+  animation: fadeInUp 1.5s ease forwards;
+  opacity: 0;
+  transform: translateY(30px);
+  max-width: 700px;
 }
 
-.hero h3 {
-    font-size: 1.5rem;
-    font-weight: 300;
-    margin-bottom: 2rem;
+.hero-content h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 4.5em;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
+  background: linear-gradient(45deg, #ffffff, #ffe66d);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin-bottom: 0.3em;
+}
+
+.hero-content h3 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 2em;
+  font-weight: 300;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+  animation: fadeSlideUp 1s ease-out forwards;
+  animation-delay: 0.6s;
+  opacity: 0;
+  transform: translateY(20px);
 }
 
 .btn {
-    display: inline-block;
-    background-color: #fff;
-    color: #667eea;
-    padding: 12px 30px;
-    text-decoration: none;
-    border-radius: 50px;
-    font-weight: 600;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: inline-block;
+  padding: 1em 2em;
+  background: linear-gradient(45deg, #ff6b6b, #ffe66d);
+  color: #1a1a1a;
+  text-decoration: none;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 1.1em;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s;
+}
+
+.btn:hover::before {
+  left: 100%;
 }
 
 .btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(45deg, #ff4d4d, #ffd700);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(255, 107, 107, 0.5);
 }
 
-/* Experiences Section */
+/* ------------------------------
+   Animations
+------------------------------ */
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeSlideUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ------------------------------
+   Experiences Section
+------------------------------ */
 .experiences {
-    padding: 80px 0;
-    background-color: #fff;
+  padding: 5em 0;
+  background: linear-gradient(to bottom, #fff3e0 0%, #ffe0b2 100%);
 }
 
 .experiences h2 {
-    text-align: center;
-    font-size: 2.5rem;
-    margin-bottom: 3rem;
-    color: #333;
+  font-family: 'Playfair Display', serif;
+  text-align: center;
+  font-size: 3em;
+  margin-bottom: 2em;
+  color: #333;
+  position: relative;
+  animation: fadeInUp 1s ease forwards;
+}
+
+.experiences h2::after {
+  content: '';
+  display: block;
+  width: 100px;
+  height: 4px;
+  background: linear-gradient(45deg, #ff6b6b, #ffe66d);
+  margin: 1em auto 0;
+  border-radius: 2px;
 }
 
 .experience-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2em;
 }
 
 .experience-card {
-    text-align: center;
-    padding: 2rem;
-    background: #f8f9fa;
-    border-radius: 10px;
-    transition: transform 0.3s ease;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 2em;
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  transition: all 0.4s ease;
+  text-align: center;
+  position: relative;
 }
 
-.experience-card:hover {
-    transform: translateY(-5px);
+.experience-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(45deg, #ff6b6b, #ffe66d);
 }
 
 .experience-card h4 {
-    font-size: 1.5rem;
-    margin-bottom: 0.5rem;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.5em;
+  margin-bottom: 0.5em;
+  color: #333;
 }
 
-.experience-card h4 a {
-    text-decoration: none;
-    color: #333;
+.experience-card a {
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.3s ease;
+}
+
+.experience-card a:hover {
+  color: #ff6b6b;
 }
 
 .experience-card p {
-    color: #666;
-    font-weight: 300;
+  font-size: 1.1em;
+  color: #555;
 }
 
-/* About Section */
+.experience-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 30px rgba(255, 107, 107, 0.2);
+}
+
+/* ------------------------------
+   About Section
+------------------------------ */
 .about {
-    padding: 80px 0;
-    background-color: #f8f9fa;
+  padding: 5em 0;
+  background: linear-gradient(to bottom, #ffffff 0%, #f8f9fa 100%);
 }
 
 .about h2 {
-    text-align: center;
-    font-size: 2.5rem;
-    margin-bottom: 3rem;
-    color: #333;
+  font-family: 'Playfair Display', serif;
+  font-size: 3em;
+  text-align: center;
+  margin-bottom: 2em;
+  color: #333;
+  position: relative;
+  animation: fadeInUp 1s ease forwards;
 }
 
-.about-features {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    margin-bottom: 2rem;
+.about h2::after {
+  content: '';
+  display: block;
+  width: 100px;
+  height: 4px;
+  background: linear-gradient(45deg, #ff6b6b, #ffe66d);
+  margin: 1em auto 0;
+  border-radius: 2px;
 }
 
-.feature {
-    background: #fff;
-    padding: 2rem;
-    border-radius: 10px;
-    text-align: center;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+.about p {
+  font-size: 1.2em;
+  max-width: 800px;
+  margin: 1em auto;
+  text-align: center;
+  color: #555;
+  line-height: 1.8;
 }
 
-.feature h3 {
-    font-size: 1.2rem;
-    margin-bottom: 1rem;
-    color: #e74c3c;
+.about p.highlight {
+  font-weight: 700;
+  color: #ff6b6b;
+  font-size: 1.3em;
 }
 
-.custom-design {
-    text-align: center;
-    margin-bottom: 2rem;
-}
-
-.custom-design p {
-    font-size: 1.1rem;
-    margin-bottom: 1rem;
-}
-
-/* Testimonials */
+/* ------------------------------
+   Testimonials
+------------------------------ */
 .testimonials {
-    padding: 80px 0;
-    background-color: #fff;
-    text-align: center;
+  background: linear-gradient(to bottom, #e3f2fd 0%, #bbdefb 100%);
+  padding: 5em 1em;
+  text-align: center;
 }
 
 .testimonials h2 {
-    font-size: 2.5rem;
-    margin-bottom: 3rem;
-    color: #333;
+  font-family: 'Playfair Display', serif;
+  font-size: 3em;
+  margin-bottom: 2em;
+  position: relative;
+}
+
+.testimonials h2::after {
+  content: '';
+  display: block;
+  width: 100px;
+  height: 4px;
+  background: linear-gradient(45deg, #ff6b6b, #ffe66d);
+  margin: 1em auto 0;
+  border-radius: 2px;
 }
 
 .testimonials blockquote {
-    font-size: 1.2rem;
-    font-style: italic;
-    margin-bottom: 1rem;
-    color: #666;
-    max-width: 600px;
-    margin: 0 auto 1rem;
+  font-family: 'Poppins', sans-serif;
+  font-style: italic;
+  font-size: 1.5em;
+  color: #333;
+  margin-bottom: 1em;
+  padding: 2em;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 15px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  border-left: 5px solid #ff6b6b;
 }
 
 .testimonials p {
-    color: #e74c3c;
-    font-weight: 600;
+  font-weight: 600;
+  color: #ff6b6b;
+  font-size: 1.2em;
 }
 
-/* Footer */
+/* ------------------------------
+   Footer
+------------------------------ */
 footer {
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    padding: 2rem 0;
+  background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%);
+  color: white;
+  text-align: center;
+  padding: 3em 1em;
+  font-size: 1em;
 }
 
 footer p {
-    margin-bottom: 0.5rem;
+  letter-spacing: 1px;
 }
 
-/* Responsive Design */
+/* ------------------------------
+   Responsive Design
+------------------------------ */
 @media (max-width: 768px) {
-    .navbar .container {
-        flex-direction: column;
-        gap: 1rem;
-    }
+  .hero-content h1 {
+    font-size: 3em;
+  }
 
-    .nav-links {
-        gap: 1rem;
-    }
+  .hero-content h3 {
+    font-size: 1.5em;
+  }
 
-    .hero h1 {
-        font-size: 2.5rem;
-    }
+  .navbar .container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 
-    .hero h3 {
-        font-size: 1.2rem;
-    }
+  .nav-links {
+    flex-direction: column;
+    gap: 1em;
+    width: 100%;
+    padding: 1em 0;
+    display: none; /* Add JS for mobile toggle */
+  }
 
-    .experiences h2,
-    .about h2,
-    .testimonials h2 {
-        font-size: 2rem;
-    }
+  .nav-links.active {
+    display: flex;
+  }
 
-    .experience-grid {
-        grid-template-columns: 1fr;
-    }
+  .experiences h2,
+  .about h2,
+  .testimonials h2 {
+    font-size: 2.2em;
+  }
 
-    .about-features {
-        grid-template-columns: 1fr;
-    }
+  .experience-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about p {
+    font-size: 1.1em;
+  }
+
+  .testimonials blockquote {
+    font-size: 1.3em;
+  }
 }
 
 @media (max-width: 480px) {
-    .hero {
-        padding: 120px 0 60px;
-    }
+  .hero {
+    min-height: 60vh;
+  }
 
-    .btn {
-        padding: 10px 20px;
-        font-size: 0.9rem;
-    }
+  .hero-content h1 {
+    font-size: 2.5em;
+  }
 
-    .experience-card,
-    .feature {
-        padding: 1.5rem;
-    }
+  .hero-content h3 {
+    font-size: 1.2em;
+  }
+
+  .btn {
+    padding: 0.8em 1.5em;
+    font-size: 1em;
+  }
+
+  .experience-card h4 {
+    font-size: 1.3em;
+  }
 }
