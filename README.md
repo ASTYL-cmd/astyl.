@@ -32,24 +32,6 @@
     </div>
   </section>
 
-  <!-- Products Section -->
-  <section class="products">
-    <div class="container">
-      <h2>Our Premium T-Shirts</h2>
-      <div class="product-grid">
-        <!-- Placeholder for Additional Products -->
-        <div class="product-card">
-          <a href="https://ibb.co/C57gwn7Z"><img src="https://i.ibb.co/N6j5FLjP/ASTYL.png" alt="ASTYL" border="0"></a><br /><a target='_blank' href='https://imgbb.com/'>imgbb free vs pro</a><br />
-          <p>Premium Black Tee</p>
-        </div>
-        <div class="product-card">
-          <img src="https://via.placeholder.com/400x500/F8F1E9/1B263B?text=White+Custom+Tee" alt="White Custom ASTYL T-Shirt" class="product-image">
-          <p>Custom White Tee</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- Experiences Section -->
   <section class="experiences">
     <div class="container">
@@ -64,14 +46,7 @@
           <p>Co-Founder & Manager</p>
         </div>
       </div>
-      <div class="instagram-profile-embed">
-        <h4>Discover More on Instagram</h4>
-        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/astyl.2/" data-instgrm-version="14"></blockquote>
-        <script async src="//www.instagram.com/embed.js"></script>
-      </div>
-    </div>
-  </section>
-
+ <a href="https://ibb.co/C57gwn7Z"><img src="https://i.ibb.co/N6j5FLjP/ASTYL.png" alt="ASTYL" border="0"></a><br /><a target='_blank' href='https://imgbb.com/'>imgbb free vs pro</a><br />
   <!-- About Section -->
   <section class="about">
     <div class="container">
