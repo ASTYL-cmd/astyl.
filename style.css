@@ -28,7 +28,7 @@ body {
    Navbar
 ------------------------------ */
 .navbar {
-  background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%);
+  background: linear-gradient(to right, #1a1a1a 0%, rgba(0, 0, 0, 0.3) 100%);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
   padding: 1em 0;
   position: sticky;
@@ -442,3 +442,4 @@ footer p {
     font-size: 1.3em;
   }
 }
+
