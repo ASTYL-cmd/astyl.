@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Product Store</title>
+  <style>
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(180deg, #f8fafc, #e8f0ff);
+      color: #333;
+      overflow-x: hidden;
+    }
+
+    /* Navbar */
+    .navbar {
+      background: black;
+      padding: 15px 0;
+      width: 100%;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+      backdrop-filter: blur(6px);
+    }
+
+    .navbar .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 40px;
+    }
+
+    .logo img {
+      height: 58px;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 2.2em;
+    }
+
+    .nav-links a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.1em;
+      position: relative;
+      letter-spacing: 0.5px;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, #ff6b6b, #ffe66d, #4facfe);
+      background-size: 300% auto;
+      animation: moveLine 3s linear infinite;
+      border-radius: 2px;
+    }
+
+    @keyframes moveLine {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 200% 50%; }
+    }
+
+    /* Product Section */
+    .product-section {
+      padding: 80px 60px;
+      text-align: center;
+      background: linear-gradient(180deg, #ffffff, #eef3ff);
+    }
+
+    .product-section h2 {
+      font-size: 2.6em;
+      color: #1e3c72;
+      margin-bottom: 20px;
+      font-weight: 700;
+      position: relative;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .product-section h2::after {
+      content: '';
+      width: 90px;
+      height: 4px;
+      background: linear-gradient(90deg, #ff6b6b, #ffe66d);
+      display: block;
+      margin: 20px auto;
+      border-radius: 3px;
+    }
+
+    /* Product Grid */
+    .product-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 40px 40px;
+      max-width: 1200px;
+      margin: 60px auto;
+    }
+
+    /* Product Card */
+    .product-card {
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 6px 25px rgba(0,0,0,0.1);
+      overflow: hidden;
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+      padding-top: 10px;
+    }
+
+    .product-card:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    }
+
+    .product-card img {
+      height: 90%;
+      width: auto;
+      object-fit: cover;
+      display: block;
+      margin: 0 auto;
+      transition: transform 0.4s ease;
+    }
+
+    .product-card:hover img {
+      transform: scale(1.05);
+    }
+
+    .product-info {
+      padding: 22px;
+    }
+
+    .product-card h3 {
+      font-size: 1.4em;
+      color: #2a5298;
+      margin-bottom: 8px;
+    }
+
+    .product-card h5 {
+      color: #666;
+      margin: 4px 0;
+      font-weight: 500;
+    }
+
+    .price {
+      font-weight: bold;
+      color: #1e3c72;
+      margin: 12px 0;
+      font-size: 1.15em;
+    }
+
+    .buy-btn {
+      background: linear-gradient(90deg, #1e3c72, #2a5298, #4facfe);
+      color: white;
+      padding: 10px 24px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 1em;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .buy-btn:hover {
+      transform: scale(1.08);
+      background: linear-gradient(90deg, #2a5298, #1e3c72, #203a43);
+      box-shadow: 0 4px 12px rgba(30,60,114,0.3);
+    }
+
+    /* Footer */
+    footer {
+      background: linear-gradient(90deg, #0f2027, #203a43, #2c5364);
+      color: white;
+      text-align: center;
+      padding: 25px 15px;
+      margin-top: 70px;
+      font-size: 0.95em;
+      letter-spacing: 0.3px;
+    }
+
+    footer span {
+      background: linear-gradient(90deg, #ff6b6b, #ffe66d);
+      -webkit-background-clip: text;
+      color: transparent;
+      font-weight: bold;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .navbar .container {
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 0 20px;
+      }
+
+      .product-section {
+        padding: 50px 20px;
+      }
+
+      .product-card img {
+        height: 90%;
+        width: auto;
+      }
+
+      .product-section h2 {
+        font-size: 2em;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="container">
+      <div class="logo">
+        <img src="https://i.ibb.co/N6j5FLjP/ASTYL.png" alt="ASTYL Logo">
+      </div>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Product Section -->
+  <section class="product-section">
+    <h2>Our Products</h2>
+    <div class="product-list">
+
+      <div class="product-card">
+        <img src="https://i.ibb.co/7xVRWtHf/LS20251023131254.png" alt="ASTYL Marvel" style="width: auto; height:300px; >
+        <div class="product-info">
+          <h3>ASTYL Marvel</h3>
+          <h5>Color: Black</h5>
+          <h5>Size: S, M</h5>
+          <div class="price">₹299</div>
+          <button class="buy-btn">Buy Now</button>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <img src="https://i.ibb.co/gLSTfm3x/LS20251023124704.png" alt="ASTYL Marvel" style="width: auto; height:300px; >
+        <div class="product-info">
+          <h3>ASTYL Batman</h3>
+          <h5>Color: Black</h5>
+          <h5>Size: S, M</h5>
+          <div class="price">₹299</div>
+          <button class="buy-btn">Buy Now</button>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <img src="https://i.ibb.co/MknVvs1X/LS20251023124801.png" alt="ASTYL Marvel" style="width: auto; height:300px; >
+        <div class="product-info">
+          <h3>ASTYL Porsche 911 </h3>
+          <h5>Color: Black</h5>
+          <h5>Size: S, M</h5>
+          <div class="price">₹299</div>
+          <button class="buy-btn">Buy Now</button>
+        </div>
+      </div>
+
+            <div class="product-card">
+        <img src="https://i.ibb.co/MxCMQkwh/LS20251023124811.png" alt="ASTYL Marvel" style="width: auto; height:300px; >
+        <div class="product-info">
+          <h3>ASTYL BMW M5</h3>
+          <h5>Color: Black</h5>
+          <h5>Size: S, M</h5>
+          <div class="price">₹299</div>
+          <button class="buy-btn">Buy Now</button>
+        </div>
+      </div>
+            <div class="product-card">
+<img src="https://i.ibb.co/m5hG8mFf/LS20251023124806.png" alt="ASTYL Marvel" style="width: auto; height:300px;">
+        <div class="product-info">
+          <h3>ASTYL Wolf</h3>
+          <h5>Color: Black</h5>
+          <h5>Size: S, M</h5>
+          <div class="price">₹299</div>
+          <button class="buy-btn">Buy Now</button>
+        </div>
+      </div>
+      <div class="product-card">
+        <img src="https://i.ibb.co/Zz1Q78Vk/LS20251023124827.png" alt="ASTYL Marvel" style="width: auto; height:300px;">
+        <div class="product-info">
+          <h3>ASTYL Just Ride</h3>
+          <h5>Color: Black</h5>
+          <h5>Size: S, M</h5>
+          <div class="price">₹299</div>
+          <button class="buy-btn">Buy Now</button>
+        </div>
+      </div>
+      <div class="product-card">
+<img src="https://i.ibb.co/hJQtWGQ3/LS20251023124817.png" alt="ASTYL Marvel" style="width: auto; height:300px;">
+        <div class="product-info">
+          <h3>ASTYL Off-roading </h3>
+          <h5>Color: Black</h5>
+          <h5>Size: S, M</h5>
+          <div class="price">₹299</div>
+          <button class="buy-btn">Buy Now</button>
+        </div>
+      </div>
+
+      <div class="product-card">
+<img src="https://i.ibb.co/39vdRd2K/LS20251023124835.png" alt="ASTYL Marvel" style="width: auto; height:300px;">
+        <div class="product-info">
+          <h3>ASTYL Heavy Driver</h3>
+          <h5>Color: Black</h5>
+          <h5>Size: S, M</h5>
+          <div class="price">₹299</div>
+          <button class="buy-btn">Buy Now</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    © 2025 <span>ASTYL</span> | All Rights Reserved.
+<p>Designed by<span>ATUL MISHRA</span> </p>
+  </footer>
+
+</body>
+</html>
