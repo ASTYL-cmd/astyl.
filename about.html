@@ -1,22 +1,333 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title> About</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us - ASTYL</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      line-height: 1.6;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      color: #333;
+    }
+
+    .navbar {
+      background-color: #000;
+      padding: 15px 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 90%;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .navbar img {
+      height: 50px;
+      width: auto;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 2em;
+    }
+
+    .nav-links a {
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.1em;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: #ffe66d;
+    }
+
+    .about-hero {
+      text-align: center;
+      padding: 4em 2em;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+    }
+
+    .about-hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 4em;
+      margin-bottom: 0.3em;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .about-hero p {
+      font-size: 1.3em;
+      font-weight: 300;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .about-content {
+      max-width: 1200px;
+      margin: 4em auto;
+      padding: 0 2em;
+    }
+
+    .story-section {
+      background: white;
+      border-radius: 20px;
+      padding: 3em;
+      margin-bottom: 3em;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .story-section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5em;
+      color: #667eea;
+      margin-bottom: 1em;
+      text-align: center;
+    }
+
+    .story-section p {
+      font-size: 1.1em;
+      line-height: 1.8;
+      color: #555;
+      margin-bottom: 1em;
+      text-align: center;
+    }
+
+    .team-showcase {
+      margin-top: 3em;
+    }
+
+    .team-showcase h3 {
+      font-family: 'Playfair Display', serif;
+      text-align: center;
+      font-size: 2.5em;
+      margin-bottom: 2em;
+      color: #333;
+    }
+
+    .carousel-container {
+      width: 100%;
+      overflow: hidden;
+      position: relative;
+      padding: 2em 0;
+    }
+
+    .carousel-track {
+      display: flex;
+      animation: slideLoop 18s linear infinite;
+    }
+
+    .carousel-slide {
+      flex: 0 0 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .carousel-slide img {
+      width: 400px;
+      height: auto;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s ease;
+    }
+
+    .carousel-slide img:hover {
+      transform: scale(1.05);
+    }
+
+    @keyframes slideLoop {
+      0% { transform: translateX(0); }
+      33.33% { transform: translateX(-100%); }
+      66.66% { transform: translateX(-200%); }
+      100% { transform: translateX(0); }
+    }
+
+    .social-section {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 4em 2em;
+      text-align: center;
+      border-radius: 20px;
+      margin: 3em auto;
+      max-width: 1000px;
+    }
+
+    .social-section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5em;
+      margin-bottom: 1.5em;
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 2em;
+      flex-wrap: wrap;
+      margin-bottom: 2em;
+    }
+
+    .social-link {
+      display: flex;
+      align-items: center;
+      gap: 0.5em;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 1em 2em;
+      border-radius: 50px;
+      text-decoration: none;
+      color: white;
+      font-weight: 600;
+      font-size: 1.1em;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
+
+    .social-link:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    }
+
+    .social-link i {
+      font-size: 1.5em;
+    }
+
+    .email-contact {
+      margin-top: 2em;
+      font-size: 1.2em;
+    }
+
+    .email-contact i {
+      margin-right: 0.5em;
+      color: #ffe66d;
+    }
+
+    .email-contact a {
+      color: white;
+      text-decoration: none;
+      border-bottom: 2px solid transparent;
+      transition: border-bottom 0.3s ease;
+    }
+
+    .email-contact a:hover {
+      border-bottom: 2px solid #ffe66d;
+    }
+
+    footer {
+      background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%);
+      color: white;
+      text-align: center;
+      padding: 2em 1em;
+      margin-top: 4em;
+    }
+
+    @media (max-width: 768px) {
+      .about-hero h1 {
+        font-size: 2.5em;
+      }
+
+      .carousel-slide img {
+        width: 280px;
+      }
+
+      .social-links {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .story-section {
+        padding: 2em 1.5em;
+      }
+    }
+  </style>
 </head>
 <body>
-	<style>
-body { font-family: sans-serif;}
-</style>
-<h1> This web is developed by the great Developer in India that is <li>
-    <a href="https://www.instagram.com/the.atul.mishra" 
-       target="_blank" 
-       rel="noopener noreferrer">
-       The.Atul.Mishra 
+  <header class="navbar">
+    <div class="container">
+      <div><img src="https://i.ibb.co/N6j5FLjP/ASTYL.png" alt="ASTYL"></div>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="product.html">Products</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
-    </a> </li> </h1>  <li><a href="https://www.instagram.com/astyl.2" class="btn">FOLLOW US on Instagram</a></li>
+  <section class="about-hero">
+    <h1>About ASTYL</h1>
+    <p>Crafting Luxury in Every Thread. Discover the passion and dedication behind India's premium t-shirt brand.</p>
+  </section>
 
+  <div class="about-content">
+    <div class="story-section">
+      <h2>Our Story</h2>
+      <p>ASTYL was born from a simple belief: everyone deserves to wear premium quality clothing that doesn't break the bank. Founded by Atul Mishra, a visionary designer with a passion for fashion, and Sidharth Yadav, a strategic manager with an eye for excellence, ASTYL represents the perfect blend of style, comfort, and affordability.</p>
+      <p>We started with a mission to revolutionize the t-shirt industry in India. Using 100% pure cotton and innovative print-on-demand technology, we've created a brand that allows you to express your unique style while enjoying unmatched comfort.</p>
+      <p>Every ASTYL t-shirt is a testament to our commitment to quality, sustainability, and customer satisfaction. From our carefully selected fabrics to our attention to detail in every stitch, we ensure that each piece meets the highest standards.</p>
+    </div>
 
+    <div class="team-showcase">
+      <h3>Meet the ASTYL Team</h3>
+      <div class="carousel-container">
+        <div class="carousel-track">
+          <div class="carousel-slide">
+            <img src="https://i.ibb.co/2001FZ3K/IMG-20251023-100443.png" alt="ASTYL Team Member 1">
+          </div>
+          <div class="carousel-slide">
+            <img src="https://i.ibb.co/DH08ZNyw/IMG-20251023-162157.jpg" alt="ASTYL Team Member 2">
+          </div>
+          <div class="carousel-slide">
+            <img src="https://i.ibb.co/DH8S7v33/IMG-20251023-162216.jpg" alt="ASTYL Team Collaboration">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="social-section">
+      <h2>Connect With Us</h2>
+      <p>Follow our journey and stay updated with the latest collections, behind-the-scenes content, and exclusive offers!</p>
+
+      <div class="social-links">
+        <a href="https://www.instagram.com/astyl.2" class="social-link" target="_blank" rel="noopener noreferrer">
+          <i class="fab fa-instagram"></i>
+          <span>@astyl.2</span>
+        </a>
+        <a href="https://www.pinterest.com/astyl2" class="social-link" target="_blank" rel="noopener noreferrer">
+          <i class="fab fa-pinterest"></i>
+          <span>Pinterest</span>
+        </a>
+      </div>
+
+      <div class="email-contact">
+        <i class="fas fa-envelope"></i>
+        <span>Email us: <a href="mailto:contact@astyl.com">contact@astyl.com</a></span>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 ASTYL. All rights reserved.</p>
+    <p>Designed by Atul Mishra</p>
+  </footer>
 </body>
 </html>
