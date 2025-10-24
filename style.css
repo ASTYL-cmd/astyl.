@@ -66,7 +66,72 @@ body {
 
 .nav-links a {
   color: #ffffff;
+/* Hero Section */
+.hero {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: url('https://i.ibb.co/m5hG8mFf/LS20251023124806.png') no-repeat center center/cover;
+  overflow: hidden;
+}
+
+.hero .overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6));
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  color: #fff;
+  animation: fadeUp 2s ease-in-out;
+}
+
+.hero h1 {
+  font-size: 5rem;
+  margin-bottom: 20px;
+  font-family: 'Playfair Display', serif;
+  letter-spacing: 8px;
+  text-transform: uppercase;
+}
+
+.hero h3 {
+  font-size: 1.8rem;
+  margin-bottom: 30px;
+  font-weight: 300;
+}
+
+.hero .btn {
+  padding: 15px 40px;
+  background: #ffe66d;
+  color: #000;
+  font-weight: bold;
+  border-radius: 50px;
   text-decoration: none;
+  transition: 0.4s all;
+}
+
+.hero .btn:hover {
+  background: #fff;
+  color: #000;
+  transform: scale(1.1);
+}
+
+/* Animation */
+@keyframes fadeUp {
+  0% {opacity: 0; transform: translateY(30px);}
+  100% {opacity: 1; transform: translateY(0);}
+}
+
+/* Optional: Smooth scroll for button */
+html {
+  scroll-behavior: smooth;
+}  text-decoration: none;
   font-weight: 600;
   font-size: 1.1em;
   position: relative;
@@ -91,104 +156,6 @@ body {
 .nav-links a:hover::after {
   width: 100%;
 }
-
-/* ------------------------------
-   Hero Section
------------------------------- */
-.hero {
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url('https://via.placeholder.com/1600x600/ff6b6b/ffffff?text=ASTYL+Hero') center/cover no-repeat;
-  min-height: 80vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  color: white;
-  position: relative;
-}
-
-.hero-content {
-  animation: fadeInUp 1.5s ease forwards;
-  opacity: 0;
-  transform: translateY(30px);
-  max-width: 700px;
-}
-
-.hero-content h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: 4.5em;
-  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
-  background: linear-gradient(45deg, #ffffff, #ffe66d);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  margin-bottom: 0.3em;
-}
-
-.hero-content h3 {
-  font-family: 'Poppins', sans-serif;
-  font-size: 2em;
-  font-weight: 300;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
-  animation: fadeSlideUp 1s ease-out forwards;
-  animation-delay: 0.6s;
-  opacity: 0;
-  transform: translateY(20px);
-}
-
-.btn {
-  display: inline-block;
-  padding: 1em 2em;
-  background: linear-gradient(45deg, #ff6b6b, #ffe66d);
-  color: #1a1a1a;
-  text-decoration: none;
-  border-radius: 50px;
-  font-weight: 600;
-  font-size: 1.1em;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
-  position: relative;
-  overflow: hidden;
-}
-
-.btn::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-  transition: left 0.5s;
-}
-
-.btn:hover::before {
-  left: 100%;
-}
-
-.btn:hover {
-  background: linear-gradient(45deg, #ff4d4d, #ffd700);
-  transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(255, 107, 107, 0.5);
-}
-
-/* ------------------------------
-   Animations
------------------------------- */
-@keyframes fadeInUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes fadeSlideUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
 /* ------------------------------
    Experiences Section
 ------------------------------ */
@@ -382,3 +349,4 @@ footer {
     width: 250px;
   }
 }
+
