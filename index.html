@@ -9,77 +9,160 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <!-- Navbar -->
+  <script src="script.js" defer></script>
   <header class="navbar">
     <div class="container">
-    <div>  <img src="https://i.ibb.co/N6j5FLjP/ASTYL.png" alt="ASTYL" style="height: 50px; width: auto;"> </div>
+      <div class="logo">
+        <img src="https://i.ibb.co/N6j5FLjP/ASTYL.png" alt="ASTYL">
+      </div>
       <nav>
         <ul class="nav-links">
-          <li><a href="about.html">About Us</a></li>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#ownership">Ownership</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#testimonials">Reviews</a></li>
+          <li><a href="#contact">Contact</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
-<!-- Hero Section -->
-<section class="hero">
-  <div class="overlay"></div>
-  <div class="hero-content">
+<section class="hero" id="home">
+  <div class="video-background">
+    <div class="video-overlay"></div>
+  </div>
+  <div class="hero-content fade-in">
     <h1>ASTYL</h1>
     <h3>Luxury in Every Thread</h3>
-    <a href="product.html" class="btn">Explore Products</a>
+    <p>Experience premium comfort with 100% pure cotton</p>
+    <a href="product.html" class="cta-btn">Explore Collection</a>
   </div>
 </section>
 
-  <!-- Experiences Section -->
-  <section class="experiences">
+  <section class="experiences scroll-reveal" id="ownership">
     <div class="container">
-      <h2>Ownership</h2>
+      <h2 class="section-title">Meet The Founders</h2>
       <div class="experience-grid">
-        <div class="experience-card">
+        <div class="experience-card card-hover">
+          <div class="card-icon">✨</div>
           <a href="https://www.instagram.com/the.atul.mishra"><h4>Atul Mishra</h4></a>
           <p>Founder & Designer</p>
+          <div class="card-divider"></div>
         </div>
-        <div class="experience-card">
+        <div class="experience-card card-hover">
+          <div class="card-icon">🎯</div>
           <a href="https://www.instagram.com/honeybaba8055"><h4>Sidharth Yadav</h4></a>
           <p>Co-Founder & Manager</p>
+          <div class="card-divider"></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- About Section -->
-  <section class="about">
+  <section class="about scroll-reveal" id="about">
     <div class="container">
-      <h2>Why Choose ASTYL T-Shirts?</h2>
-      <p>🌿 <strong>100% Pure Cotton</strong> – Stay cool and comfy all day long.</p>
-      <p>🧥 <strong>Effortless Style</strong> – Classic fit, soft feel, perfect for everyday wear.</p>
-      <p>💸 <strong>Just ₹300</strong> – Premium quality at an unbeatable price! 😍</p>
-      <p>🎨 <strong>Print-on-Demand</strong> – Add your own design, logo, or text to create a tee that's uniquely yours.</p>
-      <p class="highlight">Your style. Your way. 💯</p>
-      <a href="https://www.instagram.com/astyl.2" class="btn">🛒 Grab Yours Now</a>
+      <h2 class="section-title">Why Choose ASTYL?</h2>
+      <div class="features-grid">
+        <div class="feature-card zoom-in">
+          <div class="feature-icon">🌿</div>
+          <h3>100% Pure Cotton</h3>
+          <p>Stay cool and comfy all day long with breathable, premium fabric</p>
+        </div>
+        <div class="feature-card zoom-in">
+          <div class="feature-icon">🧥</div>
+          <h3>Effortless Style</h3>
+          <p>Classic fit, soft feel, perfect for everyday wear</p>
+        </div>
+        <div class="feature-card zoom-in">
+          <div class="feature-icon">💸</div>
+          <h3>Just ₹300</h3>
+          <p>Premium quality at an unbeatable price</p>
+        </div>
+        <div class="feature-card zoom-in">
+          <div class="feature-icon">🎨</div>
+          <h3>Print-on-Demand</h3>
+          <p>Customize with your own design, logo, or text</p>
+        </div>
+      </div>
+      <div class="cta-section">
+        <p class="highlight">Your style. Your way.</p>
+        <a href="https://www.instagram.com/astyl.2" class="cta-btn">Shop Now</a>
+      </div>
     </div>
   </section>
 
-  <!-- Testimonials Section -->
-  <section class="testimonials">
+  <section class="testimonials scroll-reveal" id="testimonials">
     <div class="container">
-      <h2>What Our Customers Say</h2>
-      <blockquote>
-        "ASTYL is my favorite t-shirt brand. The comfort is unforgettable, and the quality is amazing for the price. Thank you, ASTYL!"
-      </blockquote>
-      <p>– Happy Customer</p>
+      <h2 class="section-title">What Our Customers Say</h2>
+      <div class="testimonial-carousel">
+        <div class="testimonial-track">
+          <div class="testimonial-card active">
+            <div class="stars">★★★★★</div>
+            <blockquote>
+              "ASTYL is my favorite t-shirt brand. The comfort is unforgettable, and the quality is amazing for the price. Thank you, ASTYL!"
+            </blockquote>
+            <p class="customer-name">– Happy Customer</p>
+          </div>
+          <div class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <blockquote>
+              "Best quality cotton t-shirts I've ever worn. The fit is perfect and they last forever!"
+            </blockquote>
+            <p class="customer-name">– Satisfied Buyer</p>
+          </div>
+          <div class="testimonial-card">
+            <div class="stars">★★★★★</div>
+            <blockquote>
+              "Amazing designs and super comfortable. ASTYL has become my go-to brand for casual wear!"
+            </blockquote>
+            <p class="customer-name">– Fashion Enthusiast</p>
+          </div>
+        </div>
+        <div class="carousel-dots">
+          <span class="dot active" data-slide="0"></span>
+          <span class="dot" data-slide="1"></span>
+          <span class="dot" data-slide="2"></span>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer>
+  <footer id="contact">
     <div class="container">
-      <p1>&copy; 2025 ASTYL. All rights reserved.</p1>
-        <p2> Designed by ATUL MISHRA </p2>
-      <div style="margin-top: 1em;">
-        <a href="mailto:contact.astyl@gmail.com" style="color: #ffe66d; text-decoration: none; margin-right: 1em;">contact.astyl@gmail.com</a>
-
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>ASTYL</h3>
+          <p>Luxury in Every Thread</p>
+        </div>
+        <div class="footer-section">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="product.html">Products</a></li>
+            <li><a href="about.html">About Us</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Contact Us</h4>
+          <div class="contact-form">
+            <input type="text" placeholder="Your Name" class="form-input">
+            <input type="email" placeholder="Your Email" class="form-input">
+            <textarea placeholder="Your Message" class="form-textarea"></textarea>
+            <button class="cta-btn">Send Message</button>
+          </div>
+        </div>
+        <div class="footer-section">
+          <h4>Follow Us</h4>
+          <div class="social-icons">
+            <a href="https://www.instagram.com/astyl.2" target="_blank" class="social-icon">📷</a>
+            <a href="https://pin.it/5wSHvgWAK" target="_blank" class="social-icon">📌</a>
+            <a href="mailto:contact.astyl@gmail.com" class="social-icon">✉️</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 ASTYL. All rights reserved.</p>
+        <p>Designed by ATUL MISHRA</p>
       </div>
     </div>
   </footer>
