@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>My Product Store</title>
+  <title>ASTYL Product Store</title>
   <style>
     * {
       margin: 0;
@@ -26,7 +26,6 @@
       top: 0;
       z-index: 1000;
       box-shadow: 0 4px 20px rgba(0,0,0,0.25);
-      backdrop-filter: blur(6px);
     }
 
     .navbar .container {
@@ -49,26 +48,7 @@
       text-decoration: none;
       font-weight: 600;
       font-size: 1.1em;
-      position: relative;
       letter-spacing: 0.5px;
-    }
-
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: -4px;
-      left: 0;
-      width: 100%;
-      height: 2px;
-      background: linear-gradient(90deg, #ff6b6b, #ffe66d, #4facfe);
-      background-size: 300% auto;
-      animation: moveLine 3s linear infinite;
-      border-radius: 2px;
-    }
-
-    @keyframes moveLine {
-      0% { background-position: 0% 50%; }
-      100% { background-position: 200% 50%; }
     }
 
     .product-section {
@@ -82,7 +62,6 @@
       color: #1e3c72;
       margin-bottom: 20px;
       font-weight: 700;
-      letter-spacing: 1px;
       text-transform: uppercase;
     }
 
@@ -120,7 +99,6 @@
 
     .product-card img {
       height: 300px;
-      width: auto;
       object-fit: cover;
       display: block;
       margin: 0 auto;
@@ -185,22 +163,6 @@
       color: transparent;
       font-weight: bold;
     }
-
-    @media (max-width: 768px) {
-      .navbar .container {
-        flex-direction: row;
-        justify-content: space-between;
-        padding: 0 20px;
-      }
-
-      .product-section {
-        padding: 50px 20px;
-      }
-
-      .product-section h2 {
-        font-size: 2em;
-      }
-    }
   </style>
 </head>
 <body>
@@ -224,7 +186,7 @@
     <h2>Our Products</h2>
     <div class="product-list">
 
-      <!-- Example Product -->
+      <!-- Product Cards -->
       <div class="product-card">
         <img src="https://i.ibb.co/7xVRWtHf/LS20251023131254.png" alt="ASTYL Marvel">
         <div class="product-info">
@@ -236,10 +198,86 @@
         </div>
       </div>
 
-      <!-- You can copy the same block for other products -->
+      <div class="product-card">
+        <img src="https://i.ibb.co/gLSTfm3x/LS20251023124704.png" alt="ASTYL Batman">
+        <div class="product-info">
+          <h3>ASTYL Batman</h3>
+          <h5>Color: Black</h5>
+          <h5>Size: S, M</h5>
+          <div class="price">₹299</div>
+          <button class="buy-btn" onclick="sendOrder('ASTYL Batman', 'Black', 'S, M', '₹299')">Buy Now</button>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <img src="https://i.ibb.co/MknVvs1X/LS20251023124801.png" alt="ASTYL Porsche 911">
+        <div class="product-info">
+          <h3>ASTYL Porsche 911</h3>
+          <h5>Color: Black</h5>
+          <h5>Size: S, M</h5>
+          <div class="price">₹299</div>
+          <button class="buy-btn" onclick="sendOrder('ASTYL Porsche 911', 'Black', 'S, M', '₹299')">Buy Now</button>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <img src="https://i.ibb.co/MxCMQkwh/LS20251023124811.png" alt="ASTYL BMW M5">
+        <div class="product-info">
+          <h3>ASTYL BMW M5</h3>
+          <h5>Color: Black</h5>
+          <h5>Size: S, M</h5>
+          <div class="price">₹299</div>
+          <button class="buy-btn" onclick="sendOrder('ASTYL BMW M5', 'Black', 'S, M', '₹299')">Buy Now</button>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <img src="https://i.ibb.co/m5hG8mFf/LS20251023124806.png" alt="ASTYL Wolf">
+        <div class="product-info">
+          <h3>ASTYL Wolf</h3>
+          <h5>Color: Black</h5>
+          <h5>Size: S, M</h5>
+          <div class="price">₹299</div>
+          <button class="buy-btn" onclick="sendOrder('ASTYL Wolf', 'Black', 'S, M', '₹299')">Buy Now</button>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <img src="https://i.ibb.co/Zz1Q78Vk/LS20251023124827.png" alt="ASTYL Just Ride">
+        <div class="product-info">
+          <h3>ASTYL Just Ride</h3>
+          <h5>Color: Black</h5>
+          <h5>Size: S, M</h5>
+          <div class="price">₹299</div>
+          <button class="buy-btn" onclick="sendOrder('ASTYL Just Ride', 'Black', 'S, M', '₹299')">Buy Now</button>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <img src="https://i.ibb.co/hJQtWGQ3/LS20251023124817.png" alt="ASTYL Off-roading">
+        <div class="product-info">
+          <h3>ASTYL Off-roading</h3>
+          <h5>Color: Black</h5>
+          <h5>Size: S, M</h5>
+          <div class="price">₹299</div>
+          <button class="buy-btn" onclick="sendOrder('ASTYL Off-roading', 'Black', 'S, M', '₹299')">Buy Now</button>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <img src="https://i.ibb.co/39vdRd2K/LS20251023124835.png" alt="ASTYL Heavy Driver">
+        <div class="product-info">
+          <h3>ASTYL Heavy Driver</h3>
+          <h5>Color: Black</h5>
+          <h5>Size: S, M</h5>
+          <div class="price">₹299</div>
+          <button class="buy-btn" onclick="sendOrder('ASTYL Heavy Driver', 'Black', 'S, M', '₹299')">Buy Now</button>
+        </div>
+      </div>
+
     </div>
 
-    <p style="margin-top: 30px;">Click on <b>BUY NOW</b> — details auto-fill in Gmail.</p>
+    <p style="margin-top: 30px;">🛒 Click on <b>BUY NOW</b> — your order details will auto-fill in Gmail.</p>
   </section>
 
   <!-- Footer -->
