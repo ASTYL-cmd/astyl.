@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>My Product Store</title>
   <style>
-    /* Reset */
     * {
       margin: 0;
       padding: 0;
@@ -19,7 +18,6 @@
       overflow-x: hidden;
     }
 
-    /* Navbar */
     .navbar {
       background: black;
       padding: 15px 0;
@@ -38,9 +36,7 @@
       padding: 0 40px;
     }
 
-    .logo img {
-      height: 58px;
-    }
+    .logo img { height: 58px; }
 
     .nav-links {
       list-style: none;
@@ -75,7 +71,6 @@
       100% { background-position: 200% 50%; }
     }
 
-    /* Product Section */
     .product-section {
       padding: 80px 60px;
       text-align: center;
@@ -87,7 +82,6 @@
       color: #1e3c72;
       margin-bottom: 20px;
       font-weight: 700;
-      position: relative;
       letter-spacing: 1px;
       text-transform: uppercase;
     }
@@ -102,16 +96,14 @@
       border-radius: 3px;
     }
 
-    /* Product Grid */
     .product-list {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
-      gap: 40px 40px;
+      gap: 40px;
       max-width: 1200px;
       margin: 60px auto;
     }
 
-    /* Product Card */
     .product-card {
       background: #fff;
       border-radius: 18px;
@@ -139,9 +131,7 @@
       transform: scale(1.05);
     }
 
-    .product-info {
-      padding: 22px;
-    }
+    .product-info { padding: 22px; }
 
     .product-card h3 {
       font-size: 1.4em;
@@ -180,7 +170,6 @@
       box-shadow: 0 4px 12px rgba(30,60,114,0.3);
     }
 
-    /* Footer */
     footer {
       background: linear-gradient(90deg, #0f2027, #203a43, #2c5364);
       color: white;
@@ -188,7 +177,6 @@
       padding: 25px 15px;
       margin-top: 70px;
       font-size: 0.95em;
-      letter-spacing: 0.3px;
     }
 
     footer span {
@@ -198,7 +186,6 @@
       font-weight: bold;
     }
 
-    /* Responsive */
     @media (max-width: 768px) {
       .navbar .container {
         flex-direction: row;
@@ -235,10 +222,9 @@
   <!-- Product Section -->
   <section class="product-section">
     <h2>Our Products</h2>
-
     <div class="product-list">
 
-      <!-- ASTYL Marvel -->
+      <!-- Example Product -->
       <div class="product-card">
         <img src="https://i.ibb.co/7xVRWtHf/LS20251023131254.png" alt="ASTYL Marvel">
         <div class="product-info">
@@ -250,93 +236,10 @@
         </div>
       </div>
 
-      <!-- ASTYL Batman -->
-      <div class="product-card">
-        <img src="https://i.ibb.co/gLSTfm3x/LS20251023124704.png" alt="ASTYL Batman">
-        <div class="product-info">
-          <h3>ASTYL Batman</h3>
-          <h5>Color: Black</h5>
-          <h5>Size: S, M</h5>
-          <div class="price">₹299</div>
-          <button class="buy-btn" onclick="sendOrder('ASTYL Batman', 'Black', 'S, M', '₹299')">Buy Now</button>
-        </div>
-      </div>
-
-      <!-- ASTYL Porsche 911 -->
-      <div class="product-card">
-        <img src="https://i.ibb.co/MknVvs1X/LS20251023124801.png" alt="ASTYL Porsche 911">
-        <div class="product-info">
-          <h3>ASTYL Porsche 911</h3>
-          <h5>Color: Black</h5>
-          <h5>Size: S, M</h5>
-          <div class="price">₹299</div>
-          <button class="buy-btn" onclick="sendOrder('ASTYL Porsche 911', 'Black', 'S, M', '₹299')">Buy Now</button>
-        </div>
-      </div>
-
-      <!-- ASTYL BMW M5 -->
-      <div class="product-card">
-        <img src="https://i.ibb.co/MxCMQkwh/LS20251023124811.png" alt="ASTYL BMW M5">
-        <div class="product-info">
-          <h3>ASTYL BMW M5</h3>
-          <h5>Color: Black</h5>
-          <h5>Size: S, M</h5>
-          <div class="price">₹299</div>
-          <button class="buy-btn" onclick="sendOrder('ASTYL BMW M5', 'Black', 'S, M', '₹299')">Buy Now</button>
-        </div>
-      </div>
-
-      <!-- ASTYL Wolf -->
-      <div class="product-card">
-        <img src="https://i.ibb.co/m5hG8mFf/LS20251023124806.png" alt="ASTYL Wolf">
-        <div class="product-info">
-          <h3>ASTYL Wolf</h3>
-          <h5>Color: Black</h5>
-          <h5>Size: S, M</h5>
-          <div class="price">₹299</div>
-          <button class="buy-btn" onclick="sendOrder('ASTYL Wolf', 'Black', 'S, M', '₹299')">Buy Now</button>
-        </div>
-      </div>
-
-      <!-- ASTYL Just Ride -->
-      <div class="product-card">
-        <img src="https://i.ibb.co/Zz1Q78Vk/LS20251023124827.png" alt="ASTYL Just Ride">
-        <div class="product-info">
-          <h3>ASTYL Just Ride</h3>
-          <h5>Color: Black</h5>
-          <h5>Size: S, M</h5>
-          <div class="price">₹299</div>
-          <button class="buy-btn" onclick="sendOrder('ASTYL Just Ride', 'Black', 'S, M', '₹299')">Buy Now</button>
-        </div>
-      </div>
-
-      <!-- ASTYL Off-roading -->
-      <div class="product-card">
-        <img src="https://i.ibb.co/hJQtWGQ3/LS20251023124817.png" alt="ASTYL Off-roading">
-        <div class="product-info">
-          <h3>ASTYL Off-roading</h3>
-          <h5>Color: Black</h5>
-          <h5>Size: S, M</h5>
-          <div class="price">₹299</div>
-          <button class="buy-btn" onclick="sendOrder('ASTYL Off-roading', 'Black', 'S, M', '₹299')">Buy Now</button>
-        </div>
-      </div>
-
-      <!-- ASTYL Heavy Driver -->
-      <div class="product-card">
-        <img src="https://i.ibb.co/39vdRd2K/LS20251023124835.png" alt="ASTYL Heavy Driver">
-        <div class="product-info">
-          <h3>ASTYL Heavy Driver</h3>
-          <h5>Color: Black</h5>
-          <h5>Size: S, M</h5>
-          <div class="price">₹299</div>
-          <button class="buy-btn" onclick="sendOrder('ASTYL Heavy Driver', 'Black', 'S, M', '₹299')">Buy Now</button>
-        </div>
-      </div>
-
+      <!-- You can copy the same block for other products -->
     </div>
 
-    <button class="buy-btn"><span>Click on BUY NOW — product name auto-fills in Gmail</span></button>
+    <p style="margin-top: 30px;">Click on <b>BUY NOW</b> — details auto-fill in Gmail.</p>
   </section>
 
   <!-- Footer -->
@@ -348,18 +251,41 @@
   <script>
     function sendOrder(productName, color, size, price) {
       const recipient = 'contact.astyl@gmail.com';
-      const subject = 'Order Request for ' + productName;
-      const body = 'Product: ' + productName + ' (' + color + ', Size ' + size + ')\n' +
-                   'Price: ' + price + '\n\n' +
-                   '--- Please fill in your details ---\n\n' +
-                   'Your Name: \n\n' +
-                   'Your Phone Number: \n\n' +
-                   'Your Shipping Address: \n\n\n' +
-                   'Thank you!';
+      const subject = '🛍️ New Order – ' + productName;
+      const body =
+        '🧍‍♂️ CUSTOMER INFORMATION\n' +
+        '---------------------------------\n' +
+        'Full Name: \n' +
+        'Phone Number: \n' +
+        'Address: \n\n' +
 
-      window.location.href = 'mailto:' + recipient + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+        '👕 PRODUCT DETAILS\n' +
+        '---------------------------------\n' +
+        'Product Name: ' + productName + '\n' +
+        'Color: ' + color + '\n' +
+        'Size: ' + size + '\n' +
+        'Price (per unit): ' + price + '\n' +
+        'Quantity: \n' +
+        'Total Amount: \n\n' +
+
+        '💳 PAYMENT DETAILS\n' +
+        '---------------------------------\n' +
+        'Payment Method: [UPI / COD / Card]\n' +
+        'Transaction ID (if prepaid): \n' +
+        'Payment Status: [Paid / Pending / COD]\n\n' +
+
+        '🗒️ ADDITIONAL NOTES\n' +
+        '---------------------------------\n' +
+        'Special Requests: \n\n' +
+
+        '✅ Thank you for shopping with ASTYL!\n' +
+        'Luxury in Every Thread 💫';
+
+      window.location.href =
+        'mailto:' + recipient +
+        '?subject=' + encodeURIComponent(subject) +
+        '&body=' + encodeURIComponent(body);
     }
   </script>
-
 </body>
 </html>
