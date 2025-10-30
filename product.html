@@ -1,447 +1,531 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>ASTYL Product Store</title>
+  <title>ASTYL Products - Premium T-Shirts</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Michroma&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Poppins', sans-serif;
+    }
+
+    :root {
+      --primary: #1a1a1a;
+      --secondary: #2d2d2d;
+      --accent: #4a90e2;
+      --text: #333;
+      --text-light: #666;
+      --background: #ffffff;
+      --surface: #f8f9fa;
+      --border: #e0e0e0;
     }
 
     body {
-      background: linear-gradient(180deg, #f8fafc, #e8f0ff);
-      color: #333;
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(180deg, #f8fafc, #ffffff);
+      color: var(--text);
       overflow-x: hidden;
     }
 
+    /* Navigation */
     .navbar {
       background: black;
-      padding: 15px 0;
-      width: 100%;
+      padding: 1rem 0;
       position: sticky;
       top: 0;
       z-index: 1000;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
     }
 
-    .navbar .container {
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 0 40px;
     }
 
-    .logo img { height: 58px; }
+    /* Logo Image */
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo img {
+      height: 55px;
+      width: auto;
+      transition: transform 0.3s ease;
+    }
+
+    .logo img:hover {
+      transform: scale(1.05);
+    }
 
     .nav-links {
       list-style: none;
       display: flex;
-      gap: 2.2em;
+      gap: 2rem;
+      align-items: center;
     }
 
     .nav-links a {
-      color: #fff;
+      color: var(--text);
       text-decoration: none;
-      font-weight: 600;
-      font-size: 1.1em;
-      letter-spacing: 0.5px;
+      font-weight: 500;
+      transition: color 0.3s ease;
     }
 
-    .product-section {
-      padding: 80px 60px;
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+
+    /* Header */
+    .page-header {
       text-align: center;
-      background: linear-gradient(180deg, #ffffff, #eef3ff);
+      padding: 6rem 2rem 4rem;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
     }
 
-    .product-section h2 {
-      font-size: 2.6em;
-      color: #1e3c72;
-      margin-bottom: 20px;
-      font-weight: 700;
-      text-transform: uppercase;
+    .page-header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      letter-spacing: 2px;
     }
 
-    .product-section h2::after {
-      content: '';
-      width: 90px;
-      height: 4px;
-      background: linear-gradient(90deg, #ff6b6b, #ffe66d);
-      display: block;
-      margin: 20px auto;
-      border-radius: 3px;
+    .page-header p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+      max-width: 600px;
+      margin: 0 auto;
     }
 
-    .product-list {
+    /* Products Section */
+    .products-section {
+      padding: 4rem 2rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .products-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
-      gap: 40px;
-      max-width: 1200px;
-      margin: 60px auto;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2.5rem;
+      margin-top: 3rem;
     }
 
     .product-card {
-      background: #fff;
-      border-radius: 18px;
-      box-shadow: 0 6px 25px rgba(0,0,0,0.1);
+      background: white;
+      border-radius: 20px;
       overflow: hidden;
-      transition: transform 0.35s ease, box-shadow 0.35s ease;
-      padding-top: 10px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      transition: all 0.3s ease;
+      position: relative;
     }
 
     .product-card:hover {
-      transform: translateY(-10px) scale(1.02);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      transform: translateY(-10px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
     }
 
-    .product-card img {
-      height: 300px;
+    .product-image {
+      width: 100%;
+      height: 350px;
+      overflow: hidden;
+      background: var(--surface);
+      position: relative;
+    }
+
+    .product-image img {
+      width: 100%;
+      height: 100%;
       object-fit: cover;
-      display: block;
-      margin: 0 auto;
-      transition: transform 0.4s ease;
+      transition: transform 0.5s ease;
     }
 
-    .product-card:hover img {
+    .product-card:hover .product-image img {
       transform: scale(1.05);
     }
 
-    .product-info { padding: 22px; }
-
-    .product-card h3 {
-      font-size: 1.4em;
-      color: #2a5298;
-      margin-bottom: 8px;
-    }
-
-    .product-card h5 {
-      color: #666;
-      margin: 4px 0;
-      font-weight: 500;
-    }
-
-    .price {
-      font-weight: bold;
-      color: #1e3c72;
-      margin: 12px 0;
-      font-size: 1.15em;
-    }
-
-    .chat-btn {
-      background: #000;
-      color: #fff;
-      border: none;
-      padding: 10px 24px;
-      border-radius: 50px; /* Pill-shaped to match the image */
-      font-size: 1em;
+    .product-badge {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 0.4rem 1rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
       font-weight: 600;
+      color: var(--accent);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .product-info {
+      padding: 1.8rem;
+    }
+
+    .product-name {
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 0.8rem;
+    }
+
+    .product-details {
+      display: flex;
+      gap: 1.5rem;
+      margin-bottom: 0.8rem;
+      font-size: 0.95rem;
+      color: var(--text-light);
+    }
+
+    .product-price {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin: 1.2rem 0;
+    }
+
+    .buy-btn {
+      width: 100%;
+      padding: 1rem;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.8rem;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .buy-btn {
+      width: 100%;
+      padding: 1rem 1.5rem;
+      font-family: 'Michroma', sans-serif;
+      font-size: 1rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #fff;
+      background: black;
+      border: 2px solid ;
+      border-radius: 50px; /* Stadium shape */
       cursor: pointer;
       position: relative;
       overflow: hidden;
-      display: inline-flex;
+      transition: all 0.3s ease;
+      z-index: 1;
+      display: flex;
       align-items: center;
-      gap: 12px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Base shadow */
-      transition: transform 0.2s ease;
-      margin-top: 10px;
+      justify-content: center;
+      gap: 0.6rem;
     }
 
-    .chat-btn:hover {
-      transform: translateY(-2px);
+    /* Moving Gradient Border */
+    .buy-btn::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 50px;
+      padding: 2px;
+      background: linear-gradient(270deg, #ff6a00, #ee0979, #00c6ff, #ff6a00);
+      background-size: 400% 400%;
+      animation: gradientMove 5s linear infinite;
+      -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      z-index: -1;
     }
 
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 100% 50%; }
+    }
+
+    /* Hover effect */
+    .buy-btn:hover {
+      background: linear-gradient(90deg, #ff6a00, #ee0979, #00c6ff);
+      transform: scale(1.05);
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+    }
+
+    /* Fast arrow motion */
     .arrow {
-      font-size: 20px;
-      display: inline-block;
-      animation: arrowMove 1.5s infinite ease-in-out;
+      font-size: 1.2rem;
+      animation: arrow-wave-fast 1s cubic-bezier(0.65, 0, 0.35, 1) infinite;
     }
 
-    @keyframes arrowMove {
-      0%, 100% {
-        transform: translateX(0px);
-      }
-      50% {
-        transform: translateX(5px); /* Moves right, then back for left-right effect */
-      }
+    @keyframes arrow-wave-fast {
+      0% { transform: translateX(-5px); }
+      50% { transform: translateX(5px); }
+      100% { transform: translateX(-5px); }
     }
 
-    /.chat-btn {
-  background: #000;
-  color: #fff;
-  border: none;
-  padding: 10px 24px;
-  border-radius: 50px;
-  font-size: 1em;
-  font-weight: 600;
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  box-shadow: 0 0 20px rgba(255, 107, 107, 0.5),
-              0 0 35px rgba(255, 230, 109, 0.4),
-              0 0 50px rgba(255, 20, 147, 0.3);
-  transition: transform 0.2s ease, box-shadow 0.3s ease;
-  margin-top: 10px;
-}
 
-.chat-btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 0 30px rgba(255, 107, 107, 0.7),
-              0 0 45px rgba(255, 230, 109, 0.6),
-              0 0 60px rgba(255, 20, 147, 0.5);
-}
-
-.arrow {
-  font-size: 20px;
-  display: inline-block;
-  animation: arrowMove 1.5s infinite ease-in-out;
-}
-
-@keyframes arrowMove {
-  0%, 100% { transform: translateX(0px); }
-  50% { transform: translateX(5px); }
-}
-
-/* Moving gradient inside the button */
-.chat-btn::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 107, 107, 0.4),
-    rgba(255, 230, 109, 0.5),
-    rgba(255, 20, 147, 0.4),
-    transparent
-  );
-  animation: gradientMove 3s infinite linear;
-  z-index: 1;
-  pointer-events: none;
-}
-
-@keyframes gradientMove {
-  0% { left: -100%; }
-  100% { left: 100%; }
-}
-
-/* Outer glow animation rotating outside */
-.chat-btn::after {
-  content: '';
-  position: absolute;
-  inset: -10px; /* Bigger outer glow */
-  border-radius: 50px;
-  background: conic-gradient(
-    from 0deg,
-    rgba(255, 107, 107, 0.6),
-    rgba(255, 230, 109, 0.5),
-    rgba(255, 20, 147, 0.6),
-    rgba(255, 107, 107, 0.6)
-  );
-  filter: blur(20px);
-  animation: rotateGlow 5s linear infinite;
-  z-index: 0;
-  opacity: 0.9;
-}
-
-@keyframes rotateGlow {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
+    /* Footer */
     footer {
-      background: linear-gradient(90deg, #0f2027, #203a43, #2c5364);
+      background: var(--primary);
       color: white;
       text-align: center;
-      padding: 25px 15px;
-      margin-top: 70px;
-      font-size: 0.95em;
+      padding: 3rem 2rem;
+      margin-top: 4rem;
     }
 
-    footer span {
-      background: linear-gradient(90deg, #ff6b6b, #ffe66d);
-      -webkit-background-clip: text;
-      color: transparent;
-      font-weight: bold;
+    footer p {
+      margin: 0.5rem 0;
+      opacity: 0.8;
+    }
+
+    .footer-highlight {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    @media (max-width: 768px) {
+      .page-header h1 {
+        font-size: 2rem;
+      }
+
+      .products-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .logo img {
+        height: 45px;
+      }
     }
   </style>
 </head>
 <body>
 
-  <!-- Navbar -->
-  <header class="navbar">
-    <div class="container">
-      <div class="logo">
-        <img src="https://i.ibb.co/N6j5FLj/ASTYL.png" alt="ASTYL Logo">
-      </div>
-      <nav>
-        <ul class="nav-links">
-          <li><a href="index.html">Home</a></li>
-        </ul>
-      </nav>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo">
+        <img src="https://i.ibb.co/N6j5FLjP/ASTYL.png" alt="ASTYL Logo">
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+      </ul>
     </div>
-  </header>
+  </nav>
 
-  <!-- Product Section -->
-  <section class="product-section">
-    <h2>Our Products</h2>
-    <div class="product-list">
+  <!-- Page Header -->
+  <section class="page-header">
+    <h1>Our Collection</h1>
+    <p>Premium 100% cotton t-shirts with stunning designs. All at just ₹299.</p>
+  </section>
 
-      <!-- Product Cards -->
+  <!-- Products Section -->
+  <section class="products-section">
+    <div class="products-grid">
+
+      <!-- Product 1 -->
       <div class="product-card">
-        <img src="https://i.ibb.co/7xVRWtHf/LS20251023131254.png" alt="ASTYL Marvel">
+        <div class="product-image">
+          <img src="https://i.ibb.co/7xVRWtHf/LS20251023131254.png" alt="ASTYL Marvel">
+          <span class="product-badge">New</span>
+        </div>
         <div class="product-info">
-          <h3>ASTYL Marvel</h3>
-          <h5>Color: Black</h5>
-          <h5>Size: S, M</h5>
-          <div class="price">₹299</div>
-          <button class="chat-btn" onclick="alert('Chat initiated for ASTYL Marvel!')">
-      Buy Now
-            <span class="arrow">→</span>
+          <h3 class="product-name">ASTYL Marvel</h3>
+          <div class="product-details">
+            <span>⚫ Black</span>
+            <span>📏 S, M</span>
+          </div>
+          <div class="product-price">₹299</div>
+          <button class="buy-btn" onclick="orderProduct('ASTYL Marvel', 'Black', 'S, M', '₹299')">
+            <span>Buy Now</span><span class="arrow">→</span>
           </button>
         </div>
       </div>
 
+      <!-- Product 2 -->
       <div class="product-card">
-        <img src="https://i.ibb.co/gLSTfm3x/LS20251023124704.png" alt="ASTYL Batman">
+        <div class="product-image">
+          <img src="https://i.ibb.co/gLSTfm3x/LS20251023124704.png" alt="ASTYL Batman">
+          <span class="product-badge">New</span>
+        </div>
         <div class="product-info">
-          <h3>ASTYL Batman</h3>
-          <h5>Color: Black</h5>
-          <h5>Size: S, M</h5>
-          <div class="price">₹299</div>
-          <button class="chat-btn" onclick="alert('Chat initiated for ASTYL Batman!')">
-               Buy Now
-            <span class="arrow">→</span>
+          <h3 class="product-name">ASTYL Batman</h3>
+          <div class="product-details">
+            <span>⚫ Black</span>
+            <span>📏 S, M</span>
+          </div>
+          <div class="product-price">₹299</div>
+          <button class="buy-btn" onclick="orderProduct('ASTYL Batman', 'Black', 'S, M', '₹299')">
+            <span>Buy Now</span><span class="arrow">→</span>
           </button>
         </div>
       </div>
 
+      <!-- Product 3 -->
       <div class="product-card">
-        <img src="https://i.ibb.co/MknVvs1X/LS20251023124801.png" alt="ASTYL Porsche 911">
+        <div class="product-image">
+          <img src="https://i.ibb.co/MknVvs1X/LS20251023124801.png" alt="ASTYL Porsche 911">
+        </div>
         <div class="product-info">
-          <h3>ASTYL Porsche 911</h3>
-          <h5>Color: Black</h5>
-          <h5>Size: S, M</h5>
-          <div class="price">₹299</div>
-          <button class="chat-btn" onclick="alert('Chat initiated for ASTYL Porsche 911!')">
-               Buy Now
-            <span class="arrow">→</span>
+          <h3 class="product-name">ASTYL Porsche 911</h3>
+          <div class="product-details">
+            <span>⚫ Black</span>
+            <span>📏 S, M</span>
+          </div>
+          <div class="product-price">₹299</div>
+          <button class="buy-btn" onclick="orderProduct('ASTYL Porsche 911', 'Black', 'S, M', '₹299')">
+            <span>Buy Now</span><span class="arrow">→</span>
           </button>
         </div>
       </div>
 
+      <!-- Product 4 -->
       <div class="product-card">
-        <img src="https://i.ibb.co/MxCMQkwh/LS20251023124811.png" alt="ASTYL BMW M5">
+        <div class="product-image">
+          <img src="https://i.ibb.co/MxCMQkwh/LS20251023124811.png" alt="ASTYL BMW M5">
+        </div>
         <div class="product-info">
-          <h3>ASTYL BMW M5</h3>
-          <h5>Color: Black</h5>
-          <h5>Size: S, M</h5>
-          <div class="price">₹299</div>
-          <button class="chat-btn" onclick="alert('Chat initiated for ASTYL BMW M5!')">
-               Buy Now
-            <span class="arrow">→</span>
+          <h3 class="product-name">ASTYL BMW M5</h3>
+          <div class="product-details">
+            <span>⚫ Black</span>
+            <span>📏 S, M</span>
+          </div>
+          <div class="product-price">₹299</div>
+          <button class="buy-btn" onclick="orderProduct('ASTYL BMW M5', 'Black', 'S, M', '₹299')">
+            <span>Buy Now</span><span class="arrow">→</span>
           </button>
         </div>
       </div>
 
+      <!-- Product 5 -->
       <div class="product-card">
-        <img src="https://i.ibb.co/m5hG8mFf/LS20251023124806.png" alt="ASTYL Wolf">
+        <div class="product-image">
+          <img src="https://i.ibb.co/m5hG8mFf/LS20251023124806.png" alt="ASTYL Wolf">
+        </div>
         <div class="product-info">
-          <h3>ASTYL Wolf</h3>
-          <h5>Color: Black</h5>
-          <h5>Size: S, M</h5>
-          <div class="price">₹299</div>
-          <button class="chat-btn" onclick="alert('Chat initiated for ASTYL Wolf!')">
-               Buy Now
-            <span class="arrow">→</span>
+          <h3 class="product-name">ASTYL Wolf</h3>
+          <div class="product-details">
+            <span>⚫ Black</span>
+            <span>📏 S, M</span>
+          </div>
+          <div class="product-price">₹299</div>
+          <button class="buy-btn" onclick="orderProduct('ASTYL Wolf', 'Black', 'S, M', '₹299')">
+            <span>Buy Now</span><span class="arrow">→</span>
           </button>
         </div>
       </div>
 
+      <!-- Product 6 -->
       <div class="product-card">
-        <img src="https://i.ibb.co/Zz1Q78Vk/LS20251023124827.png" alt="ASTYL Just Ride">
+        <div class="product-image">
+          <img src="https://i.ibb.co/Zz1Q78Vk/LS20251023124827.png" alt="ASTYL Just Ride">
+        </div>
         <div class="product-info">
-          <h3>ASTYL Just Ride</h3>
-          <h5>Color: Black</h5>
-          <h5>Size: S, M</h5>
-          <div class="price">₹299</div>
-          <button class="chat-btn" onclick="alert('Chat initiated for ASTYL Just Ride!')">
-               Buy Now
-            <span class="arrow">→</span>
+          <h3 class="product-name">ASTYL Just Ride</h3>
+          <div class="product-details">
+            <span>⚫ Black</span>
+            <span>📏 S, M</span>
+          </div>
+          <div class="product-price">₹299</div>
+          <button class="buy-btn" onclick="orderProduct('ASTYL Just Ride', 'Black', 'S, M', '₹299')">
+            <span>Buy Now</span><span class="arrow">→</span>
           </button>
         </div>
       </div>
 
+      <!-- Product 7 -->
       <div class="product-card">
-        <img src="https://i.ibb.co/hJQtWGQ3/LS20251023124817.png" alt="ASTYL Off-roading">
+        <div class="product-image">
+          <img src="https://i.ibb.co/hJQtWGQ3/LS20251023124817.png" alt="ASTYL Off-roading">
+        </div>
         <div class="product-info">
-          <h3>ASTYL Off-roading</h3>
-          <h5>Color: Black</h5>
-          <h5>Size: S, M</h5>
-          <div class="price">₹299</div>
-          <button class="chat-btn" onclick="alert('Chat initiated for ASTYL Off-roading!')">
-               Buy Now
-            <span class="arrow">→</span>
+          <h3 class="product-name">ASTYL Off-roading</h3>
+          <div class="product-details">
+            <span>⚫ Black</span>
+            <span>📏 S, M</span>
+          </div>
+          <div class="product-price">₹299</div>
+          <button class="buy-btn" onclick="orderProduct('ASTYL Off-roading', 'Black', 'S, M', '₹299')">
+            <span>Buy Now</span><span class="arrow">→</span>
           </button>
         </div>
       </div>
 
+      <!-- Product 8 -->
       <div class="product-card">
-        <img src="https://i.ibb.co/39vdRd2K/LS20251023124835.png" alt="ASTYL Heavy Driver">
+        <div class="product-image">
+          <img src="https://i.ibb.co/39vdRd2K/LS20251023124835.png" alt="ASTYL Heavy Driver">
+        </div>
         <div class="product-info">
-          <h3>ASTYL Heavy Driver</h3>
-          <h5>Color: Black</h5>
-          <h5>Size: S, M</h5>
-          <div class="price">₹299</div>
-          <button class="chat-btn" onclick="alert('Chat initiated for ASTYL Heavy Driver!')">
-               Buy Now
-            <span class="arrow">→</span>
+          <h3 class="product-name">ASTYL Heavy Driver</h3>
+          <div class="product-details">
+            <span>⚫ Black</span>
+            <span>📏 S, M</span>
+          </div>
+          <div class="product-price">₹299</div>
+          <button class="buy-btn" onclick="orderProduct('ASTYL Heavy Driver', 'Black', 'S, M', '₹299')">
+            <span>Buy Now</span><span class="arrow">→</span>
           </button>
         </div>
       </div>
 
     </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 <span class="footer-highlight">ASTYL</span> | All Rights Reserved</p>
+    <p>Designed by <span class="footer-highlight">Atul Mishra</span></p>
+  </footer>
 
   <script>
-    function sendOrder(productName, color, size, price) {
+    function orderProduct(name, color, size, price) {
       const recipient = 'contact.astyl@gmail.com';
-      const subject = '🛍️ New Order – ' + productName;
+      const subject = '🛍️ New Order Request – ' + name;
       const body =
-        '🧍‍♂️ CUSTOMER INFORMATION\n' +
-        '---------------------------------\n' +
+        '👋 CUSTOMER INFORMATION\n' +
+        '━━━━━━━━━━━━━━━━━━━━━━━\n' +
         'Full Name: \n' +
         'Phone Number: \n' +
-        'Address: \n\n' +
+        'Shipping Address: \n\n' +
 
         '👕 PRODUCT DETAILS\n' +
-        '---------------------------------\n' +
-        'Product Name: ' + productName + '\n' +
+        '━━━━━━━━━━━━━━━━━━━━━━━\n' +
+        'Product Name: ' + name + '\n' +
         'Color: ' + color + '\n' +
-        'Size: ' + size + '\n' +
+        'Available Sizes: ' + size + '\n' +
+        'Selected Size: \n' +
         'Price (per unit): ' + price + '\n' +
         'Quantity: \n' +
         'Total Amount: \n\n' +
 
         '💳 PAYMENT DETAILS\n' +
-        '---------------------------------\n' +
-        'Payment Method: [UPI / COD / Card]\n' +
+        '━━━━━━━━━━━━━━━━━━━━━━━\n' +
+        'Payment Method: [UPI / COD / Bank Transfer]\n' +
         'Transaction ID (if prepaid): \n' +
         'Payment Status: [Paid / Pending / COD]\n\n' +
 
-        '🗒️ ADDITIONAL NOTES\n' +
-        '---------------------------------\n' +
-        'Special Requests: \n\n' +
+        '📝 ADDITIONAL NOTES\n' +
+        '━━━━━━━━━━━━━━━━━━━━━━━\n' +
+        'Special Requests or Custom Instructions: \n\n' +
 
-        '✅ Thank you for shopping with ASTYL!\n' +
+        '✨ Thank you for choosing ASTYL!\n' +
         'Luxury in Every Thread 💫';
 
       window.location.href =
@@ -450,13 +534,6 @@
         '&body=' + encodeURIComponent(body);
     }
   </script>
-    
-
-  <!-- Footer -->
-  <footer>
-    © 2025 <span>ASTYL</span> | All Rights Reserved.
-    <p>Designed by <span>ATUL MISHRA</span></p>
-  </footer>
 
 </body>
 </html>
