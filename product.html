@@ -294,6 +294,192 @@
       font-weight: 600;
     }
 
+    /* Popup Modal */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(5px);
+      z-index: 9999;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      animation: fadeIn 0.3s ease forwards;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+
+    .modal-content {
+      background: white;
+      border-radius: 25px;
+      width: 95%;
+      max-width: 550px;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 2.5rem;
+      position: relative;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      animation: slideUp 0.4s ease forwards;
+      transform: translateY(50px);
+    }
+
+    @keyframes slideUp {
+      to {
+        transform: translateY(0);
+      }
+    }
+
+    .modal-content::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .modal-content::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 10px;
+    }
+
+    .modal-content::-webkit-scrollbar-thumb {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      border-radius: 10px;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      background: #f0f0f0;
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      font-size: 1.5rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      color: #333;
+    }
+
+    .close-btn:hover {
+      background: #e0e0e0;
+      transform: rotate(90deg);
+    }
+
+    .modal-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .modal-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .modal-header .product-highlight {
+      font-size: 1.1rem;
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    .order-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .form-group label {
+      font-weight: 600;
+      color: var(--text);
+      font-size: 0.95rem;
+    }
+
+    .form-group label .required {
+      color: #e74c3c;
+      margin-left: 3px;
+    }
+
+    .form-input,
+    .form-select {
+      padding: 0.9rem 1.2rem;
+      border: 2px solid #e0e0e0;
+      border-radius: 12px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      background: #fafafa;
+    }
+
+    .form-input:focus,
+    .form-select:focus {
+      outline: none;
+      border-color: #667eea;
+      background: white;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+
+    .form-input::placeholder {
+      color: #aaa;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+    }
+
+    .place-order-btn {
+      margin-top: 1rem;
+      padding: 1.2rem;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      border-radius: 15px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      font-family: 'Poppins', sans-serif;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .place-order-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 35px rgba(102, 126, 234, 0.4);
+    }
+
+    .place-order-btn:active {
+      transform: translateY(0);
+    }
+
+    .readonly-field {
+      background: #f0f0f0;
+      color: #555;
+      cursor: not-allowed;
+    }
+
     @media (max-width: 768px) {
       .page-header h1 {
         font-size: 2rem;
@@ -310,6 +496,24 @@
 
       .logo img {
         height: 45px;
+      }
+
+      .modal-content {
+        padding: 2rem 1.5rem;
+        width: 98%;
+      }
+
+      .modal-header h2 {
+        font-size: 1.6rem;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+
+      .close-btn {
+        top: 1rem;
+        right: 1rem;
       }
     }
   </style>
@@ -494,44 +698,173 @@
     <p>Designed by <span class="footer-highlight">Atul Mishra</span></p>
   </footer>
 
+  <!-- Order Modal -->
+  <div class="modal-overlay" id="orderModal">
+    <div class="modal-content">
+      <button class="close-btn" onclick="closeModal()">&times;</button>
+
+      <div class="modal-header">
+        <h2>Complete Your Order</h2>
+        <p class="product-highlight" id="modalProductName"></p>
+      </div>
+
+      <form class="order-form" id="orderForm" onsubmit="submitOrder(event)">
+        <div class="form-group">
+          <label>Full Name<span class="required">*</span></label>
+          <input type="text" class="form-input" id="fullName" placeholder="Enter your full name" required>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Mobile Number<span class="required">*</span></label>
+            <input type="tel" class="form-input" id="mobile" placeholder="10-digit number" pattern="[0-9]{10}" required>
+          </div>
+
+          <div class="form-group">
+            <label>Email ID<span class="required">*</span></label>
+            <input type="email" class="form-input" id="email" placeholder="your@email.com" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Address<span class="required">*</span></label>
+          <input type="text" class="form-input" id="address" placeholder="House No., Street, Area" required>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>City<span class="required">*</span></label>
+            <input type="text" class="form-input" id="city" placeholder="Your city" required>
+          </div>
+
+          <div class="form-group">
+            <label>State<span class="required">*</span></label>
+            <input type="text" class="form-input" id="state" placeholder="Your state" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Pincode<span class="required">*</span></label>
+            <input type="text" class="form-input" id="pincode" placeholder="6-digit pincode" pattern="[0-9]{6}" required>
+          </div>
+
+          <div class="form-group">
+            <label>Landmark</label>
+            <input type="text" class="form-input" id="landmark" placeholder="Nearby landmark">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Size<span class="required">*</span></label>
+            <select class="form-select" id="size" required>
+              <option value="">Select size</option>
+              <option value="S">S</option>
+              <option value="M">M</option>
+              <option value="L">L</option>
+              <option value="XL">XL</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Quantity<span class="required">*</span></label>
+            <input type="number" class="form-input" id="quantity" min="1" max="10" value="1" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Color</label>
+            <input type="text" class="form-input readonly-field" id="color" value="Black" readonly>
+          </div>
+
+          <div class="form-group">
+            <label>Price</label>
+            <input type="text" class="form-input readonly-field" id="price" value="₹299" readonly>
+          </div>
+        </div>
+
+        <button type="submit" class="place-order-btn">Place Order</button>
+      </form>
+    </div>
+  </div>
+
   <script>
-    function orderProduct(name, color, size, price) {
+    let currentProduct = {};
+
+    function orderProduct(name, color, sizes, price) {
+      currentProduct = { name, color, price };
+      document.getElementById('modalProductName').textContent = name;
+      document.getElementById('orderModal').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      document.getElementById('orderModal').classList.remove('active');
+      document.body.style.overflow = 'auto';
+      document.getElementById('orderForm').reset();
+    }
+
+    document.getElementById('orderModal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeModal();
+      }
+    });
+
+    function submitOrder(event) {
+      event.preventDefault();
+
+      const fullName = document.getElementById('fullName').value;
+      const mobile = document.getElementById('mobile').value;
+      const email = document.getElementById('email').value;
+      const address = document.getElementById('address').value;
+      const city = document.getElementById('city').value;
+      const state = document.getElementById('state').value;
+      const pincode = document.getElementById('pincode').value;
+      const landmark = document.getElementById('landmark').value || 'N/A';
+      const size = document.getElementById('size').value;
+      const quantity = document.getElementById('quantity').value;
+      const color = document.getElementById('color').value;
+      const pricePerUnit = currentProduct.price;
+      const totalAmount = '₹' + (parseInt(pricePerUnit.replace('₹', '')) * parseInt(quantity));
+
       const recipient = 'contact.astyl@gmail.com';
-      const subject = '🛍️ New Order Request – ' + name;
+      const subject = '🛍️ New Order — ASTYL Store';
       const body =
-        '👋 CUSTOMER INFORMATION\n' +
-        '━━━━━━━━━━━━━━━━━━━━━━━\n' +
-        'Full Name: \n' +
-        'Phone Number: \n' +
-        'Shipping Address: \n\n' +
-
+        '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n' +
+        '👤 CUSTOMER INFORMATION\n' +
+        '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n' +
+        'Full Name: ' + fullName + '\n' +
+        'Mobile Number: ' + mobile + '\n' +
+        'Email ID: ' + email + '\n\n' +
+        'Address: ' + address + '\n' +
+        'City: ' + city + '\n' +
+        'State: ' + state + '\n' +
+        'Pincode: ' + pincode + '\n' +
+        'Landmark: ' + landmark + '\n\n' +
+        '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n' +
         '👕 PRODUCT DETAILS\n' +
-        '━━━━━━━━━━━━━━━━━━━━━━━\n' +
-        'Product Name: ' + name + '\n' +
+        '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n' +
+        'Product Name: ' + currentProduct.name + '\n' +
         'Color: ' + color + '\n' +
-        'Available Sizes: ' + size + '\n' +
-        'Selected Size: \n' +
-        'Price (per unit): ' + price + '\n' +
-        'Quantity: \n' +
-        'Total Amount: \n\n' +
-
-        '💳 PAYMENT DETAILS\n' +
-        '━━━━━━━━━━━━━━━━━━━━━━━\n' +
-        'Payment Method: [UPI / COD / Bank Transfer]\n' +
-        'Transaction ID (if prepaid): \n' +
-        'Payment Status: [Paid / Pending / COD]\n\n' +
-
-        '📝 ADDITIONAL NOTES\n' +
-        '━━━━━━━━━━━━━━━━━━━━━━━\n' +
-        'Special Requests or Custom Instructions: \n\n' +
-
-        '✨ Thank you for choosing ASTYL!\n' +
-        'Luxury in Every Thread 💫';
+        'Size: ' + size + '\n' +
+        'Quantity: ' + quantity + '\n' +
+        'Price (per unit): ' + pricePerUnit + '\n' +
+        'Total Amount: ' + totalAmount + '\n\n' +
+        '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n' +
+        'Thank you for choosing ASTYL!\n' +
+        'Luxury in Every Thread\n\n' +
+        '✨ We will contact you shortly to confirm your order.';
 
       window.location.href =
         'mailto:' + recipient +
         '?subject=' + encodeURIComponent(subject) +
         '&body=' + encodeURIComponent(body);
+
+      setTimeout(() => {
+        closeModal();
+      }, 1000);
     }
   </script>
 
