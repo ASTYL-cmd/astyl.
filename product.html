@@ -556,9 +556,9 @@
             <span>📏 S, M</span>
           </div>
           <div class="product-price">₹299</div>
-          <button class="buy-btn" onclick="orderProduct('ASTYL Marvel', 'Black', 'S, M', '₹299')">
+          <a href="order.html?product=ASTYL Marvel&image=https://i.ibb.co/7xVRWtHf/LS20251023131254.png" class="buy-btn" style="text-decoration: none;">
             <span>Buy Now</span><span class="arrow">→</span>
-          </button>
+          </a>
         </div>
       </div>
 
@@ -575,9 +575,9 @@
             <span>📏 S, M</span>
           </div>
           <div class="product-price">₹299</div>
-          <button class="buy-btn" onclick="orderProduct('ASTYL Batman', 'Black', 'S, M', '₹299')">
+          <a href="order.html?product=ASTYL Batman&image=https://i.ibb.co/gLSTfm3x/LS20251023124704.png" class="buy-btn" style="text-decoration: none;">
             <span>Buy Now</span><span class="arrow">→</span>
-          </button>
+          </a>
         </div>
       </div>
 
@@ -593,9 +593,9 @@
             <span>📏 S, M</span>
           </div>
           <div class="product-price">₹299</div>
-          <button class="buy-btn" onclick="orderProduct('ASTYL Porsche 911', 'Black', 'S, M', '₹299')">
+          <a href="order.html?product=ASTYL Porsche 911&image=https://i.ibb.co/MknVvs1X/LS20251023124801.png" class="buy-btn" style="text-decoration: none;">
             <span>Buy Now</span><span class="arrow">→</span>
-          </button>
+          </a>
         </div>
       </div>
 
@@ -611,9 +611,9 @@
             <span>📏 S, M</span>
           </div>
           <div class="product-price">₹299</div>
-          <button class="buy-btn" onclick="orderProduct('ASTYL BMW M5', 'Black', 'S, M', '₹299')">
+          <a href="order.html?product=ASTYL BMW M5&image=https://i.ibb.co/MxCMQkwh/LS20251023124811.png" class="buy-btn" style="text-decoration: none;">
             <span>Buy Now</span><span class="arrow">→</span>
-          </button>
+          </a>
         </div>
       </div>
 
@@ -629,9 +629,9 @@
             <span>📏 S, M</span>
           </div>
           <div class="product-price">₹299</div>
-          <button class="buy-btn" onclick="orderProduct('ASTYL Wolf', 'Black', 'S, M', '₹299')">
+          <a href="order.html?product=ASTYL Wolf&image=https://i.ibb.co/m5hG8mFf/LS20251023124806.png" class="buy-btn" style="text-decoration: none;">
             <span>Buy Now</span><span class="arrow">→</span>
-          </button>
+          </a>
         </div>
       </div>
 
@@ -647,9 +647,9 @@
             <span>📏 S, M</span>
           </div>
           <div class="product-price">₹299</div>
-          <button class="buy-btn" onclick="orderProduct('ASTYL Just Ride', 'Black', 'S, M', '₹299')">
+          <a href="order.html?product=ASTYL Just Ride&image=https://i.ibb.co/Zz1Q78Vk/LS20251023124827.png" class="buy-btn" style="text-decoration: none;">
             <span>Buy Now</span><span class="arrow">→</span>
-          </button>
+          </a>
         </div>
       </div>
 
@@ -665,9 +665,9 @@
             <span>📏 S, M</span>
           </div>
           <div class="product-price">₹299</div>
-          <button class="buy-btn" onclick="orderProduct('ASTYL Off-roading', 'Black', 'S, M', '₹299')">
+          <a href="order.html?product=ASTYL Off-roading&image=https://i.ibb.co/hJQtWGQ3/LS20251023124817.png" class="buy-btn" style="text-decoration: none;">
             <span>Buy Now</span><span class="arrow">→</span>
-          </button>
+          </a>
         </div>
       </div>
 
@@ -683,9 +683,9 @@
             <span>📏 S, M</span>
           </div>
           <div class="product-price">₹299</div>
-          <button class="buy-btn" onclick="orderProduct('ASTYL Heavy Driver', 'Black', 'S, M', '₹299')">
+          <a href="order.html?product=ASTYL Heavy Driver&image=https://i.ibb.co/39vdRd2K/LS20251023124835.png" class="buy-btn" style="text-decoration: none;">
             <span>Buy Now</span><span class="arrow">→</span>
-          </button>
+          </a>
         </div>
       </div>
 
@@ -698,175 +698,6 @@
     <p>Designed by <span class="footer-highlight">Atul Mishra</span></p>
   </footer>
 
-  <!-- Order Modal -->
-  <div class="modal-overlay" id="orderModal">
-    <div class="modal-content">
-      <button class="close-btn" onclick="closeModal()">&times;</button>
-
-      <div class="modal-header">
-        <h2>Complete Your Order</h2>
-        <p class="product-highlight" id="modalProductName"></p>
-      </div>
-
-      <form class="order-form" id="orderForm" onsubmit="submitOrder(event)">
-        <div class="form-group">
-          <label>Full Name<span class="required">*</span></label>
-          <input type="text" class="form-input" id="fullName" placeholder="Enter your full name" required>
-        </div>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label>Mobile Number<span class="required">*</span></label>
-            <input type="tel" class="form-input" id="mobile" placeholder="10-digit number" pattern="[0-9]{10}" required>
-          </div>
-
-          <div class="form-group">
-            <label>Email ID<span class="required">*</span></label>
-            <input type="email" class="form-input" id="email" placeholder="your@email.com" required>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label>Address<span class="required">*</span></label>
-          <input type="text" class="form-input" id="address" placeholder="House No., Street, Area" required>
-        </div>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label>City<span class="required">*</span></label>
-            <input type="text" class="form-input" id="city" placeholder="Your city" required>
-          </div>
-
-          <div class="form-group">
-            <label>State<span class="required">*</span></label>
-            <input type="text" class="form-input" id="state" placeholder="Your state" required>
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label>Pincode<span class="required">*</span></label>
-            <input type="text" class="form-input" id="pincode" placeholder="6-digit pincode" pattern="[0-9]{6}" required>
-          </div>
-
-          <div class="form-group">
-            <label>Landmark</label>
-            <input type="text" class="form-input" id="landmark" placeholder="Nearby landmark">
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label>Size<span class="required">*</span></label>
-            <select class="form-select" id="size" required>
-              <option value="">Select size</option>
-              <option value="S">S</option>
-              <option value="M">M</option>
-              <option value="L">L</option>
-              <option value="XL">XL</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label>Quantity<span class="required">*</span></label>
-            <input type="number" class="form-input" id="quantity" min="1" max="10" value="1" required>
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label>Color</label>
-            <input type="text" class="form-input readonly-field" id="color" value="Black" readonly>
-          </div>
-
-          <div class="form-group">
-            <label>Price</label>
-            <input type="text" class="form-input readonly-field" id="price" value="₹299" readonly>
-          </div>
-        </div>
-
-        <button type="submit" class="place-order-btn">Place Order</button>
-      </form>
-    </div>
-  </div>
-
-  <script>
-    let currentProduct = {};
-
-    function orderProduct(name, color, sizes, price) {
-      currentProduct = { name, color, price };
-      document.getElementById('modalProductName').textContent = name;
-      document.getElementById('orderModal').classList.add('active');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeModal() {
-      document.getElementById('orderModal').classList.remove('active');
-      document.body.style.overflow = 'auto';
-      document.getElementById('orderForm').reset();
-    }
-
-    document.getElementById('orderModal').addEventListener('click', function(e) {
-      if (e.target === this) {
-        closeModal();
-      }
-    });
-
-    function submitOrder(event) {
-      event.preventDefault();
-
-      const fullName = document.getElementById('fullName').value;
-      const mobile = document.getElementById('mobile').value;
-      const email = document.getElementById('email').value;
-      const address = document.getElementById('address').value;
-      const city = document.getElementById('city').value;
-      const state = document.getElementById('state').value;
-      const pincode = document.getElementById('pincode').value;
-      const landmark = document.getElementById('landmark').value || 'N/A';
-      const size = document.getElementById('size').value;
-      const quantity = document.getElementById('quantity').value;
-      const color = document.getElementById('color').value;
-      const pricePerUnit = currentProduct.price;
-      const totalAmount = '₹' + (parseInt(pricePerUnit.replace('₹', '')) * parseInt(quantity));
-
-      const recipient = 'contact.astyl@gmail.com';
-      const subject = '🛍️ New Order — ASTYL Store';
-      const body =
-        '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n' +
-        '👤 CUSTOMER INFORMATION\n' +
-        '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n' +
-        'Full Name: ' + fullName + '\n' +
-        'Mobile Number: ' + mobile + '\n' +
-        'Email ID: ' + email + '\n\n' +
-        'Address: ' + address + '\n' +
-        'City: ' + city + '\n' +
-        'State: ' + state + '\n' +
-        'Pincode: ' + pincode + '\n' +
-        'Landmark: ' + landmark + '\n\n' +
-        '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n' +
-        '👕 PRODUCT DETAILS\n' +
-        '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n' +
-        'Product Name: ' + currentProduct.name + '\n' +
-        'Color: ' + color + '\n' +
-        'Size: ' + size + '\n' +
-        'Quantity: ' + quantity + '\n' +
-        'Price (per unit): ' + pricePerUnit + '\n' +
-        'Total Amount: ' + totalAmount + '\n\n' +
-        '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n' +
-        'Thank you for choosing ASTYL!\n' +
-        'Luxury in Every Thread\n\n' +
-        '✨ We will contact you shortly to confirm your order.';
-
-      window.location.href =
-        'mailto:' + recipient +
-        '?subject=' + encodeURIComponent(subject) +
-        '&body=' + encodeURIComponent(body);
-
-      setTimeout(() => {
-        closeModal();
-      }, 1000);
-    }
-  </script>
 
 </body>
 </html>

@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Place Your Order - ASTYL</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .navbar {
+      background: black;
+      padding: 15px 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+      margin: -20px -20px 40px -20px;
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo img {
+      height: 50px;
+      width: auto;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: #667eea;
+    }
+
+    .order-container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 24px;
+      padding: 40px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
+
+    .page-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      color: #1a1a1a;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .page-subtitle {
+      text-align: center;
+      color: #666;
+      margin-bottom: 40px;
+      font-size: 1.1rem;
+    }
+
+    .product-preview {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: 30px;
+      margin-bottom: 40px;
+      padding: 30px;
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+      border-radius: 20px;
+    }
+
+    .product-image {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .product-details {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .product-name {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 15px;
+    }
+
+    .product-price {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #667eea;
+      margin-bottom: 20px;
+    }
+
+    .product-info-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+    }
+
+    .info-item {
+      padding: 12px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    .info-label {
+      font-size: 0.85rem;
+      color: #666;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+
+    .info-value {
+      font-size: 1.1rem;
+      color: #1a1a1a;
+      font-weight: 500;
+    }
+
+    .order-form {
+      display: grid;
+      gap: 25px;
+    }
+
+    .form-section-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #e0e0e0;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .form-group.full-width {
+      grid-column: 1 / -1;
+    }
+
+    .form-label {
+      font-weight: 600;
+      color: #333;
+      font-size: 0.95rem;
+    }
+
+    .required {
+      color: #e74c3c;
+      margin-left: 3px;
+    }
+
+    .form-input,
+    .form-select,
+    .form-textarea {
+      padding: 14px 16px;
+      border: 2px solid #e0e0e0;
+      border-radius: 12px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 1rem;
+      background: #f8f9fa;
+      transition: all 0.3s ease;
+    }
+
+    .form-input:focus,
+    .form-select:focus,
+    .form-textarea:focus {
+      outline: none;
+      border-color: #667eea;
+      background: white;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+
+    .form-textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .quantity-control {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      background: #f8f9fa;
+      padding: 10px;
+      border-radius: 12px;
+      width: fit-content;
+    }
+
+    .qty-btn {
+      width: 40px;
+      height: 40px;
+      border: none;
+      background: white;
+      border-radius: 10px;
+      font-size: 1.3rem;
+      font-weight: 700;
+      cursor: pointer;
+      color: #667eea;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .qty-btn:hover {
+      background: #667eea;
+      color: white;
+      transform: scale(1.1);
+    }
+
+    .qty-display {
+      font-size: 1.3rem;
+      font-weight: 600;
+      min-width: 40px;
+      text-align: center;
+      color: #1a1a1a;
+    }
+
+    .total-section {
+      margin-top: 30px;
+      padding: 25px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 16px;
+      color: white;
+    }
+
+    .total-label {
+      font-size: 1.2rem;
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+
+    .total-amount {
+      font-size: 2.5rem;
+      font-weight: 700;
+    }
+
+    .place-order-btn {
+      width: 100%;
+      padding: 18px;
+      margin-top: 30px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      border-radius: 14px;
+      font-size: 1.2rem;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: 'Poppins', sans-serif;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+      transition: all 0.3s ease;
+    }
+
+    .place-order-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 40px rgba(102, 126, 234, 0.6);
+    }
+
+    .place-order-btn:active {
+      transform: translateY(0);
+    }
+
+    @media (max-width: 768px) {
+      .order-container {
+        padding: 25px;
+      }
+
+      .product-preview {
+        grid-template-columns: 1fr;
+      }
+
+      .product-image {
+        height: 250px;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-links {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo">
+        <img src="https://i.ibb.co/N6j5FLjP/ASTYL.png" alt="ASTYL Logo">
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="product.html">Products</a></li>
+        <li><a href="about.html">About</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="order-container">
+    <h1 class="page-title">Place Your Order</h1>
+    <p class="page-subtitle">Fill in your details below to complete your order</p>
+
+    <div class="product-preview" id="productPreview">
+      <img src="https://images.pexels.com/photos/3621812/pexels-photo-3621812.jpeg?auto=compress&cs=tinysrgb&w=600"
+           alt="Product"
+           class="product-image"
+           id="productImage">
+      <div class="product-details">
+        <h2 class="product-name" id="productName">Premium T-Shirt</h2>
+        <div class="product-price" id="productPrice">₹299</div>
+        <div class="product-info-grid">
+          <div class="info-item">
+            <div class="info-label">Material</div>
+            <div class="info-value">100% Cotton</div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">Quality</div>
+            <div class="info-value">Premium</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <form class="order-form" id="orderForm">
+      <h3 class="form-section-title">Personal Information</h3>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Full Name<span class="required">*</span></label>
+          <input type="text" class="form-input" id="fullName" placeholder="Enter your full name" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Mobile Number<span class="required">*</span></label>
+          <input type="tel" class="form-input" id="mobile" placeholder="10-digit number" pattern="[0-9]{10}" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Email Address<span class="required">*</span></label>
+        <input type="email" class="form-input" id="email" placeholder="your@email.com" required>
+      </div>
+
+      <h3 class="form-section-title">Delivery Address</h3>
+
+      <div class="form-group">
+        <label class="form-label">Complete Address<span class="required">*</span></label>
+        <textarea class="form-textarea" id="address" placeholder="House No., Street, Area" required></textarea>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">City<span class="required">*</span></label>
+          <input type="text" class="form-input" id="city" placeholder="Your city" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">State<span class="required">*</span></label>
+          <input type="text" class="form-input" id="state" placeholder="Your state" required>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Pincode<span class="required">*</span></label>
+          <input type="text" class="form-input" id="pincode" placeholder="6-digit pincode" pattern="[0-9]{6}" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Landmark</label>
+          <input type="text" class="form-input" id="landmark" placeholder="Nearby landmark (optional)">
+        </div>
+      </div>
+
+      <h3 class="form-section-title">Product Details</h3>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Color<span class="required">*</span></label>
+          <select class="form-select" id="color" required>
+            <option value="">Select color</option>
+            <option value="Black">Black</option>
+            <option value="White">White</option>
+            <option value="Navy Blue">Navy Blue</option>
+            <option value="Maroon">Maroon</option>
+            <option value="Forest Green">Forest Green</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Size<span class="required">*</span></label>
+          <select class="form-select" id="size" required>
+            <option value="">Select size</option>
+            <option value="S">S</option>
+            <option value="M">M</option>
+            <option value="L">L</option>
+            <option value="XL">XL</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Quantity<span class="required">*</span></label>
+        <div class="quantity-control">
+          <button type="button" class="qty-btn" onclick="updateQuantity(-1)">−</button>
+          <span class="qty-display" id="quantity">1</span>
+          <button type="button" class="qty-btn" onclick="updateQuantity(1)">+</button>
+        </div>
+      </div>
+
+      <div class="total-section">
+        <div class="total-label">Total Amount</div>
+        <div class="total-amount" id="totalAmount">₹299</div>
+      </div>
+
+      <button type="submit" class="place-order-btn">Place Order</button>
+    </form>
+  </div>
+
+  <script>
+    const pricePerUnit = 299;
+    let quantity = 1;
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const productName = urlParams.get('product') || 'Premium T-Shirt';
+    const productImage = urlParams.get('image') || 'https://images.pexels.com/photos/3621812/pexels-photo-3621812.jpeg?auto=compress&cs=tinysrgb&w=600';
+
+    document.getElementById('productName').textContent = productName;
+    document.getElementById('productImage').src = productImage;
+
+    function updateQuantity(change) {
+      quantity = Math.max(1, quantity + change);
+      document.getElementById('quantity').textContent = quantity;
+      updateTotal();
+    }
+
+    function updateTotal() {
+      const total = pricePerUnit * quantity;
+      document.getElementById('totalAmount').textContent = '₹' + total;
+    }
+
+    document.getElementById('orderForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const fullName = document.getElementById('fullName').value;
+      const mobile = document.getElementById('mobile').value;
+      const email = document.getElementById('email').value;
+      const address = document.getElementById('address').value;
+      const city = document.getElementById('city').value;
+      const state = document.getElementById('state').value;
+      const pincode = document.getElementById('pincode').value;
+      const landmark = document.getElementById('landmark').value || 'N/A';
+      const color = document.getElementById('color').value;
+      const size = document.getElementById('size').value;
+      const totalAmount = pricePerUnit * quantity;
+
+      const recipient = 'contact.astyl@gmail.com';
+      const subject = '🛍️ New Order - ASTYL Store';
+      const body =
+        '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n' +
+        '👤 CUSTOMER INFORMATION\n' +
+        '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n' +
+        'Full Name: ' + fullName + '\n' +
+        'Mobile Number: ' + mobile + '\n' +
+        'Email ID: ' + email + '\n\n' +
+        '📍 DELIVERY ADDRESS\n' +
+        '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n' +
+        'Address: ' + address + '\n' +
+        'City: ' + city + '\n' +
+        'State: ' + state + '\n' +
+        'Pincode: ' + pincode + '\n' +
+        'Landmark: ' + landmark + '\n\n' +
+        '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n' +
+        '👕 PRODUCT DETAILS\n' +
+        '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n' +
+        'Product Name: ' + productName + '\n' +
+        'Color: ' + color + '\n' +
+        'Size: ' + size + '\n' +
+        'Quantity: ' + quantity + '\n' +
+        'Price (per unit): ₹' + pricePerUnit + '\n' +
+        'Total Amount: ₹' + totalAmount + '\n\n' +
+        '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n' +
+        'Thank you for choosing ASTYL!\n' +
+        'Luxury in Every Thread\n\n' +
+        '✨ We will contact you shortly to confirm your order.';
+
+      window.location.href =
+        'mailto:' + recipient +
+        '?subject=' + encodeURIComponent(subject) +
+        '&body=' + encodeURIComponent(body);
+    });
+  </script>
+</body>
+</html>
