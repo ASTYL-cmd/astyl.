@@ -34,27 +34,21 @@
 
   <section class="experiences scroll-reveal">
     <div class="container">
-      <h2 class="section-title">Discover ASTYL</h2>
+      <h2 class="section-title">Meet ASTYL Team</h2>
       <div class="experience-grid">
         <div class="experience-card">
           <div class="card-icon">👕</div>
-          <h4><a href="product.html">Our Collection</a></h4>
-          <p>Explore premium designs crafted for you</p>
+          <h4><a href="https://www.instagram.com/the.atul.mishra/">Atul Mishra</a></h4>
+          <p> Founder & Designer </p>
           <div class="card-divider"></div>
         </div>
         <div class="experience-card">
           <div class="card-icon">✨</div>
-          <h4><a href="about.html">Our Story</a></h4>
-          <p>Learn about our journey and passion</p>
+          <h4><a href="https://www.instagram.com/honeybaba8055/">Siddharth Yadav</a></h4>
+          <p>Co-founder & Manager </p>
           <div class="card-divider"></div>
         </div>
-        <div class="experience-card">
-          <div class="card-icon">🎨</div>
-          <h4><a href="product.html">Custom Designs</a></h4>
-          <p>Unique prints on demand, just for you</p>
-          <div class="card-divider"></div>
-        </div>
-      </div>
+        
     </div>
   </section>
 
@@ -81,6 +75,14 @@
           <div class="feature-icon">🚀</div>
           <h3>Print on Demand</h3>
           <p>Custom designs made just for you</p>
+          <div class="experience-card">
+          <div class="card-icon">🎨</div>
+          <h4><a href="">Custom Designs</a></h4>
+<p>Mail your Design</p>
+<button onclick="window.location.href='mailto:contact.astyl@gmail.com?subject=Custom%20Design%20Request&body=Hello%20ASTYL%2C%20I%20want%20to%20share%20my%20design%20idea.'">
+  Send via Gmail
+</button>
+<div class="card-divider"></div>
         </div>
       </div>
       <div class="cta-section">
@@ -98,17 +100,17 @@
           <div class="testimonial-card active">
             <div class="stars">★★★★★</div>
             <blockquote>"The quality is outstanding! These are the most comfortable t-shirts I've ever owned."</blockquote>
-            <p class="customer-name">— Priya Sharma</p>
+            <p class="customer-name">— Seema Singh</p>
           </div>
           <div class="testimonial-card">
             <div class="stars">★★★★★</div>
             <blockquote>"ASTYL delivers exactly what they promise - luxury at an affordable price. Highly recommended!"</blockquote>
-            <p class="customer-name">— Rahul Verma</p>
+            <p class="customer-name">— Viswakarma Rai</p>
           </div>
           <div class="testimonial-card">
             <div class="stars">★★★★★</div>
             <blockquote>"Love the designs and the fabric quality. Worth every rupee!"</blockquote>
-            <p class="customer-name">— Anjali Reddy</p>
+            <p class="customer-name">— Raghunandan Reddy</p>
           </div>
         </div>
         <div class="carousel-dots">
@@ -140,6 +142,8 @@
           </ul>
         </div>
         <div class="footer-section">
+          <div class="footer-section">
+  <<div class="footer-section">
           <h4>Contact Us</h4>
           <form class="contact-form">
             <input type="text" class="form-input" placeholder="Your Name" required>
@@ -148,6 +152,20 @@
             <button type="submit" class="cta-btn">Send Message</button>
           </form>
         </div>
+          </div>
+<script>
+function sendEmail(event) {
+  event.preventDefault(); // Prevent form from reloading the page
+  const name = document.getElementById('name').value;
+  const email = document.getElementById('email').value;
+  const message = document.getElementById('message').value;
+
+  const subject = `New message from ${name}`;
+  const body = `Name: ${name}%0D%0AEmail: ${email}%0D%0A%0D%0AMessage:%0D%0A${message}`;
+
+  window.location.href = `mailto:contact.astyl@gmail.com?subject=${subject}&body=${body}`;
+}
+</script>
       </div>
       <div class="footer-bottom">
         <p>&copy; 2025 ASTYL. All rights reserved.</p>
