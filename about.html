@@ -7,11 +7,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
       font-family: 'Poppins', sans-serif;
@@ -38,10 +34,7 @@
       margin: auto;
     }
 
-    .navbar img {
-      height: 50px;
-      width: auto;
-    }
+    .navbar img { height: 50px; width: auto; }
 
     .nav-links {
       list-style: none;
@@ -57,9 +50,7 @@
       transition: color 0.3s ease;
     }
 
-    .nav-links a:hover {
-      color: #ffe66d;
-    }
+    .nav-links a:hover { color: #ffe66d; }
 
     .about-hero {
       text-align: center;
@@ -112,56 +103,69 @@
       text-align: center;
     }
 
+    /* ===== 3D Slider Section ===== */
     .team-showcase {
       margin-top: 3em;
+      text-align: center;
     }
 
     .team-showcase h3 {
       font-family: 'Playfair Display', serif;
-      text-align: center;
       font-size: 2.5em;
       margin-bottom: 2em;
       color: #333;
     }
 
-    .carousel-container {
-      width: 100%;
-      overflow: hidden;
+    body {
+      display: block;
+    }
+
+    .slider {
       position: relative;
-      padding: 2em 0;
+      margin: auto;
+      width: 100%;
+      height: 370px;
+      overflow: hidden;
     }
 
-    .carousel-track {
-      display: flex;
-      animation: slideLoop 18s linear infinite;
+    .slider .item {
+      position: absolute;
+      width: 200px;
+      height: 320px;
+      background-color: #fff;
+      border-radius: 15px;
+      overflow: hidden;
+      left: calc(50% - 100px);
+      top: 0;
+      transition: 0.5s;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
     }
 
-    .carousel-slide {
-      flex: 0 0 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    .slider .item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
-    .carousel-slide img {
-      width: 400px;
-      height: auto;
-      border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-      transition: transform 0.3s ease;
+    #next, #prev {
+      position: absolute;
+      top: 40%;
+      background: none;
+      border: none;
+      font-size: xxx-large;
+      color: #333;
+      font-weight: bold;
+      opacity: 0.5;
+      transition: opacity 0.3s;
+      cursor: pointer;
     }
 
-    .carousel-slide img:hover {
-      transform: scale(1.05);
-    }
+    #next:hover, #prev:hover { opacity: 1; }
 
-    @keyframes slideLoop {
-      0% { transform: translateX(0); }
-      33.33% { transform: translateX(-100%); }
-      66.66% { transform: translateX(-200%); }
-      100% { transform: translateX(0); }
-    }
+    #next { right: 100px; }
+    #prev { left: 100px; }
 
+    /* ===== Social Section ===== */
     .social-section {
       background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       color: white;
@@ -207,31 +211,6 @@
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
     }
 
-    .social-link i {
-      font-size: 1.5em;
-    }
-
-    .email-contact {
-      margin-top: 2em;
-      font-size: 1.2em;
-    }
-
-    .email-contact i {
-      margin-right: 0.5em;
-      color: #ffe66d;
-    }
-
-    .email-contact a {
-      color: white;
-      text-decoration: none;
-      border-bottom: 2px solid transparent;
-      transition: border-bottom 0.3s ease;
-    }
-
-    .email-contact a:hover {
-      border-bottom: 2px solid #ffe66d;
-    }
-
     footer {
       background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%);
       color: white;
@@ -241,22 +220,9 @@
     }
 
     @media (max-width: 768px) {
-      .about-hero h1 {
-        font-size: 2.5em;
-      }
-
-      .carousel-slide img {
-        width: 280px;
-      }
-
-      .social-links {
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .story-section {
-        padding: 2em 1.5em;
-      }
+      .about-hero h1 { font-size: 2.5em; }
+      #next { right: 40px; }
+      #prev { left: 40px; }
     }
   </style>
 </head>
@@ -286,36 +252,28 @@
       <p>Every ASTYL t-shirt is a testament to our commitment to quality, sustainability, and customer satisfaction. From our carefully selected fabrics to our attention to detail in every stitch, we ensure that each piece meets the highest standards.</p>
     </div>
 
+    <!-- ====== New 3D Slider Section ====== -->
     <div class="team-showcase">
       <h3>Meet the ASTYL Team</h3>
-      <div class="carousel-container">
-        <div class="carousel-track">
-          <div class="carousel-slide">
-            <img src="https://i.ibb.co/2001FZ3K/IMG-20251023-100443.png" alt="ASTYL Team Member 1">
-          </div>
-          <div class="carousel-slide">
-            <img src="https://i.ibb.co/DH08ZNyw/IMG-20251023-162157.jpg" alt="ASTYL Team Member 2">
-          </div>
-          <div class="carousel-slide">
-            <img src="https://i.ibb.co/DH8S7v33/IMG-20251023-162216.jpg" alt="ASTYL Team Collaboration">
-          </div>
-        </div>
+      <div class="team-showcase">
+  <h3>Meet the ASTYL Team</h3>
+  <div class="slider">
+    <div class="item"><img src="https://i.ibb.co/MDss49PJ/ATUL-MISHRA-2-page-0001.jpg" alt="Atul Mishra"></div>
+    <div class="item"><img src="https://i.ibb.co/xK4H2gdw/IMG-20251104-113247.jpg" alt="ASTYL Member"></div>
+    <div class="item"><img src="https://i.ibb.co/bjNjB9Pp/ATUL-MISHRA-1-page-0001.jpg" alt="Atul Mishra Portrait"></div>
+    <div class="item"><img src="https://i.ibb.co/DH8S7v33/IMG-20251023-162216.jpg" alt="ASTYL Team Collaboration"></div>
+    <button id="prev">&#10094;</button>
+    <button id="next">&#10095;</button>
+  </div>
       </div>
-    </div>
 
     <div class="social-section">
       <h2>Connect With Us</h2>
       <p>Follow our journey and stay updated with the latest collections, behind-the-scenes content, and exclusive offers!</p>
 
       <div class="social-links">
-        <a href="https://www.instagram.com/astyl.2" class="social-link" target="_blank" rel="noopener noreferrer">
-          <i class="fab fa-instagram"></i>
-          <span>@astyl.2</span>
-        </a>
-        <a href="https://pin.it/5wSHvgWAK" class="social-link" target="_blank" rel="noopener noreferrer">
-          <i class="fab fa-pinterest"></i>
-          <span>@astyl</span>
-        </a>
+        <a href="https://www.instagram.com/astyl.2" class="social-link" target="_blank"><i class="fab fa-instagram"></i><span>@astyl.2</span></a>
+        <a href="https://pin.it/5wSHvgWAK" class="social-link" target="_blank"><i class="fab fa-pinterest"></i><span>@astyl</span></a>
       </div>
 
       <div class="email-contact">
@@ -329,6 +287,46 @@
     <p>&copy; 2025 ASTYL. All rights reserved.</p>
     <p>Designed by Atul Mishra</p>
   </footer>
+
+  <!-- ====== Slider JS ====== -->
+  <script>
+    let items = document.querySelectorAll('.slider .item');
+    let active = 1; // center image
+
+    function loadShow(){
+      items[active].style.transform = `none`;
+      items[active].style.zIndex = 1;
+      items[active].style.filter = 'none';
+      items[active].style.opacity = 1;
+
+      let stt = 0;
+      for(let i = active + 1; i < items.length; i++){
+        stt++;
+        items[i].style.transform = `translateX(${120*stt}px) scale(${1 - 0.2*stt}) perspective(16px) rotateY(-1deg)`;
+        items[i].style.zIndex = -stt;
+        items[i].style.filter = 'blur(5px)';
+        items[i].style.opacity = stt > 2 ? 0 : 0.6;
+      }
+
+      stt = 0;
+      for(let i = active - 1; i >= 0; i--){
+        stt++;
+        items[i].style.transform = `translateX(${-120*stt}px) scale(${1 - 0.2*stt}) perspective(16px) rotateY(1deg)`;
+        items[i].style.zIndex = -stt;
+        items[i].style.filter = 'blur(5px)';
+        items[i].style.opacity = stt > 2 ? 0 : 0.6;
+      }
+    }
+    loadShow();
+
+    document.getElementById('next').onclick = () => {
+      active = active + 1 < items.length ? active + 1 : active;
+      loadShow();
+    }
+    document.getElementById('prev').onclick = () => {
+      active = active - 1 >= 0 ? active - 1 : active;
+      loadShow();
+    }
+  </script>
 </body>
 </html>
-
