@@ -1,3 +1,86 @@
+/* --- GLASS NAVBAR --- */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    /* Responsive padding */
+    padding: 15px 5%; 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* Glass Effect */
+    background: rgba(10, 10, 10, 0.6); 
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px); /* For Safari */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+/* --- LOGO IMAGE --- */
+/* This ensures your image fits perfectly in the glass bar */
+.logo img {
+    height: 50px; /* Adjust based on your logo file size */
+    width: auto;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.logo img:hover {
+    transform: scale(1.05);
+}
+
+/* --- NAV LINKS --- */
+.nav-links {
+    display: flex;
+    gap: 40px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase; /* Makes it look cleaner/more premium */
+    position: relative;
+    transition: color 0.3s ease;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Hover Line Effect */
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    /* Using your Gold Color */
+    background: #d4af37; 
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: #d4af37;
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+/* Mobile Adjustment */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 15px 20px;
+    }
+    .nav-links {
+        display: none;
+    }
+}
 * {
   margin: 0;
   padding: 0;
@@ -19,74 +102,6 @@ body {
   margin: auto;
 }
 
-.navbar {
-  background: rgba(0, 0, 0, 0.95);
-  backdrop-filter: blur(10px);
-  padding: 20px 0;
-  width: 100%;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
-}
-
-.navbar.scrolled {
-  padding: 15px 0;
-  box-shadow: 0 4px 40px rgba(0, 0, 0, 0.2);
-}
-
-.navbar .container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.logo img {
-  height: 55px;
-  width: auto;
-  transition: transform 0.3s ease;
-}
-
-.logo img:hover {
-  transform: scale(1.05);
-}
-
-.nav-links {
-  list-style: none;
-  display: flex;
-  gap: 3em;
-}
-
-.nav-links a {
-  color: #ffffff;
-  text-decoration: none;
-  font-weight: 500;
-  font-size: 1.05em;
-  position: relative;
-  transition: color 0.3s ease;
-  letter-spacing: 0.5px;
-}
-
-.nav-links a::after {
-  content: '';
-  position: absolute;
-  bottom: -6px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 0;
-  height: 2px;
-  background: linear-gradient(90deg, #d4af37, #f4e4c1);
-  transition: width 0.3s ease;
-}
-
-.nav-links a:hover {
-  color: #d4af37;
-}
-
-.nav-links a:hover::after {
-  width: 100%;
-}
 
 .hero {
   position: relative;
@@ -651,3 +666,4 @@ footer {
     grid-template-columns: repeat(2, 1fr);
   }
 }
+
