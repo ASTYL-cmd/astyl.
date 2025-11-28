@@ -1,320 +1,621 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-  <title>ASTYL - Premium Streetwear</title>
-  <meta name="description" content="ASTYL — Premium streetwear. Shop latest designs from ₹299.">
+<!DOCTYPE html>  <html lang="en">  
+<head>  
+  <meta charset="UTF-8" />  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>  
+  <title>ASTYL - Premium Streetwear</title>    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&family=Michroma&display=swap" rel="stylesheet">    <style>  
+    /* --- RESET & VARIABLES --- */  
+    * {  
+      margin: 0;  
+      padding: 0;  
+      box-sizing: border-box;  
+    }  
+  
+    :root {  
+      --primary: #000000;  
+      --secondary: #1a1a1a;  
+      --accent: #4a90e2;  
+      --text: #333;  
+      --text-light: #666;  
+      --bg-gradient: linear-gradient(180deg, #f8fafc, #ffffff);  
+      --card-shadow: 0 10px 30px rgba(0,0,0,0.08);  
+      --card-hover-shadow: 0 20px 40px rgba(0,0,0,0.15);  
+    }  
+  
+    html {  
+      scroll-behavior: smooth;  
+    }  
+  
+    body {  
+      font-family: 'Inter', sans-serif;  
+      background: var(--bg-gradient);  
+      color: var(--text);  
+      overflow-x: hidden;  
+    }  
+  
+    /* --- NAVIGATION --- */  
+    .navbar {  
+      background: rgba(0, 0, 0, 0.9); /* Slight transparency */  
+      backdrop-filter: blur(10px); /* Glass effect */  
+      padding: 1rem 0;  
+      position: sticky;  
+      top: 0;  
+      z-index: 1000;  
+      border-bottom: 1px solid rgba(255,255,255,0.1);  
+    }  
+  
+    .nav-container {  
+      max-width: 1200px;  
+      margin: 0 auto;  
+      padding: 0 1.5rem;  
+      display: flex;  
+      justify-content: space-between;  
+      align-items: center;  
+    }  
+  
+    /* Logo */  
+    .logo img {  
+      height: 50px;  
+      width: auto;  
+      transition: transform 0.3s ease;  
+      filter: brightness(1.2);  
+    }  
+  
+    .logo img:hover {  
+      transform: scale(1.05);  
+    }  
+  
+    /* Desktop Links */  
+    .nav-links {  
+      list-style: none;  
+      display: flex;  
+      gap: 2.5rem;  
+      align-items: center;  
+    }  
+  
+    .nav-links a {  
+      color: #fff;  
+      text-decoration: none;  
+      font-weight: 500;  
+      font-size: 0.95rem;  
+      text-transform: uppercase;  
+      letter-spacing: 1px;  
+      transition: color 0.3s ease;  
+      position: relative;  
+    }  
+  
+    .nav-links a::after {  
+      content: '';  
+      position: absolute;  
+      width: 0;  
+      height: 2px;  
+      bottom: -4px;  
+      left: 0;  
+      background-color: #fff;  
+      transition: width 0.3s ease;  
+    }  
+  
+    .nav-links a:hover::after {  
+      width: 100%;  
+    }  
+  
+    /* --- HAMBURGER MENU (/// Toggle) --- */  
+    .hamburger {  
+      display: none;  
+      cursor: pointer;  
+      flex-direction: column;  
+      gap: 6px;  
+      z-index: 1001;  
+    }  
+  
+    .bar {  
+      width: 28px;  
+      height: 3px;  
+      background-color: white;  
+      border-radius: 3px;  
+      transition: all 0.3s ease-in-out;  
+    }  
+  
+    /* Mobile Menu Dropdown */  
+    .mobile-menu {  
+      position: absolute;  
+      top: 100%;  
+      left: 0;  
+      width: 100%;  
+      background: black;  
+      padding: 0;  
+      max-height: 0;  
+      overflow: hidden;  
+      transition: max-height 0.4s ease-out;  
+      border-bottom: 1px solid #333;  
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);  
+    }  
+  
+    .mobile-menu.active {  
+      max-height: 300px; /* Adjust based on content height */  
+    }  
+  
+    .mobile-menu a {  
+      display: block;  
+      color: white;  
+      text-decoration: none;  
+      padding: 1.5rem;  
+      text-align: center;  
+      border-bottom: 1px solid #222;  
+      font-weight: 600;  
+      letter-spacing: 1px;  
+      text-transform: uppercase;  
+      transition: background 0.3s;  
+    }  
+  
+    .mobile-menu a:last-child {  
+      border-bottom: none;  
+    }  
+  
+    .mobile-menu a:hover {  
+      background: #1a1a1a;  
+      color: var(--accent);  
+    }  
+  
+    /* Hamburger Animation to 'X' */  
+    .hamburger.active .bar:nth-child(1) {  
+      transform: translateY(9px) rotate(45deg);  
+    }  
+    .hamburger.active .bar:nth-child(2) {  
+      opacity: 0;  
+    }  
+    .hamburger.active .bar:nth-child(3) {  
+      transform: translateY(-9px) rotate(-45deg);  
+    }  
+  
+    /* --- HERO HEADER --- */  
+    .page-header {  
+      text-align: center;  
+      padding: 7rem 1.5rem 5rem;  
+      background: linear-gradient(135deg, #000000 0%, #2c3e50 100%);  
+      color: white;  
+      position: relative;  
+      overflow: hidden;  
+    }  
+  
+    /* Decorative background circle */  
+    .page-header::before {  
+      content: '';  
+      position: absolute;  
+      top: -50%;  
+      left: -20%;  
+      width: 800px;  
+      height: 800px;  
+      background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);  
+      border-radius: 50%;  
+      pointer-events: none;  
+    }  
+  
+    .page-header h1 {  
+      font-family: 'Playfair Display', serif;  
+      font-size: 3.5rem;  
+      margin-bottom: 1.2rem;  
+      letter-spacing: 1px;  
+      text-shadow: 0 4px 10px rgba(0,0,0,0.3);  
+    }  
+  
+    .page-header p {  
+      font-size: 1.2rem;  
+      opacity: 0.8;  
+      max-width: 600px;  
+      margin: 0 auto;  
+      line-height: 1.6;  
+    }  
+  
+    /* --- PRODUCTS GRID --- */  
+    .products-section {  
+      padding: 4rem 2rem;  
+      max-width: 1400px;  
+      margin: 0 auto;  
+    }  
+  
+    .section-title {  
+      text-align: center;  
+      margin-bottom: 3rem;  
+      font-size: 2rem;  
+      font-weight: 700;  
+      color: var(--primary);  
+      text-transform: uppercase;  
+      letter-spacing: 2px;  
+    }  
+  
+    .products-grid {  
+      display: grid;  
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));  
+      gap: 3rem;  
+    }  
+  
+    .product-card {  
+      background: white;  
+      border-radius: 20px;  
+      overflow: hidden;  
+      box-shadow: var(--card-shadow);  
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);  
+      position: relative;  
+      border: 1px solid #f0f0f0;  
+    }  
+  
+    .product-card:hover {  
+      transform: translateY(-12px);  
+      box-shadow: var(--card-hover-shadow);  
+    }  
+  
+    .product-image {  
+      width: 100%;  
+      height: 320px;  
+      overflow: hidden;  
+      background: #f4f4f4;  
+      position: relative;  
+      display: flex;  
+      align-items: center;  
+      justify-content: center;  
+    }  
+  
+    .product-image img {  
+      width: 100%;  
+      height: 100%;  
+      object-fit: cover;  
+      transition: transform 0.6s ease;  
+    }  
+  
+    .product-card:hover .product-image img {  
+      transform: scale(1.08);  
+    }  
+  
+    .product-badge {  
+      position: absolute;  
+      top: 1rem;  
+      left: 1rem;  
+      background: black;  
+      color: white;  
+      padding: 0.4rem 1rem;  
+      border-radius: 50px;  
+      font-size: 0.75rem;  
+      font-weight: 700;  
+      text-transform: uppercase;  
+      letter-spacing: 1px;  
+      z-index: 2;  
+    }  
+  
+    .product-info {  
+      padding: 1.5rem;  
+      text-align: left;  
+    }  
+  
+    .product-name {  
+      font-size: 1.25rem;  
+      font-weight: 700;  
+      color: var(--primary);  
+      margin-bottom: 0.5rem;  
+      font-family: 'Inter', sans-serif;  
+    }  
+  
+    .product-meta {  
+      display: flex;  
+      justify-content: space-between;  
+      align-items: center;  
+      margin-bottom: 1.2rem;  
+      font-size: 0.9rem;  
+      color: var(--text-light);  
+    }  
+  
+    .price-tag {  
+      font-size: 1.5rem;  
+      font-weight: 700;  
+      color: var(--primary);  
+    }  
+  
+    /* --- ANIMATED BUTTON --- */  
+    .buy-btn {  
+      width: 100%;  
+      padding: 1rem 1.5rem;  
+      font-family: 'Michroma', sans-serif;  
+      font-size: 0.9rem;  
+      letter-spacing: 1px;  
+      text-transform: uppercase;  
+      color: #fff;  
+      background: black;  
+      text-decoration: none;  
+      border-radius: 50px;  
+      cursor: pointer;  
+      position: relative;  
+      overflow: hidden;  
+      transition: all 0.3s ease;  
+      z-index: 1;  
+      display: flex;  
+      align-items: center;  
+      justify-content: center;  
+      gap: 0.6rem;  
+      border: none;  
+    }  
+  
+    /* Moving Gradient Border */  
+    .buy-btn::before {  
+      content: "";  
+      position: absolute;  
+      inset: 0;  
+      border-radius: 50px;  
+      padding: 2px; /* Border width */  
+      background: linear-gradient(90deg, #ff6a00, #ee0979, #00c6ff, #ff6a00);  
+      background-size: 400% 400%;  
+      animation: gradientMove 4s linear infinite;  
+      -webkit-mask:  
+        linear-gradient(#fff 0 0) content-box,  
+        linear-gradient(#fff 0 0);  
+      -webkit-mask-composite: xor;  
+      mask-composite: exclude;  
+      z-index: -1;  
+    }  
+  
+    @keyframes gradientMove {  
+      0% { background-position: 0% 50%; }  
+      100% { background-position: 100% 50%; }  
+    }  
+  
+    .buy-btn:hover {  
+      background: #1a1a1a;  
+      transform: scale(1.02);  
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);  
+    }  
+  
+    .arrow {  
+      display: inline-block;  
+      transition: transform 0.3s ease;  
+    }  
+  
+    .buy-btn:hover .arrow {  
+      transform: translateX(5px);  
+    }  
+  
+    /* --- FOOTER --- */  
+    footer {  
+      background: #000;  
+      color: white;  
+      text-align: center;  
+      padding: 4rem 2rem;  
+      margin-top: 4rem;  
+      border-top: 5px solid #333;  
+    }  
+  
+    footer p {  
+      margin: 0.8rem 0;  
+      color: #888;  
+      font-size: 0.9rem;  
+    }  
+  
+    .footer-highlight {  
+      color: white;  
+      font-weight: 600;  
+    }  
+  
+    /* --- MEDIA QUERIES --- */  
+    @media (max-width: 768px) {  
+      /* Hide desktop links */  
+      .nav-links {  
+        display: none;  
+      }  
+  
+      /* Show Hamburger */  
+      .hamburger {  
+        display: flex;  
+      }  
+  
+      .page-header h1 {  
+        font-size: 2.2rem;  
+      }  
+  
+      .products-grid {  
+        grid-template-columns: 1fr; /* Single column on mobile */  
+        gap: 2rem;  
+      }  
+        
+      .product-image {  
+        height: 350px; /* Taller images on mobile */  
+      }  
+    }  
+  </style>  </head>  
+<body>    <nav class="navbar">  
+    <div class="nav-container">  
+      <a href="index.html" class="logo">  
+        <img src="https://i.ibb.co/N6j5FLjP/ASTYL.png" alt="ASTYL Logo">  
+      </a>  <ul class="nav-links">  
+    <li><a href="index.html">Home</a></li>  
+    <li><a href="about.html">About Us</a></li>  
+    <li><a href="#products">Products</a></li>  
+  </ul>  
 
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <div class="hamburger" id="hamburger">  
+    <span class="bar"></span>  
+    <span class="bar"></span>  
+    <span class="bar"></span>  
+  </div>  
+</div>  
+  
+<div class="mobile-menu" id="mobile-menu">  
+  <a href="index.html" onclick="toggleMenu()">Home</a>  
+  <a href="about.html" onclick="toggleMenu()">About Us</a>  
+  <a href="#products" onclick="toggleMenu()">Products</a>  
+</div>
 
-  <style>
-    /* --- CORE VARIABLES --- */
-    :root {
-      --bg: #f9fafb;
-      --card-bg: #ffffff;
-      --text: #111;
-      --muted: #666;
-      --accent: #000;
-      --radius: 12px;
-      --shadow: 0 4px 20px rgba(0,0,0,0.06);
-      --container: 1200px;
-    }
+  </nav>    <header class="page-header">  
+    <h1>The Collection</h1>  
+    <p>Premium 100% cotton streetwear designed for comfort and style.<br>Exclusive drops at <strong>₹299</strong>.</p>  
+  </header>    <section class="products-section" id="products">  
+    <div class="section-title">Latest Drops</div>  <div class="products-grid">  
 
-    /* --- RESET --- */
-    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); padding-top: 60px; }
-    a { text-decoration: none; color: inherit; }
-    img { display: block; width: 100%; object-fit: cover; }
-    button { font-family: inherit; cursor: pointer; border: none; outline: none; }
+  <div class="product-card">  
+    <div class="product-image">  
+      <span class="product-badge">Best Seller</span>  
+      <img src="https://i.ibb.co/7xVRWtHf/LS20251023131254.png" alt="ASTYL Marvel" loading="lazy">  
+    </div>  
+    <div class="product-info">  
+      <h3 class="product-name">ASTYL Marvel</h3>  
+      <div class="product-meta">  
+        <span>Color: Black</span>  
+        <span>Sizes: S, M</span>  
+      </div>  
+      <div class="price-tag" style="margin-bottom: 1rem;">₹299</div>  
+      <a href="order.html?product=ASTYL Marvel&image=https://i.ibb.co/7xVRWtHf/LS20251023131254.png" class="buy-btn">  
+        <span>Buy Now</span><span class="arrow">→</span>  
+      </a>  
+    </div>  
+  </div>  
 
-    /* --- LAYOUT --- */
-    .container { max-width: var(--container); margin: 0 auto; padding: 0 16px; }
+  <div class="product-card">  
+    <div class="product-image">  
+      <span class="product-badge">Trending</span>  
+      <img src="https://i.ibb.co/gLSTfm3x/LS20251023124704.png" alt="ASTYL Batman" loading="lazy">  
+    </div>  
+    <div class="product-info">  
+      <h3 class="product-name">ASTYL Batman</h3>  
+      <div class="product-meta">  
+        <span>Color: Black</span>  
+        <span>Sizes: S, M</span>  
+      </div>  
+      <div class="price-tag" style="margin-bottom: 1rem;">₹299</div>  
+      <a href="order.html?product=ASTYL Batman&image=https://i.ibb.co/gLSTfm3x/LS20251023124704.png" class="buy-btn">  
+        <span>Buy Now</span><span class="arrow">→</span>  
+      </a>  
+    </div>  
+  </div>  
 
-    /* --- NAVBAR --- */
-    .navbar {
-      position: fixed; top: 0; left: 0; right: 0; height: 60px;
-      background: rgba(255,255,255,0.95); backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(0,0,0,0.05); z-index: 100;
-      display: flex; align-items: center;
-    }
-    .nav-inner { width: 100%; display: flex; justify-content: space-between; align-items: center; }
-    
-    .logo { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 700; display: flex; align-items: center; gap: 8px; }
-    .logo img { height: 32px; width: auto; }
+  <div class="product-card">  
+    <div class="product-image">  
+      <img src="https://i.ibb.co/MknVvs1X/LS20251023124801.png" alt="ASTYL Porsche 911" loading="lazy">  
+    </div>  
+    <div class="product-info">  
+      <h3 class="product-name">Porsche 911 Edition</h3>  
+      <div class="product-meta">  
+        <span>Color: Black</span>  
+        <span>Sizes: S, M</span>  
+      </div>  
+      <div class="price-tag" style="margin-bottom: 1rem;">₹299</div>  
+      <a href="order.html?product=ASTYL Porsche 911&image=https://i.ibb.co/MknVvs1X/LS20251023124801.png" class="buy-btn">  
+        <span>Buy Now</span><span class="arrow">→</span>  
+      </a>  
+    </div>  
+  </div>  
 
-    .nav-icons { display: flex; gap: 16px; align-items: center; }
-    .icon-btn { background: none; padding: 4px; position: relative; font-size: 1.2rem; }
-    
-    /* Cart Badge */
-    .cart-count { 
-      position: absolute; top: -2px; right: -4px; 
-      background: #ff3b30; color: white; 
-      font-size: 10px; font-weight: bold; 
-      height: 16px; width: 16px; 
-      border-radius: 50%; display: flex; align-items: center; justify-content: center;
-    }
+  <div class="product-card">  
+    <div class="product-image">  
+      <img src="https://i.ibb.co/MxCMQkwh/LS20251023124811.png" alt="ASTYL BMW M5" loading="lazy">  
+    </div>  
+    <div class="product-info">  
+      <h3 class="product-name">BMW M5 Power</h3>  
+      <div class="product-meta">  
+        <span>Color: Black</span>  
+        <span>Sizes: S, M</span>  
+      </div>  
+      <div class="price-tag" style="margin-bottom: 1rem;">₹299</div>  
+      <a href="order.html?product=ASTYL BMW M5&image=https://i.ibb.co/MxCMQkwh/LS20251023124811.png" class="buy-btn">  
+        <span>Buy Now</span><span class="arrow">→</span>  
+      </a>  
+    </div>  
+  </div>  
 
-    /* --- HERO SECTION --- */
-    .hero { text-align: center; padding: 40px 0; background: #fff; border-bottom: 1px solid #eee; }
-    .hero h1 { font-family: 'Playfair Display', serif; font-size: 2.2rem; margin-bottom: 10px; line-height: 1.1; }
-    .hero p { color: var(--muted); font-size: 0.95rem; max-width: 500px; margin: 0 auto 20px; }
+  <div class="product-card">  
+    <div class="product-image">  
+      <img src="https://i.ibb.co/m5hG8mFf/LS20251023124806.png" alt="ASTYL Wolf" loading="lazy">  
+    </div>  
+    <div class="product-info">  
+      <h3 class="product-name">ASTYL Wolf</h3>  
+      <div class="product-meta">  
+        <span>Color: Black</span>  
+        <span>Sizes: S, M</span>  
+      </div>  
+      <div class="price-tag" style="margin-bottom: 1rem;">₹299</div>  
+      <a href="order.html?product=ASTYL Wolf&image=https://i.ibb.co/m5hG8mFf/LS20251023124806.png" class="buy-btn">  
+        <span>Buy Now</span><span class="arrow">→</span>  
+      </a>  
+    </div>  
+  </div>  
 
-    /* Search Bar */
-    .search-wrapper { max-width: 400px; margin: 0 auto; position: relative; }
-    .search-wrapper input {
-      width: 100%; padding: 12px 16px; border-radius: 50px;
-      border: 1px solid #ddd; background: #f4f4f4; font-size: 1rem;
-    }
-    .search-wrapper input:focus { background: #fff; border-color: #000; }
+  <div class="product-card">  
+    <div class="product-image">  
+      <img src="https://i.ibb.co/Zz1Q78Vk/LS20251023124827.png" alt="ASTYL Just Ride" loading="lazy">  
+    </div>  
+    <div class="product-info">  
+      <h3 class="product-name">Just Ride</h3>  
+      <div class="product-meta">  
+        <span>Color: Black</span>  
+        <span>Sizes: S, M</span>  
+      </div>  
+      <div class="price-tag" style="margin-bottom: 1rem;">₹299</div>  
+      <a href="order.html?product=ASTYL Just Ride&image=https://i.ibb.co/Zz1Q78Vk/LS20251023124827.png" class="buy-btn">  
+        <span>Buy Now</span><span class="arrow">→</span>  
+      </a>  
+    </div>  
+  </div>  
 
-    /* --- PRODUCTS GRID --- */
-    .products-section { padding: 30px 0; }
-    .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-    .section-title { font-weight: 800; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px; }
+  <div class="product-card">  
+    <div class="product-image">  
+      <img src="https://i.ibb.co/hJQtWGQ3/LS20251023124817.png" alt="ASTYL Off-roading" loading="lazy">  
+    </div>  
+    <div class="product-info">  
+      <h3 class="product-name">Off-Roading</h3>  
+      <div class="product-meta">  
+        <span>Color: Black</span>  
+        <span>Sizes: S, M</span>  
+      </div>  
+      <div class="price-tag" style="margin-bottom: 1rem;">₹299</div>  
+      <a href="order.html?product=ASTYL Off-roading&image=https://i.ibb.co/hJQtWGQ3/LS20251023124817.png" class="buy-btn">  
+        <span>Buy Now</span><span class="arrow">→</span>  
+      </a>  
+    </div>  
+  </div>  
 
-    .grid {
-      display: grid;
-      /* MOBILE OPTIMIZED: 2 columns min */
-      grid-template-columns: repeat(2, 1fr); 
-      gap: 12px;
-    }
-    /* Tablet/Desktop */
-    @media(min-width: 768px) { .grid { grid-template-columns: repeat(4, 1fr); gap: 20px; } }
+  <div class="product-card">  
+    <div class="product-image">  
+      <img src="https://i.ibb.co/39vdRd2K/LS20251023124835.png" alt="ASTYL Heavy Driver" loading="lazy">  
+    </div>  
+    <div class="product-info">  
+      <h3 class="product-name">Heavy Driver</h3>  
+      <div class="product-meta">  
+        <span>Color: Black</span>  
+        <span>Sizes: S, M</span>  
+      </div>  
+      <div class="price-tag" style="margin-bottom: 1rem;">₹299</div>  
+      <a href="order.html?product=ASTYL Heavy Driver&image=https://i.ibb.co/39vdRd2K/LS20251023124835.png" class="buy-btn">  
+        <span>Buy Now</span><span class="arrow">→</span>  
+      </a>  
+    </div>  
+  </div>  
 
-    .card { background: var(--card-bg); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); transition: transform 0.2s; }
-    .card:active { transform: scale(0.98); } /* Touch feedback */
-    
-    .card-img { position: relative; padding-top: 100%; background: #f0f0f0; } /* Square Aspect Ratio */
-    .card-img img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }
-    .badge { position: absolute; top: 8px; left: 8px; background: #000; color: #fff; padding: 4px 8px; font-size: 10px; font-weight: bold; border-radius: 4px; text-transform: uppercase; }
+</div>
 
-    .card-info { padding: 12px; }
-    .prod-name { font-weight: 600; font-size: 0.9rem; margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .prod-price { font-weight: 800; font-size: 1rem; }
-    
-    .btn-add {
-      width: 100%; margin-top: 8px; padding: 10px;
-      background: #000; color: #fff; font-weight: 600; font-size: 0.85rem;
-      border-radius: 8px;
-    }
-
-    /* --- CART MODAL (Bottom Sheet on Mobile) --- */
-    .backdrop {
-      position: fixed; inset: 0; background: rgba(0,0,0,0.5); 
-      z-index: 900; opacity: 0; pointer-events: none; transition: opacity 0.3s;
-    }
-    .backdrop.open { opacity: 1; pointer-events: auto; }
-
-    .cart-drawer {
-      position: fixed; bottom: 0; left: 0; right: 0;
-      background: #fff; border-radius: 20px 20px 0 0;
-      padding: 20px; z-index: 1000;
-      transform: translateY(100%); transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-      max-height: 85vh; display: flex; flex-direction: column;
-    }
-    .cart-drawer.open { transform: translateY(0); }
-    
-    /* Desktop Cart override */
-    @media(min-width: 768px) {
-      .cart-drawer { top: 0; bottom: 0; left: auto; right: 0; width: 400px; border-radius: 0; transform: translateX(100%); }
-      .cart-drawer.open { transform: translateX(0); }
-    }
-
-    .cart-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
-    .cart-items { flex: 1; overflow-y: auto; margin-bottom: 15px; }
-    
-    .cart-item { display: flex; gap: 10px; margin-bottom: 15px; }
-    .cart-item img { width: 60px; height: 60px; border-radius: 8px; background: #eee; }
-    .cart-item-info { flex: 1; }
-    .qty-ctrl { display: flex; align-items: center; gap: 10px; margin-top: 5px; }
-    .qty-btn { width: 24px; height: 24px; background: #f0f0f0; border-radius: 4px; font-weight: bold; }
-
-    .checkout-btn { width: 100%; background: #000; color: white; padding: 15px; border-radius: 12px; font-weight: bold; font-size: 1rem; }
-
-    /* --- FOOTER --- */
-    footer { background: #111; color: #888; padding: 40px 16px; text-align: center; margin-top: 40px; font-size: 0.85rem; }
-    footer strong { color: #fff; }
-
-  </style>
-</head>
-<body>
-
-  <nav class="navbar">
-    <div class="container nav-inner">
-      <a href="#" class="logo">
-        <img src="https://i.ibb.co/N6j5FLjP/ASTYL.png" alt="Logo">
-        <span>ASTYL</span>
-      </a>
-      <div class="nav-icons">
-        <button class="icon-btn" onclick="openCart()">
-          🛒 <span id="cartCount" class="cart-count" style="display:none">0</span>
-        </button>
-      </div>
-    </div>
-  </nav>
-
-  <section class="hero">
-    <div class="container">
-      <h1>New Collection</h1>
-      <p>Premium 100% cotton fits. Drops from <strong>₹299</strong>.</p>
-      <div class="search-wrapper">
-        <input type="text" id="searchInput" placeholder="Search t-shirts, hoodies...">
-      </div>
-    </div>
-  </section>
-
-  <main class="container products-section">
-    <div class="section-header">
-      <div class="section-title">Latest Drops</div>
-      <div style="font-size:0.8rem; color:var(--muted)"><span id="totalItems">0</span> items</div>
-    </div>
-    <div id="grid" class="grid">
-      </div>
-  </main>
-
-  <footer>
-    <p>&copy; 2025 <strong>ASTYL</strong>. Designed for Mobile.</p>
-  </footer>
-
-  <div id="backdrop" class="backdrop" onclick="closeCart()"></div>
-  <aside id="cartDrawer" class="cart-drawer">
-    <div class="cart-header">
-      <h2>Your Cart</h2>
-      <button onclick="closeCart()" style="font-size:1.5rem;">&times;</button>
-    </div>
-    <div id="cartList" class="cart-items">
-      <div style="text-align:center; padding: 20px; color:#888;">Cart is empty</div>
-    </div>
-    <div style="border-top:1px solid #eee; padding-top:15px;">
-      <div style="display:flex; justify-content:space-between; margin-bottom:15px; font-weight:800; font-size:1.1rem;">
-        <span>Total</span>
-        <span id="cartTotal">₹0</span>
-      </div>
-      <button class="checkout-btn" onclick="alert('Proceeding to checkout...')">Checkout</button>
-    </div>
-  </aside>
-
-  <script>
-    // --- DATA ---
-    const products = [
-      { id: 1, name: 'Marvel Edition', price: 299, badge: 'Hot', img:'https://i.ibb.co/7xVRWtHf/LS20251023131254.png' },
-      { id: 2, name: 'Batman Dark', price: 299, badge: 'New', img:'https://i.ibb.co/gLSTfm3x/LS20251023124704.png' },
-      { id: 3, name: 'Porsche 911', price: 299, badge: '', img:'https://i.ibb.co/MknVvs1X/LS20251023124801.png' },
-      { id: 4, name: 'BMW M5 Power', price: 299, badge: '', img:'https://i.ibb.co/MxCMQkwh/LS20251023124811.png' },
-      { id: 5, name: 'Lone Wolf', price: 299, badge: '', img:'https://i.ibb.co/m5hG8mFf/LS20251023124806.png' },
-      { id: 6, name: 'Just Ride', price: 299, badge: '', img:'https://i.ibb.co/Zz1Q78Vk/LS20251023124827.png' },
-      { id: 7, name: 'Off Road 4x4', price: 299, badge: 'Sale', img:'https://i.ibb.co/hJQtWGQ3/LS20251023124817.png' },
-      { id: 8, name: 'Heavy Driver', price: 299, badge: '', img:'https://i.ibb.co/39vdRd2K/LS20251023124835.png' }
-    ];
-
-    let cart = {}; // { id: qty }
-
-    // --- RENDER PRODUCTS ---
-    const grid = document.getElementById('grid');
-    const totalItems = document.getElementById('totalItems');
-
-    function renderProducts(filterText = '') {
-      grid.innerHTML = '';
-      const filtered = products.filter(p => p.name.toLowerCase().includes(filterText.toLowerCase()));
-      totalItems.textContent = filtered.length;
-
-      filtered.forEach(p => {
-        const el = document.createElement('div');
-        el.className = 'card';
-        el.innerHTML = `
-          <div class="card-img">
-            ${p.badge ? `<span class="badge">${p.badge}</span>` : ''}
-            <img src="${p.img}" alt="${p.name}" loading="lazy">
-          </div>
-          <div class="card-info">
-            <div class="prod-name">${p.name}</div>
-            <div class="prod-price">₹${p.price}</div>
-            <button class="btn-add" onclick="addToCart(${p.id})">ADD +</button>
-          </div>
-        `;
-        grid.appendChild(el);
-      });
-    }
-
-    // --- CART FUNCTIONS ---
-    function addToCart(id) {
-      if(!cart[id]) cart[id] = 0;
-      cart[id]++;
-      updateCartUI();
-      openCart();
-    }
-
-    function updateCartUI() {
-      const list = document.getElementById('cartList');
-      const countBadge = document.getElementById('cartCount');
-      const totalEl = document.getElementById('cartTotal');
-      
-      list.innerHTML = '';
-      let total = 0;
-      let count = 0;
-
-      Object.keys(cart).forEach(key => {
-        const pid = parseInt(key);
-        const qty = cart[key];
-        if(qty > 0) {
-          const p = products.find(x => x.id === pid);
-          total += p.price * qty;
-          count += qty;
-
-          const item = document.createElement('div');
-          item.className = 'cart-item';
-          item.innerHTML = `
-            <img src="${p.img}">
-            <div class="cart-item-info">
-              <div style="font-weight:600; font-size:0.9rem;">${p.name}</div>
-              <div style="color:#666; font-size:0.85rem;">₹${p.price}</div>
-              <div class="qty-ctrl">
-                <button class="qty-btn" onclick="modQty(${p.id}, -1)">−</button>
-                <span style="font-size:0.9rem; width:20px; text-align:center;">${qty}</span>
-                <button class="qty-btn" onclick="modQty(${p.id}, 1)">+</button>
-              </div>
-            </div>
-            <div style="font-weight:700;">₹${p.price * qty}</div>
-          `;
-          list.appendChild(item);
-        }
-      });
-
-      if(count === 0) list.innerHTML = '<div style="text-align:center; padding: 20px; color:#888;">Cart is empty</div>';
-      
-      cartCount.style.display = count > 0 ? 'flex' : 'none';
-      cartCount.textContent = count;
-      totalEl.textContent = '₹' + total;
-    }
-
-    function modQty(id, diff) {
-      if(cart[id] !== undefined) {
-        cart[id] += diff;
-        if(cart[id] <= 0) delete cart[id];
-        updateCartUI();
-      }
-    }
-
-    // --- UI INTERACTIONS ---
-    function openCart() {
-      document.getElementById('cartDrawer').classList.add('open');
-      document.getElementById('backdrop').classList.add('open');
-      document.body.style.overflow = 'hidden'; // Prevent background scrolling
-    }
-
-    function closeCart() {
-      document.getElementById('cartDrawer').classList.remove('open');
-      document.getElementById('backdrop').classList.remove('open');
-      document.body.style.overflow = '';
-    }
-
-    document.getElementById('searchInput').addEventListener('input', (e) => {
-      renderProducts(e.target.value);
-    });
-
-    // Init
-    renderProducts();
-  </script>
-</body>
+  </section>    <footer>  
+    <div class="logo" style="margin-bottom: 1rem; opacity: 0.8;">  
+      <img src="https://i.ibb.co/N6j5FLjP/ASTYL.png" alt="ASTYL Logo" style="height: 40px; filter: grayscale(1);">  
+    </div>  
+    <p>&copy; 2025 <span class="footer-highlight">ASTYL</span> | All Rights Reserved</p>  
+    <p>Designed by <span class="footer-highlight">Atul Mishra</span></p>  
+  </footer>    <script>  
+    // Toggle Menu Function  
+    function toggleMenu() {  
+      const hamburger = document.getElementById('hamburger');  
+      const mobileMenu = document.getElementById('mobile-menu');  
+        
+      // Toggle Active Classes  
+      hamburger.classList.toggle('active');  
+      mobileMenu.classList.toggle('active');  
+    }  
+  
+    // Event Listener for click  
+    document.getElementById('hamburger').addEventListener('click', toggleMenu);  
+  
+    // Close menu when clicking outside (Optional polish)  
+    document.addEventListener('click', function(event) {  
+      const hamburger = document.getElementById('hamburger');  
+      const mobileMenu = document.getElementById('mobile-menu');  
+      const isClickInside = hamburger.contains(event.target) || mobileMenu.contains(event.target);  
+        
+      if (!isClickInside && mobileMenu.classList.contains('active')) {  
+        toggleMenu();  
+      }  
+    });  
+  </script>  </body>  
 </html>
