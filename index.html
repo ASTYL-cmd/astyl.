@@ -4,18 +4,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ASTYL - Luxury in Every Thread</title>
-  <link rel="stylesheet" href="style.css">
+  <!-- Link external CSS file -->
+  <link rel="stylesheet" href="style.css"> 
+  <!-- Fonts (Already included via @import in CSS, but fine to keep here) -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <!-- Font Awesome for Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
   
+  <!-- 1. Navbar -->
   <nav class="navbar">
     <div class="container"> 
       <div class="logo">
         <img src="https://i.ibb.co/yFHvS870/7789-removebg-preview.png" alt="ASTYL">
       </div>
 
+      <!-- The nav links are the mobile menu target (nav-links.nav-active) -->
       <ul class="nav-links">
         <li><a href="#hero">Home</a></li>
         <li><a href="#features">Features</a></li>
@@ -24,13 +29,16 @@
         <li><a href="#contact">Contact</a></li>
       </ul>
 
+      <!-- The burger is the toggle button (burger.toggle) -->
       <div class="burger">
         <div class="line1"></div>
         <div class="line2"></div>
         <div class="line3"></div>
       </div>
-    </div> </nav>
+    </div> 
+  </nav>
 
+  <!-- 2. Hero Section -->
   <section id="hero" class="hero">
     <div class="video-background"></div>
     <div class="video-overlay"></div>
@@ -44,6 +52,7 @@
   
   <hr>
 
+  <!-- 3. Team Section (uses .experiences classes) -->
   <section id="experiences" class="experiences scroll-reveal">
     <div class="container">
       <h2 class="section-title">Meet ASTYL Team</h2>
@@ -64,6 +73,7 @@
 
   <hr>
 
+  <!-- 4. Features Section -->
   <section id="features" class="features scroll-reveal">
     <div class="container">
       <h2 class="section-title">Why Choose ASTYL</h2>
@@ -86,6 +96,7 @@
           <p>Experience premium quality and comfort at just ₹299.</p>
         </div>
 
+        <!-- Mailto link using feature-box style -->
         <a href="mailto:contact.astyl@gmail.com?subject=Custom%20Design%20Request&body=Hello%20ASTYL%2C%20I%20want%20to%20share%20my%20design%20idea." 
            class="feature-box scroll-reveal" 
            style="text-decoration: none; color: inherit;">
@@ -111,6 +122,7 @@
 
   <hr>
 
+  <!-- 5. Testimonials -->
   <section id="testimonials" class="testimonials scroll-reveal">
     <div class="container">
       <h2 class="section-title">What Our Customers Say</h2>
@@ -146,10 +158,12 @@
 
   <hr>
 
+  <!-- 6. Footer -->
   <footer id="contact">
     <div class="container">
       <div class="footer-content">
         
+        <!-- Section 1: Logo and Social Links -->
         <div class="footer-section logo-section">
           <img src="https://i.ibb.co/VcZtw4NT/9833-removebg-preview.png" alt="Astyl Logo" style="max-width: 120px; height: auto; margin-bottom: 2rem;">
           
@@ -159,15 +173,18 @@
           </div>
         </div>
             
+        <!-- Section 2: Quick Links (Added About Us) -->
         <div class="footer-section">
           <h4>Quick Links</h4>
           <ul>
             <li><a href="#hero">Home</a></li>
             <li><a href="product.html">Products</a></li>
             <li><a href="#features">Features</a></li>
+            <li><a href="about.html">About Us</a></li>
           </ul>
         </div>
 
+        <!-- Section 3: Get in Touch (Styled Form) -->
         <div class="footer-section">
           <h4>Get in Touch</h4>
           <form class="contact-form">
@@ -178,31 +195,38 @@
           </form>
         </div>
 
-      </div> <div class="footer-bottom">
+      </div> 
+
+      <div class="footer-bottom">
         <p>&copy; 2025 ASTYL. All rights reserved.</p>
         <p>Designed by Atul Mishra</p>
       </div>
     </div>
   </footer>
 
+  <!-- 7. Inline Form Submission Handler (Prevents alert() issues) -->
   <script>
-    // This inline JS function handles the mailto link submission
+    // Note: The main logic for handling form submission is in script.js 
+    // using the click listener on the form's button. This simple check 
+    // ensures the submit button does its basic task if script.js isn't fully loaded.
     document.querySelector('.contact-form').addEventListener('submit', function(event) {
-      event.preventDefault();
-      const name = document.getElementById('name').value;
-      const email = document.getElementById('email').value;
-      const message = document.getElementById('message').value;
-      
-      if (name && email && message) { // Basic validation check
-          const subject = `New message from ${name}`;
-          const body = `Name: ${name}%0D%0AEmail: ${email}%0D%0A%0D%0AMessage:%0D%0A${message}`;
-          window.location.href = `mailto:contact.astyl@gmail.com?subject=${subject}&body=${body}`;
-      } else {
-          alert('Please fill out all fields.');
-      }
+        event.preventDefault();
+        
+        // Basic check for alert usage prevention: 
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const message = document.getElementById('message').value;
+        
+        if (name && email && message) {
+            const subject = `New message from ${name}`;
+            const body = `Name: ${name}%0D%0AEmail: ${email}%0D%0A%0D%0AMessage:%0D%0A${message}`;
+            window.location.href = `mailto:contact.astyl@gmail.com?subject=${subject}&body=${body}`;
+        }
     });
   </script>
 
+  <!-- 8. Link External JS -->
   <script src="script.js"></script>
 </body>
 </html>
+
