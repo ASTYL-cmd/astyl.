@@ -43,6 +43,72 @@ a {
     text-decoration: none;
     color: inherit;
 }
+/* --- MOBILE MENU TOGGLE (The "Tongle") --- */
+.burger {
+  display: none;
+  cursor: pointer;
+  z-index: 1001; /* Above navbar background */
+}
+
+.burger div {
+  width: 25px;
+  height: 3px;
+  background-color: var(--primary-color);
+  margin: 5px;
+  transition: all 0.3s ease;
+  border-radius: 2px;
+}
+
+/* Animation for the Toggle turning into an X */
+.toggle .line1 {
+  transform: rotate(-45deg) translate(-5px, 6px);
+}
+.toggle .line2 {
+  opacity: 0;
+}
+.toggle .line3 {
+  transform: rotate(45deg) translate(-5px, -6px);
+}
+
+/* Mobile Nav Drawer */
+@media screen and (max-width: 768px) {
+  .burger {
+    display: block;
+  }
+
+  .nav-links {
+    position: fixed;
+    right: 0px;
+    height: 100vh;
+    top: 0; /* Full height */
+    background: rgba(10, 10, 10, 0.98); /* Darker, less see-through */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 60%; /* Slide out drawer width */
+    transform: translateX(100%); /* Hidden by default */
+    transition: transform 0.5s ease-in-out;
+    box-shadow: -5px 0 15px rgba(0,0,0,0.5);
+  }
+
+  .nav-links.nav-active {
+    transform: translateX(0%); /* Slides in */
+  }
+
+  .nav-links a {
+    font-size: 2rem;
+    margin: 2rem 0;
+    opacity: 0; /* For fade-in animation */
+  }
+}
+
+/* Keyframe for link fade-in */
+@keyframes navLinkFade {
+  from { opacity: 0; transform: translateX(50px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
 
 .container {
   width: 90%;
@@ -619,6 +685,41 @@ section {
     transform: scale(1.2);
 }
 
+/* --- BRANDED SOCIAL ICONS --- */
+.social-icon {
+  /* Keep your existing base styles, just updating hover */
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+/* Instagram Gradient Hover */
+.social-icon.instagram:hover {
+  border-color: transparent;
+  background: #f09433; 
+  background: -moz-linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); 
+  background: -webkit-linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); 
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); 
+  color: white;
+  box-shadow: 0 0 20px rgba(188, 24, 136, 0.5);
+  transform: translateY(-5px) rotate(15deg);
+}
+
+/* Pinterest Red Hover */
+.social-icon.pinterest:hover {
+  border-color: #E60023;
+  background: #E60023;
+  color: white;
+  box-shadow: 0 0 20px rgba(230, 0, 35, 0.5);
+  transform: translateY(-5px) rotate(-15deg);
+}
+
+/* Facebook/Generic Hover */
+.social-icon.generic:hover {
+  background: var(--primary-color);
+  color: var(--dark-color);
+  transform: translateY(-5px);
+}
 
 /* =================================== */
 /* 📞 FOOTER (Refined Layout) */
@@ -836,6 +937,30 @@ footer {
     transform: scale(1);
   }
 }
+/* Custom Scrollbar for Chrome/Safari/Edge */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--dark-color);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border-radius: 5px;
+  border: 2px solid var(--dark-color);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-color);
+}
+
+/* Selection Color (When user highlights text) */
+::selection {
+  background: var(--primary-color);
+  color: var(--dark-color);
+}
 
 /* Scroll Reveal (Added a slight bounce for more life) */
 .scroll-reveal {
@@ -848,3 +973,4 @@ footer {
   opacity: 1;
   transform: translateY(0);
 }
+
