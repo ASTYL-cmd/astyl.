@@ -41,165 +41,8 @@ body {
 /* Global Link Reset */
 a {
     text-decoration: none;
-    color: inherit;
-}
-
-/* =================================== */
-/* 🍔 MOBILE NAVIGATION (UNIFIED) */
-/* =================================== */
-
-/* Burger Icon Base Style */
-.burger {
-  display: none; 
-  cursor: pointer;
-  z-index: 1001; 
-  flex-direction: column;
-  gap: 0.7rem; 
-  /* FIX: Explicitly position burger on the right */
-  position: absolute; 
-  right: 5%; 
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-.burger div {
-  width: 3rem; 
-  height: 0.3rem; 
-  background-color: var(--light-text); 
-  border-radius: 0.3rem;
-  transition: all 0.4s ease-in-out;
-}
-
-/* Animation for the Burger (The .toggle class is added by JS) */
-.toggle div:nth-child(1) {
-  transform: translateY(1rem) rotate(45deg); 
-}
-.toggle div:nth-child(2) {
-  opacity: 0;
-}
-.toggle div:nth-child(3) {
-  transform: translateY(-1rem) rotate(-45deg); 
-}
-
-/* Mobile Nav Drawer Container */
-@media screen and (max-width: 768px) {
-  .burger {
-    display: flex; /* Show burger icon */
-  }
-  
-  /* Desktop nav is now the mobile nav on small screens */
-  .nav-links {
-    position: fixed; /* CRITICAL FIX: Use fixed positioning relative to viewport */
-    right: 0;
-    top: 0; 
-    height: 100vh;
-    width: 100%; 
-    max-width: 40rem; /* Menu width */
-    background: rgba(0, 0, 0, 0.95); 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding-top: 5rem;
-    transform: translateX(100%); /* Hidden by default */
-    transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1);
-  }
-
-  /* The .nav-active class is added by JS */
-  .nav-links.nav-active {
-    transform: translateX(0%); /* Slides in */
-  }
-
-  .nav-links li {
-    width: 80%;
-    text-align: center;
-    margin: 1.5rem 0;
-    padding: 1.5rem 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  }
-
-  /* Links are hidden initially and animated by JS */
-  .nav-links a {
-    font-size: 2.2rem;
-    opacity: 0; 
-    transition: color 0.3s ease;
-  }
-}
-
-/* Keyframe for link fade-in (Used by JS) */
-@keyframes navLinkFade {
-  from { opacity: 0; transform: translateX(5rem); }
-  to { opacity: 1; transform: translateX(0); }
-}
-
-.container {
-  width: 90%;
-  max-width: 1350px; 
-  margin: auto;
-}
-
-/* =================================== */
-/* 🌟 NAVIGATION (GLASS) */
-/* =================================== */
-
-.navbar {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 1000;
-    /* FIX: Added position:relative for burger to be positioned absolutely */
-    position: relative; 
-    padding: 1.5rem 5%; 
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    /* Glass Effect */
-    background: rgba(10, 10, 10, 0.7);
-    backdrop-filter: blur(25px);
-    -webkit-backdrop-filter: blur(25px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-    transition: all 0.4s ease;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-}
-
-.navbar .container {
-    /* Ensure flex display in the container to hold logo and links */
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-}
-
-.logo img {
-    height: 5.5rem;
-    width: auto;
-    display: block;
-    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    filter: drop-shadow(0 0 5px rgba(212, 175, 55, 0.6));
-}
-
-.logo img:hover {
-    transform: scale(1.08) rotate(-1deg);
-}
-
-/* --- NAVIGATION LINKS (Desktop) --- */
-.nav-links {
-    list-style: none;
-    display: flex;
-    gap: 3rem;
-    align-items: center;
-}
-
-.nav-links a {
-    color: var(--light-text);
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 1.6rem;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    transition: color 0.3s ease;
-    position: relative;
-    padding: 0.5rem 0;
+    color: inherite
+    } 
     /* --- NAVIGATION --- */  
     .navbar {  
       background: rgba(0, 0, 0, 0.9); /* Slight transparency */  
@@ -334,7 +177,6 @@ a {
     .hamburger.active .bar:nth-child(3) {  
       transform: translateY(-9px) rotate(-45deg);  
     }  
-  
 /* =================================== */
 /* ✨ HERO SECTION (More Dynamic) */
 /* =================================== */
@@ -1019,5 +861,6 @@ footer {
   opacity: 1;
   transform: translateY(0);
 }
+
 
 
