@@ -1,56 +1,62 @@
 document.addEventListener('DOMContentLoaded', () => {
   
-  // --- NEWLY ADDED NAVSLIDE LOGIC ---
+  // --- NAVSLIDE LOGIC (Mobile Menu Toggle) ---
   const navSlide = () => {
     const burger = document.querySelector('.burger');
     const nav = document.querySelector('.nav-links');
     const navLinks = document.querySelectorAll('.nav-links li');
 
-    // Only run if the burger element exists to prevent errors
+    // Only run if the burger element exists
     if (burger) {
       burger.addEventListener('click', () => {
-        // Toggle Nav
+        // Toggle Nav (Slides the menu in/out)
         nav.classList.toggle('nav-active');
 
-        // Burger Animation
+        // Burger Animation (Toggles X icon)
         burger.classList.toggle('toggle');
 
-        // Animate Links
+        // Animate Links (Staggered fade-in)
         navLinks.forEach((link, index) => {
+          // If animation is already active, reset it to allow re-entry
           if (link.style.animation) {
             link.style.animation = '';
           } else {
+            // Apply staggered animation using the keyframe defined in CSS
+            // The delay is calculated based on the index to create the cascade effect
             link.style.animation = `navLinkFade 0.5s ease forwards ${index / 7 + 0.3}s`;
           }
         });
       });
+      
+      // Close mobile menu when a link inside it is clicked
+      navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            nav.classList.remove('nav-active');
+            burger.classList.remove('toggle');
+            navLinks.forEach(l => l.style.animation = ''); // Reset animation after closing
+        });
+      });
+      
     }
   }
 
-  // Initialize the nav function
   navSlide();
   // ----------------------------------
 
   const navbar = document.querySelector('.navbar');
   const scrollRevealElements = document.querySelectorAll('.scroll-reveal');
 
+  // --- NAVBAR SCROLL EFFECT ---
   window.addEventListener('scroll', () => {
+    // Add 'scrolled' class for potential styling (e.g., changing opacity/size)
     if (window.scrollY > 100) {
       navbar.classList.add('scrolled');
     } else {
       navbar.classList.remove('scrolled');
     }
-
-    scrollRevealElements.forEach(element => {
-      const elementTop = element.getBoundingClientRect().top;
-      const windowHeight = window.innerHeight;
-
-      if (elementTop < windowHeight - 100) {
-        element.classList.add('revealed');
-      }
-    });
   });
 
+  // --- TESTIMONIAL CAROUSEL LOGIC ---
   const testimonialCards = document.querySelectorAll('.testimonial-card');
   const dots = document.querySelectorAll('.dot');
   let currentSlide = 0;
@@ -61,26 +67,33 @@ document.addEventListener('DOMContentLoaded', () => {
       dots[i].classList.remove('active');
     });
 
-    testimonialCards[index].classList.add('active');
-    dots[index].classList.add('active');
+    // Handle wrap-around index
+    currentSlide = (index + testimonialCards.length) % testimonialCards.length;
+    
+    testimonialCards[currentSlide].classList.add('active');
+    dots[currentSlide].classList.add('active');
   }
 
   function nextSlide() {
-    currentSlide = (currentSlide + 1) % testimonialCards.length;
-    showSlide(currentSlide);
+    showSlide(currentSlide + 1);
   }
 
-  if (testimonialCards.length > 0) {
+  if (testimonialCards.length > 1) { // Only run carousel if there's more than one slide
+    // Auto-advance every 5 seconds
     setInterval(nextSlide, 5000);
 
+    // Manual control via dots
     dots.forEach((dot, index) => {
       dot.addEventListener('click', () => {
-        currentSlide = index;
-        showSlide(currentSlide);
+        showSlide(index);
       });
     });
+    
+    // Initialize first slide state
+    showSlide(0);
   }
 
+  // --- SMOOTH SCROLLING FOR ALL HASH LINKS ---
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
       e.preventDefault();
@@ -94,8 +107,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  // --- INTERSECTION OBSERVER (Scroll Reveal) ---
   const observerOptions = {
-    threshold: 0.1,
+    // Reveal element when 10% is visible
+    threshold: 0.1, 
     rootMargin: '0px 0px -50px 0px'
   };
 
@@ -103,6 +118,8 @@ document.addEventListener('DOMContentLoaded', () => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('revealed');
+        // Stop observing once revealed
+        observer.unobserve(entry.target);
       }
     });
   }, observerOptions);
@@ -111,41 +128,10 @@ document.addEventListener('DOMContentLoaded', () => {
     observer.observe(element);
   });
 
-  const featureCards = document.querySelectorAll('.feature-card');
+  // --- FEATURE CARD STAGGERED ANIMATION ---
+  const featureCards = document.querySelectorAll('.feature-box');
   featureCards.forEach((card, index) => {
-    card.style.animationDelay = `${index * 0.1}s`;
+    // Applies an increasing delay for a cascading entrance effect (zoom-in from CSS)
+    card.style.animationDelay = `${index * 0.1}s`; 
   });
-
-  const contactForm = document.querySelector('.contact-form');
-  if (contactForm) {
-    const formButton = contactForm.querySelector('.cta-btn');
-    if (formButton) {
-      formButton.addEventListener('click', (e) => {
-        e.preventDefault();
-        const inputs = contactForm.querySelectorAll('input, textarea');
-        let allFilled = true;
-
-        inputs.forEach(input => {
-          if (!input.value.trim()) {
-            allFilled = false;
-            input.style.borderColor = '#ff6b6b';
-            setTimeout(() => {
-              input.style.borderColor = 'rgba(255, 255, 255, 0.2)';
-            }, 2000);
-          }
-        });
-
-        if (allFilled) {
-          const name = contactForm.querySelector('input[type="text"]').value;
-          const email = contactForm.querySelector('input[type="email"]').value;
-          const message = contactForm.querySelector('textarea').value;
-
-          const mailtoLink = `mailto:contact.astyl@gmail.com?subject=Contact from ${encodeURIComponent(name)}&body=${encodeURIComponent(message)}%0A%0AFrom: ${encodeURIComponent(email)}`;
-          window.location.href = mailtoLink;
-
-          inputs.forEach(input => input.value = '');
-        }
-      });
-    }
-  }
 });
