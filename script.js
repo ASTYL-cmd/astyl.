@@ -1,4 +1,36 @@
 document.addEventListener('DOMContentLoaded', () => {
+  
+  // --- NEWLY ADDED NAVSLIDE LOGIC ---
+  const navSlide = () => {
+    const burger = document.querySelector('.burger');
+    const nav = document.querySelector('.nav-links');
+    const navLinks = document.querySelectorAll('.nav-links li');
+
+    // Only run if the burger element exists to prevent errors
+    if (burger) {
+      burger.addEventListener('click', () => {
+        // Toggle Nav
+        nav.classList.toggle('nav-active');
+
+        // Burger Animation
+        burger.classList.toggle('toggle');
+
+        // Animate Links
+        navLinks.forEach((link, index) => {
+          if (link.style.animation) {
+            link.style.animation = '';
+          } else {
+            link.style.animation = `navLinkFade 0.5s ease forwards ${index / 7 + 0.3}s`;
+          }
+        });
+      });
+    }
+  }
+
+  // Initialize the nav function
+  navSlide();
+  // ----------------------------------
+
   const navbar = document.querySelector('.navbar');
   const scrollRevealElements = document.querySelectorAll('.scroll-reveal');
 
@@ -50,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
+    anchor.addEventListener('click', function(e) {
       e.preventDefault();
       const target = document.querySelector(this.getAttribute('href'));
       if (target) {
