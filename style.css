@@ -727,27 +727,6 @@ section {
     color: rgba(255, 255, 255, 0.6);
 }
 
-/* CAROUSEL DOTS (Placeholders - you'd need JS/library for functionality) */
-.carousel-dots {
-    display: flex;
-    justify-content: center;
-    gap: 1.5rem;
-    margin-top: 5rem;
-}
-
-.dot {
-    width: 1.2rem;
-    height: 1.2rem;
-    border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.4);
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.dot.active {
-    background-color: var(--primary-color);
-    transform: scale(1.2);
-}
 
 /* --- BRANDED SOCIAL ICONS --- */
 .social-icon {
@@ -1040,4 +1019,5 @@ footer {
   opacity: 1;
   transform: translateY(0);
 }
+
 
