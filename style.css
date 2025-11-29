@@ -1,483 +1,155 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>ASTYL - Premium Streetwear</title>
-  <meta name="description" content="ASTYL — Premium streetwear. 100% cotton tees, exclusive drops, premium fit. Shop latest designs from ₹299." />
-
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-
-  <style>
-    /* =================================== */
-    /* 🚀 CORE STYLES & FONT IMPORT */
-    /* =================================== */
-
-    :root {
-      --primary-color: #d4af37; /* Rich Gold */
-      --secondary-color: #f4e4c1; /* Light Gold */
-      --dark-color: #1a1a1a; /* True Dark */
-      --medium-dark: #2c2c2c;
-      --light-text: #ffffff;
-      --background-light: #fafafa;
-      --background-dark: #0d0d0d; /* New: For Dark Sections */
-      --border-light: #eeeeee;
-      --shadow-light: rgba(0, 0, 0, 0.08);
-      --shadow-gold: rgba(212, 175, 55, 0.4);
-      --max-width: 1200px;
+{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
     }
-
-    /* Fluid Typography Helper - for a modern touch */
-    html { font-size: 62.5%; /* 1rem = 10px */ scroll-behavior: smooth; }
-
-    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
-      font-family: 'Poppins', sans-serif;
-      line-height: 1.7;
-      background-color: white;
-      color: var(--medium-dark);
-      overflow-x: hidden; /* CRITICAL FIX: Ensure no horizontal scroll is triggered */
-      font-size: 1.6rem;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
+      background: #000;
+      color: #fff;
+      overflow-x: hidden;
     }
 
-    /* Global Link Reset */
-    a { text-decoration: none; color: inherit; }
-
-    /* --- NAVIGATION --- */
-    .navbar {
-      background: rgba(0, 0, 0, 0.9); /* Slight transparency */
-      backdrop-filter: blur(10px); /* Glass effect */
-      padding: 1rem 0;
-      position: sticky;
+    /* HEADER */
+    header {
+      width: 100%;
+      padding: 20px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
       top: 0;
+      left: 0;
       z-index: 1000;
+      backdrop-filter: blur(10px);
+      background: rgba(0,0,0,0.4);
       border-bottom: 1px solid rgba(255,255,255,0.1);
     }
 
-    .nav-container { max-width: var(--max-width); margin: 0 auto; padding: 0 1.5rem; display: flex; justify-content: space-between; align-items: center; }
-
-    .logo img { height: 50px; width: auto; transition: transform 0.3s ease; filter: brightness(1.2); }
-    .logo img:hover { transform: scale(1.05); }
-
-    .nav-links { list-style: none; display: flex; gap: 2.5rem; align-items: center; }
-    .nav-links a { color: #fff; font-weight: 500; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 1px; transition: color 0.3s ease; position: relative; }
-    .nav-links a::after { content: ''; position: absolute; width: 0; height: 2px; bottom: -4px; left: 0; background-color: #fff; transition: width 0.3s ease; }
-    .nav-links a:hover::after { width: 100%; }
-
-    /* --- HAMBURGER MENU (/// Toggle) --- */
-    .hamburger { display: none; cursor: pointer; flex-direction: column; gap: 6px; z-index: 1001; }
-    .bar { width: 28px; height: 3px; background-color: white; border-radius: 3px; transition: all 0.3s ease-in-out; }
-
-    /* Mobile Menu Dropdown */
-    .mobile-menu { position: absolute; top: 100%; left: 0; width: 100%; background: black; padding: 0; max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; border-bottom: 1px solid #333; box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
-    .mobile-menu.active { max-height: 360px; }
-    .mobile-menu a { display: block; color: white; text-decoration: none; padding: 1.5rem; text-align: center; border-bottom: 1px solid #222; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; transition: background 0.3s; }
-    .mobile-menu a:last-child { border-bottom: none; }
-    .mobile-menu a:hover { background: #1a1a1a; color: var(--primary-color); }
-
-    /* Hamburger Animation to 'X' */
-    .hamburger.active .bar:nth-child(1) { transform: translateY(9px) rotate(45deg); }
-    .hamburger.active .bar:nth-child(2) { opacity: 0; }
-    .hamburger.active .bar:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
-
-    /* =================================== */
-    /* ✨ HERO SECTION (More Dynamic) */
-    /* =================================== */
-
-    .hero { position: relative; height: 100vh; display: flex; justify-content: center; align-items: center; text-align: center; overflow: hidden; }
-
-    .video-background, .video-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
-
-    .video-background { background: linear-gradient(135deg, var(--dark-color) 0%, #333333 30%, var(--dark-color) 60%, #444444 100%); background-size: 600% 600%; animation: gradientFlow 25s ease infinite; z-index: 0; }
-    @keyframes gradientFlow { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
-
-    .video-overlay { background: radial-gradient(circle at center, rgba(212, 175, 55, 0.1) 0%, rgba(0, 0, 0, 0.85) 100%); z-index: 1; animation: pulseOverlay 15s ease-in-out infinite alternate; }
-    @keyframes pulseOverlay { 0% { opacity: 1; } 100% { opacity: 0.95; } }
-
-    .hero-content { position: relative; z-index: 2; color: white; max-width: 100rem; padding: 0 2rem; }
-
-    .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(4.5rem, 8vw + 1rem, 7.5rem); margin-bottom: 3rem; letter-spacing: 1.5rem; text-shadow: 0 1rem 4rem var(--shadow-gold); background: linear-gradient(135deg, var(--primary-color), var(--secondary-color) 50%, var(--primary-color)); background-size: 200% auto; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; animation: shimmer 5s ease-in-out infinite; will-change: transform, opacity; }
-    @keyframes shimmer { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
-
-    .hero h3 { font-size: clamp(1.8rem, 3vw, 2.5rem); margin-bottom: 2rem; font-weight: 300; letter-spacing: 0.4rem; color: var(--secondary-color); text-shadow: 0 0 1rem rgba(0, 0, 0, 0.5); will-change: transform, opacity; }
-
-    .hero p { font-size: clamp(1.4rem, 2vw, 1.8rem); margin-bottom: 5rem; color: rgba(255, 255, 255, 0.9); font-weight: 300; max-width: 70rem; margin-left: auto; margin-right: auto; }
-
-    .cta-btn { display: inline-block; padding: 1.8rem 4.5rem; background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); color: var(--dark-color); font-weight: 700; font-size: 1.8rem; border-radius: 6rem; box-shadow: 0 1.5rem 5rem var(--shadow-gold); transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94); text-transform: uppercase; letter-spacing: 1px; will-change: transform, opacity; }
-    .cta-btn:hover { transform: translateY(-0.5rem) scale(1.02); box-shadow: 0 2rem 7rem rgba(212, 175, 55, 0.7); background: linear-gradient(135deg, var(--secondary-color), var(--primary-color)); }
-
-    /* =================================== */
-    /* 💎 SECTION STYLES */
-    /* =================================== */
-
-    section { padding: 10rem 0; }
-
-    .section-title { font-family: 'Playfair Display', serif; text-align: center; font-size: clamp(3rem, 5vw, 4.5rem); margin-bottom: 5rem; color: black; position: relative; padding-bottom: 2.5rem; }
-    .section-title::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 10rem; height: 0.5rem; background: linear-gradient(90deg, var(--primary-color), var(--secondary-color)); border-radius: 0.5rem; }
-
-    /* =================================== */
-    /* ⚜️ EXPERIENCES SECTION */
-    /* =================================== */
-
-    .experiences { padding: 8rem 0; background: linear-gradient(180deg, var(--background-light) 0%, #f0f0f0 100%); }
-
-    .experience-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 4rem; }
-
-    .experience-card { padding: 3.5rem 3rem; border-radius: 2.5rem; box-shadow: 0 1.5rem 5rem var(--shadow-light); transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1); overflow: visible; border: 1px solid var(--border-light); background-color: white; text-align: center; }
-    .experience-card:hover { transform: translateY(-1.5rem) rotate(1deg); box-shadow: 0 2.5rem 7rem rgba(212, 175, 55, 0.3); border-color: var(--primary-color); }
-
-    .card-icon { font-size: 4rem; margin-bottom: 2rem; color: var(--primary-color); transition: transform 0.4s ease; }
-    .experience-card:hover .card-icon { transform: scale(1.1) rotate(-5deg); }
-
-    .experience-card h4 { font-size: 2rem; color: var(--dark-color); letter-spacing: 1px; margin-bottom: 1rem; font-family: 'Playfair Display', serif; }
-    .experience-card p { font-size: 1.5rem; color: var(--medium-dark); }
-
-    /* =================================== */
-    /* 🛠️ FEATURES/SERVICES SECTION (New) */
-    /* =================================== */
-
-    .features { background-color: var(--background-dark); color: var(--light-text); }
-    .features .section-title { color: var(--light-text); }
-    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr)); gap: 3rem; }
-
-    .feature-box { padding: 3rem; background: rgba(255, 255, 255, 0.05); border-radius: 1.5rem; text-align: center; border: 1px solid rgba(255, 255, 255, 0.1); transition: all 0.4s ease; }
-    .feature-box:hover { background: rgba(212, 175, 55, 0.1); transform: translateY(-0.5rem); box-shadow: 0 1rem 4rem rgba(212,175,55,0.18); }
-    .feature-icon { font-size: 4rem; color: var(--primary-color); margin-bottom: 1.5rem; }
-    .feature-box h5 { font-size: 1.8rem; font-weight: 600; margin-bottom: 1rem; letter-spacing: 1px; }
-    .feature-box p { font-size: 1.4rem; color: rgba(255, 255, 255, 0.8); }
-
-    /* =================================== */
-    /* 🖼️ PORTFOLIO SECTION (New) */
-    /* =================================== */
-
-    .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 3rem; }
-    .portfolio-item { position: relative; overflow: hidden; border-radius: 1.5rem; box-shadow: 0 1rem 3rem var(--shadow-light); transition: transform 0.4s ease; }
-    .portfolio-item:hover { transform: translateY(-0.5rem); }
-    .portfolio-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s ease; }
-    .portfolio-item:hover img { transform: scale(1.05); }
-    .portfolio-info { position: absolute; bottom: 0; left: 0; width: 100%; padding: 2rem; background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0) 100%); color: var(--light-text); transform: translateY(100%); transition: transform 0.5s ease; }
-    .portfolio-item:hover .portfolio-info { transform: translateY(0); }
-    .portfolio-info h4 { font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: 0.5rem; color: var(--secondary-color); }
-    .portfolio-info p { font-size: 1.4rem; font-weight: 300; }
-
-    /* =================================== */
-    /* 💡 TESTIMONIALS (Glass Carousel) */
-    /* =================================== */
-
-    .testimonials { padding: 8rem 2rem; background-color: var(--background-dark); color: var(--light-text); }
-    .testimonials .section-title { color: var(--light-text); }
-    .testimonial-card { max-width: 80rem; margin: 0 auto; padding: 4rem; border-radius: 2rem; background: rgba(255, 255, 255, 0.08); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.2); box-shadow: 0 1rem 5rem rgba(0, 0, 0, 0.3); text-align: center; }
-    .stars { font-size: 2.5rem; color: var(--primary-color); margin-bottom: 2rem; }
-    .testimonial-card blockquote { font-size: clamp(1.4rem, 2.5vw, 1.8rem); font-weight: 300; font-style: italic; margin-bottom: 3rem; }
-    .customer-info img { width: 8rem; height: 8rem; border-radius: 50%; object-fit: cover; border: 3px solid var(--primary-color); margin-bottom: 1rem; }
-    .customer-name { font-size: 1.6rem; font-weight: 600; letter-spacing: 1px; color: var(--primary-color); }
-    .customer-title { font-size: 1.4rem; color: rgba(255, 255, 255, 0.6); }
-
-    /* --- BRANDED SOCIAL ICONS --- */
-    .social-icon { display: flex; justify-content: center; align-items: center; width: 4.5rem; height: 4.5rem; font-size: 1.8rem; border: 1px solid var(--primary-color); border-radius: 50%; color: var(--primary-color); transition: all 0.3s ease; position: relative; overflow: hidden; z-index: 1; }
-    .social-icons { display: flex; gap: 1.5rem; margin-top: 2rem; }
-
-    /* Instagram Gradient Hover */
-    .social-icon.instagram:hover { border-color: transparent; background: linear-gradient(45deg,#f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); color: white; box-shadow: 0 0 20px rgba(188, 24, 136, 0.5); transform: translateY(-5px) rotate(5deg); }
-
-    /* Pinterest Red Hover */
-    .social-icon.pinterest:hover { border-color: #E60023; background: #E60023; color: white; box-shadow: 0 0 20px rgba(230, 0, 35, 0.5); transform: translateY(-5px) rotate(-5deg); }
-
-    /* Facebook/Generic Hover */
-    .social-icon.generic:hover, .social-icon:not(.instagram):not(.pinterest):hover { background: var(--primary-color); color: var(--dark-color); box-shadow: 0 0 2rem var(--shadow-gold); transform: translateY(-5px); }
-
-    /* =================================== */
-    /* 📞 FOOTER (Refined Layout) */
-    /* =================================== */
-
-    footer { background-color: var(--dark-color); color: var(--light-text); padding: 6rem 0 2rem; }
-    .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr)); gap: 4rem; margin-bottom: 4rem; }
-    .footer-section h4 { font-size: 1.8rem; position: relative; margin-bottom: 2.5rem; color: var(--primary-color); }
-    .footer-section h4::after { content: ''; position: absolute; bottom: -0.5rem; left: 0; width: 3rem; height: 0.2rem; background: var(--primary-color); }
-
-    .contact-form { display: flex; flex-direction: column; gap: 1.5rem; }
-    .form-input, .form-textarea { width: 100%; padding: 1.2rem; background-color: var(--medium-dark); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 0.5rem; color: var(--light-text); font-size: 1.5rem; transition: border-color 0.3s ease; }
-    .form-input:focus, .form-textarea:focus { outline: none; border-color: var(--primary-color); box-shadow: 0 0 5px var(--shadow-gold); }
-    .form-textarea { resize: vertical; min-height: 12rem; }
-
-    .cta-btn { width: 100%; padding: 1.5rem; }
-
-    .footer-bottom { text-align: center; padding-top: 2rem; border-top: 1px solid rgba(255, 255, 255, 0.1); font-size: 1.4rem; color: rgba(255, 255, 255, 0.6); }
-
-    /* =================================== */
-    /* 📱 RESPONSIVENESS (Refined Breakpoints) */
-    /* =================================== */
-
-    @media (max-width: 1200px) { .hero h1 { font-size: 6rem; } }
-
-    @media (max-width: 992px) {
-      .nav-links { gap: 2rem; }
-      .hero h1 { font-size: 5rem; letter-spacing: 1rem; }
-      .hero h3 { font-size: 2rem; }
-      .section-title { font-size: 3.5em; }
-      .footer-content { grid-template-columns: 1fr 1fr; }
+    header h1 {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: 2px;
     }
 
-    @media (max-width: 768px) {
-      .nav-links { display: none; }
-      .hamburger { display: flex; }
-
-      .hero h1 { font-size: 4rem; letter-spacing: 0.8rem; }
-      .hero h3 { font-size: 1.8rem; }
-      .hero p { font-size: 1.6rem; }
-      .cta-btn { padding: 1.5rem 4rem; font-size: 1.6rem; }
-      .section-title { font-size: 3rem; }
-      .experience-grid, .features-grid, .portfolio-grid { grid-template-columns: 1fr; }
-      .footer-content { grid-template-columns: 1fr; text-align: left; }
-      .footer-section h4::after { left: 0; }
-      .social-icons { justify-content: flex-start; }
+    nav a {
+      margin-left: 25px;
+      font-size: 16px;
+      text-decoration: none;
+      color: #fff;
+      transition: 0.3s;
     }
 
-    @media (max-width: 500px) {
-      .hero h1 { font-size: 3rem; letter-spacing: 0.5rem; }
-      .testimonials { padding: 6rem 1rem; }
-      .testimonial-card { padding: 3rem 1.5rem; }
+    nav a:hover {
+      color: #aaa;
     }
 
-    /* =================================== */
-    /* 🧱 UTILITY CLASSES & GLOBAL ENHANCEMENTS */
-    /* =================================== */
+    /* HERO */
+    .hero {
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0 5%;
+      background: url('https://images.unsplash.com/photo-1533867610507-5c7b69d07d5b?auto=format&fit=crop&w=1400&q=80') center/cover no-repeat;
+      position: relative;
+    }
 
-    /* Custom Scrollbar for Chrome/Safari/Edge */
-    ::-webkit-scrollbar { width: 10px; }
-    ::-webkit-scrollbar-track { background: var(--dark-color); }
-    ::-webkit-scrollbar-thumb { background: var(--primary-color); border-radius: 5px; border: 2px solid var(--dark-color); }
-    ::-webkit-scrollbar-thumb:hover { background: var(--secondary-color); }
+    .hero::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.65);
+    }
 
-    /* Selection Color (When user highlights text) */
-    ::selection { background: var(--primary-color); color: var(--dark-color); }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+    }
 
-    .fade-in { animation: fadeInUp 1.2s ease-out; }
-    @keyframes fadeInUp { from { opacity: 0; transform: translateY(4rem); } to { opacity: 1; transform: translateY(0); } }
+    .hero h2 {
+      font-size: 60px;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
 
-    .zoom-in { animation: zoomIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
-    @keyframes zoomIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+    .hero p {
+      font-size: 20px;
+      opacity: 0.85;
+      margin-bottom: 30px;
+    }
 
-    /* Scroll Reveal (Added a slight bounce for more life) */
-    .scroll-reveal { opacity: 0; transform: translateY(6rem); transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-    .scroll-reveal.revealed { opacity: 1; transform: translateY(0); }
+    .btn {
+      padding: 14px 38px;
+      background: #fff;
+      color: #000;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 18px;
+      transition: 0.3s;
+    }
 
-  </style>
-</head>
-<body>
+    .btn:hover {
+      background: #ddd;
+    }
 
-  <!-- NAV -->
-  <nav class="navbar">
-    <div class="nav-container">
-      <a href="#" class="logo" aria-label="ASTYL logo"><img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='40'><rect width='100%' height='100%' fill='black' rx='6'/><text x='50%' y='60%' font-family='Playfair Display, serif' font-size='18' fill='%23d4af37' text-anchor='middle'>ASTYL</text></svg>" alt="ASTYL logo"></a>
+    /* PRODUCTS */
+    .products-section {
+      padding: 120px 5%;
+      text-align: center;
+    }
 
-      <ul class="nav-links">
-        <li><a href="#hero">Home</a></li>
-        <li><a href="#experiences">About</a></li>
-        <li><a href="#features">Features</a></li>
-        <li><a href="#portfolio">Portfolio</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
+    .products-section h2 {
+      font-size: 42px;
+      margin-bottom: 50px;
+      font-weight: 700;
+    }
 
-      <div class="hamburger" id="hamburger" aria-label="Menu toggle" role="button" tabindex="0">
-        <span class="bar"></span>
-        <span class="bar"></span>
-        <span class="bar"></span>
-      </div>
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 40px;
+    }
 
-    </div>
-    <div class="mobile-menu" id="mobileMenu">
-      <a href="#hero">Home</a>
-      <a href="#experiences">About</a>
-      <a href="#features">Features</a>
-      <a href="#portfolio">Portfolio</a>
-      <a href="#contact">Contact</a>
-    </div>
-  </nav>
+    .product {
+      background: #111;
+      border-radius: 14px;
+      padding: 20px;
+      transition: 0.3s;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
 
-  <!-- HERO -->
-  <header id="hero" class="hero">
-    <div class="video-background" aria-hidden="true"></div>
-    <div class="video-overlay" aria-hidden="true"></div>
+    .product:hover {
+      transform: translateY(-8px);
+      border-color: rgba(255,255,255,0.25);
+    }
 
-    <div class="hero-content">
-      <h1 class="scroll-reveal">ASTYL</h1>
-      <h3 class="scroll-reveal">Luxury streetwear, crafted for presence</h3>
-      <p class="scroll-reveal">We design premium everyday pieces with thoughtful fabrics, flattering fits, and bold details. New drops every season — curated for those who demand more from their wardrobe.</p>
-      <a class="cta-btn scroll-reveal" href="#portfolio">Shop Collection</a>
-    </div>
-  </header>
+    .product img {
+      width: 100%;
+      border-radius: 12px;
+      margin-bottom: 15px;
+    }
 
-  <!-- EXPERIENCES -->
-  <section id="experiences" class="experiences">
-    <div class="container" style="max-width:var(--max-width);margin:0 auto;padding:0 1.5rem;">
-      <h2 class="section-title scroll-reveal">Our Story</h2>
-      <div class="experience-grid">
-        <article class="experience-card scroll-reveal">
-          <div class="card-icon">👕</div>
-          <h4>Premium Fabrics</h4>
-          <p>100% long-staple cotton &amp; careful garment washing for a luxe handfeel.</p>
-        </article>
-        <article class="experience-card scroll-reveal">
-          <div class="card-icon">🏷️</div>
-          <h4>Exclusive Drops</h4>
-          <p>Limited runs with focused attention on detail — never mass-produced.</p>
-        </article>
-        <article class="experience-card scroll-reveal">
-          <div class="card-icon">✂️</div>
-          <h4>Tailored Cuts</h4>
-          <p>Designed to fit modern bodies — clean lines, comfortable movement.</p>
-        </article>
-      </div>
-    </div>
-  </section>
+    .price {
+      margin: 10px 0;
+      font-size: 18px;
+      font-weight: 600;
+    }
 
-  <!-- FEATURES -->
-  <section id="features" class="features">
-    <div class="container" style="max-width:var(--max-width);margin:0 auto;padding:0 1.5rem;">
-      <h2 class="section-title">What We Offer</h2>
-      <div class="features-grid">
-        <div class="feature-box scroll-reveal">
-          <div class="feature-icon">🚚</div>
-          <h5>Fast Shipping</h5>
-          <p>Quick dispatch with premium packaging and tracking to your door.</p>
-        </div>
-        <div class="feature-box scroll-reveal">
-          <div class="feature-icon">🔁</div>
-          <h5>Easy Returns</h5>
-          <p>30-day returns — we make it simple if something doesn’t work out.</p>
-        </div>
-        <div class="feature-box scroll-reveal">
-          <div class="feature-icon">🛡️</div>
-          <h5>Quality Guarantee</h5>
-          <p>Every piece is inspected to ensure it meets our high standards.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PORTFOLIO -->
-  <section id="portfolio">
-    <div class="container" style="max-width:var(--max-width);margin:0 auto;padding:0 1.5rem;">
-      <h2 class="section-title">Lookbook</h2>
-      <div class="portfolio-grid">
-        <div class="portfolio-item scroll-reveal">
-          <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='800'><rect width='100%' height='100%' fill='%230d0d0d'/><text x='50%' y='50%' fill='%23d4af37' font-family='Poppins, sans-serif' font-size='48' text-anchor='middle'>Look 1</text></svg>" alt="Look 1">
-          <div class="portfolio-info"><h4>Street Classic</h4><p>Relaxed fit tee with refined finishing.</p></div>
-        </div>
-        <div class="portfolio-item scroll-reveal">
-          <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='800'><rect width='100%' height='100%' fill='%231a1a1a'/><text x='50%' y='50%' fill='%23d4af37' font-family='Poppins, sans-serif' font-size='48' text-anchor='middle'>Look 2</text></svg>" alt="Look 2">
-          <div class="portfolio-info"><h4>Monochrome Drop</h4><p>Minimal, versatile pieces for everyday wear.</p></div>
-        </div>
-        <div class="portfolio-item scroll-reveal">
-          <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='800'><rect width='100%' height='100%' fill='%23222222'/><text x='50%' y='50%' fill='%23d4af37' font-family='Poppins, sans-serif' font-size='48' text-anchor='middle'>Look 3</text></svg>" alt="Look 3">
-          <div class="portfolio-info"><h4>Signature Layer</h4><p>Layered textures and premium trims.</p></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- TESTIMONIALS -->
-  <section class="testimonials">
-    <div class="container" style="max-width:var(--max-width);margin:0 auto;padding:0 1.5rem;">
-      <h2 class="section-title">What People Say</h2>
-      <div class="testimonial-card scroll-reveal">
-        <div class="stars">★★★★★</div>
-        <blockquote>"Astyl nailed the fabric and fit. My shirts feel premium and last through washes."</blockquote>
-        <div class="customer-info"><img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80'><rect width='100%' height='100%' fill='%23222222' rx='40'/><text x='50%' y='56%' fill='%23d4af37' font-family='Poppins' font-size='28' text-anchor='middle'>A</text></svg>" alt="Customer"></div>
-        <div class="customer-name">Anil Kumar</div>
-        <div class="customer-title">Designer &amp; Customer</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer id="contact">
-    <div class="footer-content container" style="max-width:var(--max-width);margin:0 auto;padding:0 1.5rem;">
-      <div class="footer-section">
-        <h4>Subscribe</h4>
-        <p>Sign up for exclusive drops &amp; early access.</p>
-        <form class="contact-form" onsubmit="(e=>e.preventDefault())()">
-          <input class="form-input" type="email" placeholder="Your email" aria-label="email">
-          <button class="cta-btn" type="submit">Subscribe</button>
-        </form>
-      </div>
-
-      <div class="footer-section">
-        <h4>Contact</h4>
-        <p>Email: hello@astyl.example</p>
-        <p>Phone: +91 90000 00000</p>
-        <div class="social-icons">
-          <div class="social-icon instagram" title="Instagram">ig</div>
-          <div class="social-icon pinterest" title="Pinterest">pt</div>
-          <div class="social-icon generic" title="Facebook">fb</div>
-        </div>
-      </div>
-
-      <div class="footer-section">
-        <h4>Browse</h4>
-        <p><a href="#portfolio">Lookbook</a></p>
-        <p><a href="#features">Features</a></p>
-        <p><a href="#experiences">About</a></p>
-      </div>
-    </div>
-
-    <div class="footer-bottom">&copy; <span id="year"></span> ASTYL. All rights reserved.</div>
-  </footer>
-
-  <script>
-    // MENU TOGGLE
-    (function(){
-      const hamburger = document.getElementById('hamburger');
-      const mobileMenu = document.getElementById('mobileMenu');
-      function toggleMenu(){
-        hamburger.classList.toggle('active');
-        mobileMenu.classList.toggle('active');
-      }
-      hamburger.addEventListener('click', toggleMenu);
-      hamburger.addEventListener('keydown', (e)=>{ if(e.key === 'Enter' || e.key === ' ') toggleMenu(); });
-
-      // Close mobile menu on resize to larger screens
-      window.addEventListener('resize', ()=>{
-        if(window.innerWidth > 768){
-          hamburger.classList.remove('active');
-          mobileMenu.classList.remove('active');
-        }
-      });
-    })();
-
-    // SCROLL REVEAL (IntersectionObserver)
-    (function(){
-      const reveals = document.querySelectorAll('.scroll-reveal');
-      const observer = new IntersectionObserver((entries)=>{
-        entries.forEach(entry = {
-          if(entry.isIntersecting){
-            entry.target.classList.add('revealed');
-            // once revealed, unobserve for performance
-            observer.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.12 });
-      reveals.forEach(r => observer.observe(r));
-    })();
-
-    // YEAR UPDATE
-    document.getElementById('year').ttent = new Date().getFullYear();
-
-    // Accessibility: reduce animation for prefers-reduced-motion
-    (function(){
-      if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){
-        document.querySelectorAll('*').forEach(el=>{
-          el.style.transition = 'none';
-          el.style.animation = 'none';
-        });
-      }
-    })();
-  </script>
-
-</body>
-</html>
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 40px 0;
+      font-size: 14px;
+      opacity: 0.6;
+      margin-top: 80px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
