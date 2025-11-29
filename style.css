@@ -34,7 +34,7 @@ body {
   line-height: 1.7; 
   background-color: var(--background-light);
   color: var(--medium-dark);
-  overflow-x: hidden;
+  overflow-x: hidden; /* CRITICAL FIX: Ensure no horizontal scroll is triggered */
   font-size: 1.6rem; 
 }
 
@@ -55,7 +55,7 @@ a {
   z-index: 1001; 
   flex-direction: column;
   gap: 0.7rem; 
-  /* FIX: Explicitly position burger on the right corner */
+  /* FIX: Explicitly position burger on the right */
   position: absolute; 
   right: 5%; 
   top: 50%;
@@ -89,12 +89,12 @@ a {
   
   /* Desktop nav is now the mobile nav on small screens */
   .nav-links {
-    position: fixed;
+    position: fixed; /* CRITICAL FIX: Use fixed positioning relative to viewport */
     right: 0;
     top: 0; 
     height: 100vh;
     width: 100%; 
-    max-width: 40rem; 
+    max-width: 40rem; /* Menu width */
     background: rgba(0, 0, 0, 0.95); 
     display: flex;
     flex-direction: column;
@@ -197,6 +197,7 @@ a {
     font-size: 1.6rem;
     text-transform: uppercase;
     letter-spacing: 1.5px;
+    transition: color 0.3s ease;
     position: relative;
     padding: 0.5rem 0;
 }
@@ -244,6 +245,7 @@ a {
 }
 
 .video-background {
+  /* Using a more complex 4-color gradient for richer flow */
   background: linear-gradient(
     135deg, 
     var(--dark-color) 0%, 
@@ -287,11 +289,13 @@ a {
 
 .hero h1 {
   font-family: 'Playfair Display', serif;
+  /* Fluid sizing for h1 */
   font-size: clamp(4.5rem, 8vw + 1rem, 7.5rem); 
   margin-bottom: 3rem;
   letter-spacing: 1.5rem;
   text-shadow: 0 1rem 4rem var(--shadow-gold);
   
+  /* Enhanced Gold Gradient */
   background: linear-gradient(
     135deg, 
     var(--primary-color), 
@@ -748,8 +752,10 @@ footer {
 }
 
 .cta-btn {
+    /* Inherit CTA button styles for a consistent look */
+    /* Ensure the button has width 100% inside the form */
     width: 100%;
-    padding: 1.5rem;
+    padding: 1.5rem; /* Slightly reduced padding for form fit */
 }
 
 .footer-bottom {
@@ -791,8 +797,11 @@ footer {
 }
 
 @media (max-width: 768px) {
-    /* REMOVED: .nav-links { display: none; } */
-    /* Mobile nav is now controlled by the @media screen and (max-width: 768px) above */
+    .nav-links {
+        /* Desktop links must be hidden on mobile */
+        display: none; 
+    }
+    /* NOTE: The burger icon is displayed by the specific media query above */
 
     .hero h1 {
         font-size: 4rem;
