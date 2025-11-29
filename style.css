@@ -31,11 +31,11 @@ html {
 
 body {
   font-family: 'Poppins', sans-serif;
-  line-height: 1.7; /* Slightly looser line-height for better readability */
+  line-height: 1.7; 
   background-color: var(--background-light);
   color: var(--medium-dark);
   overflow-x: hidden;
-  font-size: 1.6rem; /* Base font size */
+  font-size: 1.6rem; 
 }
 
 /* Global Link Reset */
@@ -50,30 +50,35 @@ a {
 
 /* Burger Icon Base Style */
 .burger {
-  display: none; /* Hidden on desktop */
+  display: none; 
   cursor: pointer;
   z-index: 1001; 
   flex-direction: column;
-  gap: 0.7rem; /* Matches the old .hamburger gap */
+  gap: 0.7rem; 
+  /* FIX: Explicitly position burger on the right corner */
+  position: absolute; 
+  right: 5%; 
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .burger div {
-  width: 3rem; /* Matches the old .bar width */
-  height: 0.3rem; /* Matches the old .bar height */
-  background-color: var(--light-text); /* Changed to light-text for visibility */
+  width: 3rem; 
+  height: 0.3rem; 
+  background-color: var(--light-text); 
   border-radius: 0.3rem;
   transition: all 0.4s ease-in-out;
 }
 
 /* Animation for the Burger (The .toggle class is added by JS) */
 .toggle div:nth-child(1) {
-  transform: translateY(1rem) rotate(45deg); /* Adjusted for 3rem width and 0.7rem gap */
+  transform: translateY(1rem) rotate(45deg); 
 }
 .toggle div:nth-child(2) {
   opacity: 0;
 }
 .toggle div:nth-child(3) {
-  transform: translateY(-1rem) rotate(-45deg); /* Adjusted for 3rem width and 0.7rem gap */
+  transform: translateY(-1rem) rotate(-45deg); 
 }
 
 /* Mobile Nav Drawer Container */
@@ -88,9 +93,9 @@ a {
     right: 0;
     top: 0; 
     height: 100vh;
-    width: 100%; /* Using full width for a strong overlay */
-    max-width: 40rem; /* Max width of the slide-out menu */
-    background: rgba(0, 0, 0, 0.95); /* Dark overlay */
+    width: 100%; 
+    max-width: 40rem; 
+    background: rgba(0, 0, 0, 0.95); 
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -129,7 +134,7 @@ a {
 
 .container {
   width: 90%;
-  max-width: 1350px; /* Slightly wider container */
+  max-width: 1350px; 
   margin: auto;
 }
 
@@ -142,6 +147,8 @@ a {
     top: 0;
     width: 100%;
     z-index: 1000;
+    /* FIX: Added position:relative for burger to be positioned absolutely */
+    position: relative; 
     padding: 1.5rem 5%; 
     display: flex;
     justify-content: space-between;
@@ -153,6 +160,14 @@ a {
     border-bottom: 1px solid rgba(255, 255, 255, 0.15);
     transition: all 0.4s ease;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.navbar .container {
+    /* Ensure flex display in the container to hold logo and links */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
 }
 
 .logo img {
@@ -168,7 +183,6 @@ a {
 }
 
 /* --- NAVIGATION LINKS (Desktop) --- */
-/* The desktop style is also the base for the mobile menu */
 .nav-links {
     list-style: none;
     display: flex;
@@ -183,7 +197,6 @@ a {
     font-size: 1.6rem;
     text-transform: uppercase;
     letter-spacing: 1.5px;
-    transition: color 0.3s ease;
     position: relative;
     padding: 0.5rem 0;
 }
@@ -208,9 +221,6 @@ a {
     width: 100%;
 }
 
-/* ❌ CONFLICT REMOVED: Deleted all .hamburger, .bar, and .mobile-menu styles. */
-
-
 /* =================================== */
 /* ✨ HERO SECTION (More Dynamic) */
 /* =================================== */
@@ -234,7 +244,6 @@ a {
 }
 
 .video-background {
-  /* Using a more complex 4-color gradient for richer flow */
   background: linear-gradient(
     135deg, 
     var(--dark-color) 0%, 
@@ -278,13 +287,11 @@ a {
 
 .hero h1 {
   font-family: 'Playfair Display', serif;
-  /* Fluid sizing for h1 */
   font-size: clamp(4.5rem, 8vw + 1rem, 7.5rem); 
   margin-bottom: 3rem;
   letter-spacing: 1.5rem;
   text-shadow: 0 1rem 4rem var(--shadow-gold);
   
-  /* Enhanced Gold Gradient */
   background: linear-gradient(
     135deg, 
     var(--primary-color), 
@@ -711,28 +718,38 @@ footer {
     background: var(--primary-color);
 }
 
-.footer-section p {
-    color: rgba(255, 255, 255, 0.8);
+/* --- FOOTER FORM INPUT STYLES (ENHANCEMENT) --- */
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form-input, .form-textarea {
+    width: 100%;
+    padding: 1.2rem;
+    background-color: var(--medium-dark); /* Darker background */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 0.5rem;
+    color: var(--light-text);
     font-size: 1.5rem;
+    transition: border-color 0.3s ease;
 }
 
-.footer-section ul {
-    list-style: none;
+.form-input:focus, .form-textarea:focus {
+    outline: none;
+    border-color: var(--primary-color); /* Gold focus */
+    box-shadow: 0 0 5px var(--shadow-gold);
 }
 
-.footer-section ul li {
-    margin-bottom: 1rem;
+.form-textarea {
+    resize: vertical;
+    min-height: 12rem;
 }
 
-.footer-section ul li a {
-    color: rgba(255, 255, 255, 0.7);
-    transition: all 0.3s ease;
-    display: inline-block;
-}
-
-.footer-section ul li a:hover {
-    color: var(--primary-color);
-    padding-left: 0.5rem;
+.cta-btn {
+    width: 100%;
+    padding: 1.5rem;
 }
 
 .footer-bottom {
@@ -774,11 +791,8 @@ footer {
 }
 
 @media (max-width: 768px) {
-    .nav-links {
-        /* Desktop links must be hidden on mobile */
-        display: none; 
-    }
-    /* NOTE: The burger icon is displayed by the specific media query above */
+    /* REMOVED: .nav-links { display: none; } */
+    /* Mobile nav is now controlled by the @media screen and (max-width: 768px) above */
 
     .hero h1 {
         font-size: 4rem;
