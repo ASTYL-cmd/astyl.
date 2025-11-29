@@ -1,50 +1,28 @@
 document.addEventListener('DOMContentLoaded', () => {
   
   // --- NAVSLIDE LOGIC (Mobile Menu Toggle) ---
-  const navSlide = () => {
-    const burger = document.querySelector('.burger');
-    const nav = document.querySelector('.nav-links');
-    const navLinks = document.querySelectorAll('.nav-links li');
-
-    // Only run if the burger element exists
-    if (burger) {
-      burger.addEventListener('click', () => {
-        // Toggle Nav (Slides the menu in/out)
-        nav.classList.toggle('nav-active');
-
-        // Burger Animation (Toggles X icon)
-        burger.classList.toggle('toggle');
-
-        // Animate Links (Staggered fade-in)
-        navLinks.forEach((link, index) => {
-          // If animation is already active, reset it to allow re-entry
-          if (link.style.animation) {
-            link.style.animation = '';
-          } else {
-            // Apply staggered animation using the keyframe defined in CSS
-            // The delay is calculated based on the index to create the cascade effect
-            link.style.animation = `navLinkFade 0.5s ease forwards ${index / 7 + 0.3}s`;
-          }
-        });
-      });
-      
-      // Close mobile menu when a link inside it is clicked
-      navLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            nav.classList.remove('nav-active');
-            burger.classList.remove('toggle');
-            navLinks.forEach(l => l.style.animation = ''); // Reset animation after closing
-        });
-      });
-      
-    }
-  }
-
-  navSlide();
-  // ----------------------------------
-
-  const navbar = document.querySelector('.navbar');
-  const scrollRevealElements = document.querySelectorAll('.scroll-reveal');
+function toggleMenu() {  
+      const hamburger = document.getElementById('hamburger');  
+      const mobileMenu = document.getElementById('mobile-menu');  
+        
+      // Toggle Active Classes  
+      hamburger.classList.toggle('active');  
+      mobileMenu.classList.toggle('active');  
+    }  
+  
+    // Event Listener for click  
+    document.getElementById('hamburger').addEventListener('click', toggleMenu);  
+  
+    // Close menu when clicking outside (Optional polish)  
+    document.addEventListener('click', function(event) {  
+      const hamburger = document.getElementById('hamburger');  
+      const mobileMenu = document.getElementById('mobile-menu');  
+      const isClickInside = hamburger.contains(event.target) || mobileMenu.contains(event.target);  
+        
+      if (!isClickInside && mobileMenu.classList.contains('active')) {  
+        toggleMenu();  
+      }  
+    });  
 
   // --- NAVBAR SCROLL EFFECT ---
   window.addEventListener('scroll', () => {
