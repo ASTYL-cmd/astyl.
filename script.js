@@ -1,90 +1,22 @@
 document.addEventListener('DOMContentLoaded', () => {
   
- (function(){
-      const menuToggle = document.getElementById('menuToggle');
-      const sideWrap = document.getElementById('sideWrap');
-      const sidePanel = document.getElementById('sidePanel');
-      const overlay = document.getElementById('panelOverlay');
-      const closeBtn = document.getElementById('closePanel');
-      const focusableSelectors = 'a[href], button:not([disabled]), [tabindex="0"]';
-      let lastFocused = null;
+  // --- MOBILE MENU TOGGLE ---
+  const burger = document.querySelector('.burger');
+  const nav = document.querySelector('.nav-links');
+  const navbar = document.querySelector('.navbar');
 
-      function openPanel(){
-        lastFocused = document.activeElement;
-        sideWrap.classList.add('active');
-        sidePanel.classList.add('open');
-        overlay.classList.add('visible');
-        menuToggle.setAttribute('aria-expanded','true');
-        sideWrap.setAttribute('aria-hidden','false');
-        // set focus to first link
-        const firstLink = sidePanel.querySelector('.panel-links a');
-        if(firstLink) firstLink.focus();
-        // prevent body scroll
-        document.documentElement.style.overflow = 'hidden';
-        document.body.style.overflow = 'hidden';
-      }
+  if (burger) {
+    burger.addEventListener('click', () => {
+      // Toggle nav
+      nav.classList.toggle('nav-active');
+      
+      // Burger animation
+      burger.classList.toggle('toggle');
+    });
+  }
 
-      function closePanel(){
-        sidePanel.classList.remove('open');
-        overlay.classList.remove('visible');
-        menuToggle.setAttribute('aria-expanded','false');
-        sideWrap.setAttribute('aria-hidden','true');
-
-        // collapse wrapper after transition so click-outside is disabled
-        setTimeout(()=> sideWrap.classList.remove('active'), 380);
-
-        // restore focus
-        if(lastFocused) lastFocused.focus();
-        document.documentElement.style.overflow = '';
-        document.body.style.overflow = '';
-      }
-
-      menuToggle.addEventListener('click', function(e){
-        const expanded = menuToggle.getAttribute('aria-expanded') === 'true';
-        if(!expanded) openPanel(); else closePanel();
-      });
-
-      closeBtn.addEventListener('click', closePanel);
-      overlay.addEventListener('click', closePanel);
-
-      // close on Escape key
-      window.addEventListener('keydown', function(e){
-        if(e.key === 'Escape' || e.key === 'Esc'){
-          // only if panel is open
-          if(sidePanel.classList.contains('open')) closePanel();
-        }
-      });
-
-      // close when a panel link is clicked (and allow navigation)
-      sidePanel.querySelectorAll('.panel-links a').forEach(a => {
-        a.addEventListener('click', () => {
-          // we let the navigation happen but close the panel visually
-          closePanel();
-        });
-      });
-
-      // handle focus trap minimal: keep tabbing inside panel when open
-      sidePanel.addEventListener('keydown', function(e){
-        if(e.key !== 'Tab') return;
-        const focusables = Array.from(sidePanel.querySelectorAll(focusableSelectors)).filter(n => n.offsetParent !== null);
-        if(focusables.length === 0) return;
-        const first = focusables[0];
-        const last = focusables[focusables.length - 1];
-        if(e.shiftKey && document.activeElement === first){
-          e.preventDefault();
-          last.focus();
-        } else if(!e.shiftKey && document.activeElement === last){
-          e.preventDefault();
-          first.focus();
-        }
-      });
-
-      // progressive enhancement: if JS disabled, show button as link to site map
-    })();
-  
   // --- NAVBAR SCROLL EFFECT ---
   window.addEventListener('scroll', () => {
-    // Add 'scrolled' class for potential styling (e.g., changing opacity/size)
     if (window.scrollY > 100) {
       navbar.classList.add('scrolled');
     } else {
@@ -114,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
     showSlide(currentSlide + 1);
   }
 
-  if (testimonialCards.length > 1) { // Only run carousel if there's more than one slide
+  if (testimonialCards.length > 1) {
     // Auto-advance every 5 seconds
     setInterval(nextSlide, 5000);
 
@@ -139,13 +71,20 @@ document.addEventListener('DOMContentLoaded', () => {
           behavior: 'smooth',
           block: 'start'
         });
+        
+        // Close mobile menu if open
+        if (nav.classList.contains('nav-active')) {
+          nav.classList.remove('nav-active');
+          burger.classList.remove('toggle');
+        }
       }
     });
   });
 
   // --- INTERSECTION OBSERVER (Scroll Reveal) ---
+  const scrollRevealElements = document.querySelectorAll('.scroll-reveal');
+  
   const observerOptions = {
-    // Reveal element when 10% is visible
     threshold: 0.1, 
     rootMargin: '0px 0px -50px 0px'
   };
@@ -154,7 +93,6 @@ document.addEventListener('DOMContentLoaded', () => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('revealed');
-        // Stop observing once revealed
         observer.unobserve(entry.target);
       }
     });
@@ -167,7 +105,24 @@ document.addEventListener('DOMContentLoaded', () => {
   // --- FEATURE CARD STAGGERED ANIMATION ---
   const featureCards = document.querySelectorAll('.feature-box');
   featureCards.forEach((card, index) => {
-    // Applies an increasing delay for a cascading entrance effect (zoom-in from CSS)
     card.style.animationDelay = `${index * 0.1}s`; 
   });
+
+  // --- CONTACT FORM ---
+  const contactForm = document.querySelector('.contact-form');
+  if (contactForm) {
+    contactForm.addEventListener('submit', function(event) {
+      event.preventDefault();
+      
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const message = document.getElementById('message').value;
+      
+      if (name && email && message) {
+        const subject = `New message from ${name}`;
+        const body = `Name: ${name}%0D%0AEmail: ${email}%0D%0A%0D%0AMessage:%0D%0A${message}`;
+        window.location.href = `mailto:contact.astyl@gmail.com?subject=${subject}&body=${body}`;
+      }
+    });
+  }
 });
