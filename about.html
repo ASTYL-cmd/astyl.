@@ -7,6 +7,11 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
+    :root { /* Added variable for primary color consistency */
+        --primary-color: #667eea;
+        --secondary-color: #764ba2;
+        --light-gold: #ffe66d;
+    }
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
@@ -15,7 +20,13 @@
       background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
       color: #333;
     }
-
+    /* Set body to flex-direction: column for reliable footer positioning */
+    body {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+    
     .navbar {
       background-color: #000;
       padding: 15px 0;
@@ -50,12 +61,12 @@
       transition: color 0.3s ease;
     }
 
-    .nav-links a:hover { color: #ffe66d; }
+    .nav-links a:hover { color: var(--light-gold); }
 
     .about-hero {
       text-align: center;
       padding: 4em 2em;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
       color: white;
     }
 
@@ -77,6 +88,7 @@
       max-width: 1200px;
       margin: 4em auto;
       padding: 0 2em;
+      flex-grow: 1; /* Allows content to push footer down */
     }
 
     .story-section {
@@ -87,10 +99,10 @@
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     }
 
-    .story-section h2 {
+    .story-section h2, .team-showcase h3 {
       font-family: 'Playfair Display', serif;
       font-size: 2.5em;
-      color: #667eea;
+      color: var(--primary-color);
       margin-bottom: 1em;
       text-align: center;
     }
@@ -103,156 +115,145 @@
       text-align: center;
     }
 
-    /* ===== 3D Slider Section ===== */
+    /* ===== Team Showcase Styling ===== */
     .team-showcase {
-      margin-top: 3em;
+      margin: 3em 0; /* Adjusted margin */
       text-align: center;
     }
-
+    
     .team-showcase h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.5em;
-      margin-bottom: 2em;
-      color: #333;
+        color: #333;
     }
 
-    body {
-      display: block;
-    }
-
-    .slider {
-      position: relative;
-      margin: auto;
+    /* --- TOUCH SWIPE SLIDER --- (Kept and slightly optimized your previous styles)*/
+    .swipe-container {
       width: 100%;
-      height: 370px;
+      max-width: 1350px;
+      margin: 2rem auto;
+      position: relative;
       overflow: hidden;
     }
 
-    .slider .item {
-      position: absolute;
-      width: 200px;
-      height: 320px;
-      background-color: #fff;
+    .swipe-track {
+      display: flex;
+      gap: 15px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 20px;
+    }
+
+    .swipe-track::-webkit-scrollbar {
+      height: 0px; 
+      background: transparent;
+    }
+
+    .swipe-card {
+      flex: 0 0 100%; 
+      height: 80vh;
+      scroll-snap-align: center;
       border-radius: 15px;
       overflow: hidden;
-      left: calc(50% - 100px);
-      top: 0;
-      transition: 0.5s;
+      position: relative;
       box-shadow: 0 10px 20px rgba(0,0,0,0.2);
     }
+    
+    .swipe-card.team-member { /* Specific styling for team member cards */
+        flex: 0 0 300px; /* Fixed width for better grid-like appearance */
+        height: 400px;
+        scroll-snap-align: start; /* Snap to the start of the viewport */
+    }
 
-    .slider .item img {
+
+    .swipe-card img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      object-position: center top; /* Focus on the top/face */
+      pointer-events: none;
     }
 
-    #next, #prev {
+    /* Overlay text styling */
+    .card-overlay {
       position: absolute;
-      top: 40%;
-      background: none;
-      border: none;
-      font-size: xxx-large;
-      color: #333;
-      font-weight: bold;
-      opacity: 0.5;
-      transition: opacity 0.3s;
-      cursor: pointer;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding: 1.5rem;
+      background: linear-gradient(to top, rgba(0,0,0,0.8) 20%, transparent);
+      color: white;
+      text-align: left;
+    }
+    .card-overlay h4 {
+        font-family: 'Playfair Display', serif;
+        font-size: 1.5em;
+        margin-bottom: 0.2em;
+        color: var(--light-gold);
+    }
+    .card-overlay p {
+        font-family: 'Poppins', sans-serif;
+        font-size: 1em;
+        font-weight: 300;
+        line-height: 1.4;
+        text-align: left;
     }
 
-    #next:hover, #prev:hover { opacity: 1; }
 
-    #next { right: 100px; }
-    #prev { left: 100px; }/* --- TOUCH SWIPE SLIDER --- */
-.swipe-container {
-  width: 100%;
-  max-width: 1350px;
-  margin: 2rem auto; /* Spacing */
-  position: relative;
-  overflow: hidden;
-}
+    .swipe-hint {
+      text-align: center;
+      margin-top: 10px; /* Adjusted margin */
+      font-size: 1.2rem;
+      color: var(--primary-color);
+      opacity: 0.7;
+      animation: float 2s infinite;
+    }
 
-.swipe-track {
-  display: flex;
-  gap: 15px; /* Space between slides */
-  overflow-x: auto; /* Enables horizontal scroll */
-  scroll-snap-type: x mandatory; /* The magic snapping effect */
-  scroll-behavior: smooth;
-  
-  /* Hide Scrollbar for Chrome, Safari and Opera */
-  -webkit-overflow-scrolling: touch; /* Smooth momentum on iOS */
-  padding-bottom: 20px;
-}
+    @keyframes float {
+      0% { transform: translateX(0); }
+      50% { transform: translateX(5px); }
+      100% { transform: translateX(0); }
+    }
 
-/* Hide scrollbar visually but keep functionality */
-.swipe-track::-webkit-scrollbar {
-  height: 0px; 
-  background: transparent;
-}
-
-.swipe-card {
-  flex: 0 0 100%; /* Show 1 image at a time (100% width) */
-  height: 80vh; /* Takes 80% of screen height */
-  scroll-snap-align: center; /* Snaps image to center */
-  border-radius: 15px;
-  overflow: hidden;
-  position: relative;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-}
-
-.swipe-card img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* Ensures no stretching */
-  object-position: center 20%; /* Focus on faces */
-  pointer-events: none; /* Prevents dragging image file itself */
-}
-
-/* Optional Overlay text */
-.card-overlay {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  padding: 2rem;
-  background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
-  color: var(--primary-color);
-  font-family: 'Playfair Display', serif;
-}
-
-.swipe-hint {
-  text-align: center;
-  margin-top: -10px;
-  font-size: 1.2rem;
-  color: var(--primary-color);
-  opacity: 0.7;
-  animation: float 2s infinite;
-}
-
-@keyframes float {
-  0% { transform: translateX(0); }
-  50% { transform: translateX(5px); }
-  100% { transform: translateX(0); }
-}
-
-/* --- MOBILE ADJUSTMENTS --- */
-@media (max-width: 768px) {
-  .swipe-card {
-    flex: 0 0 85%; /* Show slightly next slide on mobile */
-    height: 65vh;
-    margin-right: 10px;
-  }
-  
-  .swipe-track {
-    padding: 0 20px; /* Padding on sides so cards aren't edge-to-edge */
-    gap: 10px;
-  }
-}
+    /* --- MOBILE ADJUSTMENTS --- */
+    @media (max-width: 768px) {
+      .about-hero h1 { font-size: 2.5em; }
+      
+      .swipe-track {
+        padding: 0 20px;
+        gap: 10px;
+      }
+      
+      .swipe-card.team-member {
+          flex: 0 0 70%; /* Show two-thirds of the card on mobile */
+          height: 350px;
+      }
+      .card-overlay h4 {
+          font-size: 1.3em;
+      }
+      .card-overlay p {
+          font-size: 0.9em;
+      }
+      
+      .social-links {
+          flex-direction: column;
+          align-items: stretch;
+      }
+      .social-link {
+          justify-content: center;
+      }
+    }
+    
+    @media (min-width: 769px) {
+        .swipe-track {
+            justify-content: center; /* Center cards horizontally on large screens */
+        }
+    }
     
 
     /* ===== Social Section ===== */
     .social-section {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
       color: white;
       padding: 4em 2em;
       text-align: center;
@@ -295,30 +296,34 @@
       transform: translateY(-5px);
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
     }
+    
+    .email-contact a {
+        color: var(--light-gold);
+        text-decoration: underline;
+        transition: color 0.3s;
+    }
+    .email-contact a:hover {
+        color: white;
+    }
 
     footer {
       background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%);
       color: white;
       text-align: center;
       padding: 2em 1em;
-      margin-top: 4em;
-    }
-
-    @media (max-width: 768px) {
-      .about-hero h1 { font-size: 2.5em; }
-      #next { right: 40px; }
-      #prev { left: 40px; }
+      margin-top: auto; /* Pushes footer to the bottom */
     }
   </style>
 </head>
 <body>
   <header class="navbar">
     <div class="container">
-      <div><img src="https://i.ibb.co/N6j5FLjP/ASTYL.png" alt="ASTYL"></div>
+      <div><img src="https://i.ibb.co/N6j5FLjP/ASTYL.png" alt="ASTYL Logo"></div>
       <nav>
         <ul class="nav-links">
           <li><a href="index.html">Home</a></li>
           <li><a href="product.html">Products</a></li>
+          <li><a href="#social">Contact</a></li>
         </ul>
       </nav>
     </div>
@@ -332,45 +337,54 @@
   <div class="about-content">
     <div class="story-section">
       <h2>Our Story</h2>
-      <p>ASTYL was born from a simple belief: everyone deserves to wear premium quality clothing that doesn't break the bank. Founded by Atul Mishra, a visionary designer with a passion for fashion, and Sidharth Yadav, a strategic manager with an eye for excellence, ASTYL represents the perfect blend of style, comfort, and affordability.</p>
-      <p>We started with a mission to revolutionize the t-shirt industry in India. Using 100% pure cotton and innovative print-on-demand technology, we've created a brand that allows you to express your unique style while enjoying unmatched comfort.</p>
+      <p>ASTYL was born from a simple belief: everyone deserves to wear premium quality clothing that doesn't break the bank. Founded by **Atul Mishra**, a visionary designer with a passion for fashion, and **Sidharth Yadav**, a strategic manager with an eye for excellence, ASTYL represents the perfect blend of style, comfort, and affordability.</p>
+      <p>We started with a mission to revolutionize the t-shirt industry in India. Using **100% pure cotton** and innovative **print-on-demand technology**, we've created a brand that allows you to express your unique style while enjoying unmatched comfort.</p>
       <p>Every ASTYL t-shirt is a testament to our commitment to quality, sustainability, and customer satisfaction. From our carefully selected fabrics to our attention to detail in every stitch, we ensure that each piece meets the highest standards.</p>
     </div>
 
-    <!-- ====== New 3D Slider Section ====== -->
     <div class="team-showcase">
       <h3>Meet the ASTYL Team</h3>
     
-  
-<div class="swipe-container">
-  <div class="swipe-track">
-    
-    <div class="swipe-card">
-      <img src="https://i.ibb.co/MDss49PJ/ATUL-MISHRA-2-page-0001.jpg" alt="Model 1">
-      <div class="card-overlay">
-        <h3>New Arrival</h3>
+    <div class="swipe-container">
+      <div class="swipe-track">
+        
+        <div class="swipe-card team-member">
+          <img src="https://i.ibb.co/MDss49PJ/ATUL-MISHRA-2-page-0001.jpg" alt="Atul Mishra, Founder & Designer">
+          <div class="card-overlay">
+            <h4>Atul Mishra</h4>
+            <p>Founder & Designer</p>
+          </div>
+        </div>
+
+        <div class="swipe-card team-member">
+          <img src="https://i.ibb.co/xK4H2gdw/IMG-20251104-113247.jpg" alt="Sidharth Yadav, Co-founder & Manager">
+          <div class="card-overlay">
+            <h4>Sidharth Yadav</h4>
+            <p>Co-founder & Manager</p>
+          </div>
+        </div>
+        
+        <div class="swipe-card team-member">
+          <img src="https://i.ibb.co/bjNjB9Pp/ATUL-MISHRA-1-page-0001.jpg" alt="ASTYL Lifestyle Shot">
+          <div class="card-overlay">
+            <h4>Vision & Style</h4>
+            <p>Our commitment to modern, minimalistic design.</p>
+          </div>
+        </div>
+
+        <div class="swipe-card team-member">
+          <img src="https://i.ibb.co/DH8S7v33/IMG-20251023-162216.jpg" alt="ASTYL Team Vibe">
+          <div class="card-overlay">
+            <h4>The Collective</h4>
+            <p>Passion, quality, and continuous innovation.</p>
+          </div>
+        </div>
+
       </div>
-    </div>
-
-    <div class="swipe-card">
-      <img src="https://i.ibb.co/xK4H2gdw/IMG-20251104-113247.jpg" alt="Model 2">
-    </div>
-
-    <div class="swipe-card">
-      <img src="https://i.ibb.co/bjNjB9Pp/ATUL-MISHRA-1-page-0001.jpg" alt="Model 3">
-    </div>
-
-    <div class="swipe-card">
-      <img src="https://i.ibb.co/DH8S7v33/IMG-20251023-162216.jpg" alt="Team">
-    </div>
-
-  </div>
-  
-  <div class="swipe-hint">Swipe <i class="fas fa-arrow-right"></i></div>
-</div>
-
       
-    <div class="social-section">
+      <div class="swipe-hint">Swipe to see the team <i class="fas fa-arrow-right"></i></div>
+    </div>
+    </div> <div id="social" class="social-section">
       <h2>Connect With Us</h2>
       <p>Follow our journey and stay updated with the latest collections, behind-the-scenes content, and exclusive offers!</p>
 
@@ -390,47 +404,6 @@
     <p>&copy; 2025 ASTYL. All rights reserved.</p>
     <p>Designed by Atul Mishra</p>
   </footer>
-
-  <!-- ====== Slider JS ====== -->
-  <script>
-    let items = document.querySelectorAll('.slider .item');
-    let active = 1; // center image
-
-    function loadShow(){
-      items[active].style.transform = `none`;
-      items[active].style.zIndex = 1;
-      items[active].style.filter = 'none';
-      items[active].style.opacity = 1;
-
-      let stt = 0;
-      for(let i = active + 1; i < items.length; i++){
-        stt++;
-        items[i].style.transform = `translateX(${120*stt}px) scale(${1 - 0.2*stt}) perspective(16px) rotateY(-1deg)`;
-        items[i].style.zIndex = -stt;
-        items[i].style.filter = 'blur(5px)';
-        items[i].style.opacity = stt > 2 ? 0 : 0.6;
-      }
-
-      stt = 0;
-      for(let i = active - 1; i >= 0; i--){
-        stt++;
-        items[i].style.transform = `translateX(${-120*stt}px) scale(${1 - 0.2*stt}) perspective(16px) rotateY(1deg)`;
-        items[i].style.zIndex = -stt;
-        items[i].style.filter = 'blur(5px)';
-        items[i].style.opacity = stt > 2 ? 0 : 0.6;
-      }
-    }
-    loadShow();
-
-    document.getElementById('next').onclick = () => {
-      active = active + 1 < items.length ? active + 1 : active;
-      loadShow();
-    }
-    document.getElementById('prev').onclick = () => {
-      active = active - 1 >= 0 ? active - 1 : active;
-      loadShow();
-    }
-  </script>
-</body>
+  
+  </body>
 </html>
-
