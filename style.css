@@ -32,7 +32,7 @@ html {
 body {
   font-family: 'Poppins', sans-serif;
   line-height: 1.7; 
-  background-color: var(--background-light);
+  background-color: white;
   color: var(--medium-dark);
   overflow-x: hidden; /* CRITICAL FIX: Ensure no horizontal scroll is triggered */
   font-size: 1.6rem; 
@@ -237,7 +237,7 @@ a {
 .hero-content {
   position: relative;
   z-index: 2;
-  color: var(--light-text);
+  color: black;
   max-width: 100rem;
   padding: 0 2rem;
 }
@@ -321,7 +321,7 @@ section {
   text-align: center;
   font-size: clamp(3rem, 5vw, 4.5rem); /* Fluid section title */
   margin-bottom: 5rem;
-  color: var(--medium-dark);
+  color: black;
   position: relative;
   padding-bottom: 2.5rem;
 }
@@ -861,4 +861,5 @@ footer {
   opacity: 1;
   transform: translateY(0);
 }
+
 
