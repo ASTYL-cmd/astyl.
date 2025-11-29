@@ -43,72 +43,89 @@ a {
     text-decoration: none;
     color: inherit;
 }
-/* --- MOBILE MENU TOGGLE (The "Tongle") --- */
+
+/* =================================== */
+/* 🍔 MOBILE NAVIGATION (UNIFIED) */
+/* =================================== */
+
+/* Burger Icon Base Style */
 .burger {
-  display: none;
+  display: none; /* Hidden on desktop */
   cursor: pointer;
-  z-index: 1001; /* Above navbar background */
+  z-index: 1001; 
+  flex-direction: column;
+  gap: 0.7rem; /* Matches the old .hamburger gap */
 }
 
 .burger div {
-  width: 25px;
-  height: 3px;
-  background-color: var(--primary-color);
-  margin: 5px;
-  transition: all 0.3s ease;
-  border-radius: 2px;
+  width: 3rem; /* Matches the old .bar width */
+  height: 0.3rem; /* Matches the old .bar height */
+  background-color: var(--light-text); /* Changed to light-text for visibility */
+  border-radius: 0.3rem;
+  transition: all 0.4s ease-in-out;
 }
 
-/* Animation for the Toggle turning into an X */
-.toggle .line1 {
-  transform: rotate(-45deg) translate(-5px, 6px);
+/* Animation for the Burger (The .toggle class is added by JS) */
+.toggle div:nth-child(1) {
+  transform: translateY(1rem) rotate(45deg); /* Adjusted for 3rem width and 0.7rem gap */
 }
-.toggle .line2 {
+.toggle div:nth-child(2) {
   opacity: 0;
 }
-.toggle .line3 {
-  transform: rotate(45deg) translate(-5px, -6px);
+.toggle div:nth-child(3) {
+  transform: translateY(-1rem) rotate(-45deg); /* Adjusted for 3rem width and 0.7rem gap */
 }
 
-/* Mobile Nav Drawer */
+/* Mobile Nav Drawer Container */
 @media screen and (max-width: 768px) {
   .burger {
-    display: block;
+    display: flex; /* Show burger icon */
   }
-
+  
+  /* Desktop nav is now the mobile nav on small screens */
   .nav-links {
     position: fixed;
-    right: 0px;
+    right: 0;
+    top: 0; 
     height: 100vh;
-    top: 0; /* Full height */
-    background: rgba(10, 10, 10, 0.98); /* Darker, less see-through */
+    width: 100%; /* Using full width for a strong overlay */
+    max-width: 40rem; /* Max width of the slide-out menu */
+    background: rgba(0, 0, 0, 0.95); /* Dark overlay */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 60%; /* Slide out drawer width */
+    padding-top: 5rem;
     transform: translateX(100%); /* Hidden by default */
-    transition: transform 0.5s ease-in-out;
-    box-shadow: -5px 0 15px rgba(0,0,0,0.5);
+    transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1);
   }
 
+  /* The .nav-active class is added by JS */
   .nav-links.nav-active {
     transform: translateX(0%); /* Slides in */
   }
 
+  .nav-links li {
+    width: 80%;
+    text-align: center;
+    margin: 1.5rem 0;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  /* Links are hidden initially and animated by JS */
   .nav-links a {
-    font-size: 2rem;
-    margin: 2rem 0;
-    opacity: 0; /* For fade-in animation */
+    font-size: 2.2rem;
+    opacity: 0; 
+    transition: color 0.3s ease;
   }
 }
 
-/* Keyframe for link fade-in */
+/* Keyframe for link fade-in (Used by JS) */
 @keyframes navLinkFade {
-  from { opacity: 0; transform: translateX(50px); }
+  from { opacity: 0; transform: translateX(5rem); }
   to { opacity: 1; transform: translateX(0); }
 }
-
 
 .container {
   width: 90%;
@@ -150,7 +167,8 @@ a {
     transform: scale(1.08) rotate(-1deg);
 }
 
-/* --- NAVIGATION LINKS --- */
+/* --- NAVIGATION LINKS (Desktop) --- */
+/* The desktop style is also the base for the mobile menu */
 .nav-links {
     list-style: none;
     display: flex;
@@ -190,86 +208,8 @@ a {
     width: 100%;
 }
 
-/* --- HAMBURGER & MOBILE MENU (Enhanced) --- */
-.hamburger {
-    display: none;
-    cursor: pointer;
-    flex-direction: column;
-    gap: 0.7rem;
-    z-index: 1001;
-}
+/* ❌ CONFLICT REMOVED: Deleted all .hamburger, .bar, and .mobile-menu styles. */
 
-.bar {
-    width: 3rem;
-    height: 0.3rem;
-    background-color: var(--light-text);
-    border-radius: 0.3rem;
-    transition: all 0.4s ease-in-out;
-}
-
-.mobile-menu {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.95);
-    padding: 8rem 0 0 0;
-    transform: translateX(100%);
-    transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1);
-    z-index: 999;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-}
-
-.mobile-menu.active {
-    transform: translateX(0);
-}
-
-.mobile-menu a {
-    display: block;
-    color: var(--light-text);
-    text-decoration: none;
-    padding: 1.8rem;
-    text-align: center;
-    width: 80%;
-    font-weight: 600;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    transition: all 0.3s ease;
-    transform: translateX(5rem);
-    opacity: 0;
-}
-
-/* Staggered animation for mobile links */
-.mobile-menu.active a {
-    transform: translateX(0);
-    opacity: 1;
-}
-
-.mobile-menu.active a:nth-child(1) { transition-delay: 0.1s; }
-.mobile-menu.active a:nth-child(2) { transition-delay: 0.2s; }
-.mobile-menu.active a:nth-child(3) { transition-delay: 0.3s; }
-.mobile-menu.active a:nth-child(4) { transition-delay: 0.4s; }
-.mobile-menu.active a:nth-child(5) { transition-delay: 0.5s; }
-
-.mobile-menu a:hover {
-    background: rgba(212, 175, 55, 0.1);
-    color: var(--primary-color);
-}
-
-.hamburger.active .bar:nth-child(1) {
-    transform: translateY(1rem) rotate(45deg);
-}
-.hamburger.active .bar:nth-child(2) {
-    opacity: 0;
-}
-.hamburger.active .bar:nth-child(3) {
-    transform: translateY(-1rem) rotate(-45deg);
-}
 
 /* =================================== */
 /* ✨ HERO SECTION (More Dynamic) */
@@ -687,10 +627,25 @@ section {
 
 /* --- BRANDED SOCIAL ICONS --- */
 .social-icon {
-  /* Keep your existing base styles, just updating hover */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 4.5rem; /* Slightly smaller for better fit */
+  height: 4.5rem;
+  font-size: 1.8rem;
+  border: 1px solid var(--primary-color);
+  border-radius: 50%;
+  color: var(--primary-color);
+  transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
   z-index: 1;
+}
+
+.social-icons {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 2rem;
 }
 
 /* Instagram Gradient Hover */
@@ -702,7 +657,7 @@ section {
   background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); 
   color: white;
   box-shadow: 0 0 20px rgba(188, 24, 136, 0.5);
-  transform: translateY(-5px) rotate(15deg);
+  transform: translateY(-5px) rotate(5deg);
 }
 
 /* Pinterest Red Hover */
@@ -711,13 +666,14 @@ section {
   background: #E60023;
   color: white;
   box-shadow: 0 0 20px rgba(230, 0, 35, 0.5);
-  transform: translateY(-5px) rotate(-15deg);
+  transform: translateY(-5px) rotate(-5deg);
 }
 
 /* Facebook/Generic Hover */
-.social-icon.generic:hover {
+.social-icon.generic:hover, .social-icon:not(.instagram):not(.pinterest):hover {
   background: var(--primary-color);
   color: var(--dark-color);
+  box-shadow: 0 0 2rem var(--shadow-gold);
   transform: translateY(-5px);
 }
 
@@ -779,31 +735,6 @@ footer {
     padding-left: 0.5rem;
 }
 
-.social-icons {
-    display: flex;
-    gap: 1.5rem;
-    margin-top: 2rem;
-}
-
-.social-icon {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 4.5rem; /* Slightly smaller for better fit */
-  height: 4.5rem;
-  font-size: 1.8rem;
-  border: 1px solid var(--primary-color);
-  border-radius: 50%;
-  color: var(--primary-color);
-  transition: all 0.3s ease;
-}
-
-.social-icon:hover {
-  background: var(--primary-color);
-  color: var(--dark-color);
-  box-shadow: 0 0 2rem var(--shadow-gold);
-}
-
 .footer-bottom {
     text-align: center;
     padding-top: 2rem;
@@ -844,12 +775,10 @@ footer {
 
 @media (max-width: 768px) {
     .nav-links {
-        display: none;
+        /* Desktop links must be hidden on mobile */
+        display: none; 
     }
-
-    .hamburger {
-        display: flex;
-    }
+    /* NOTE: The burger icon is displayed by the specific media query above */
 
     .hero h1 {
         font-size: 4rem;
@@ -905,8 +834,34 @@ footer {
 }
 
 /* =================================== */
-/* 🧱 UTILITY CLASSES */
+/* 🧱 UTILITY CLASSES & GLOBAL ENHANCEMENTS */
 /* =================================== */
+
+/* Custom Scrollbar for Chrome/Safari/Edge */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--dark-color);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border-radius: 5px;
+  border: 2px solid var(--dark-color);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--secondary-color); /* Hover on secondary color */
+}
+
+/* Selection Color (When user highlights text) */
+::selection {
+  background: var(--primary-color);
+  color: var(--dark-color);
+}
+
 
 .fade-in {
   animation: fadeInUp 1.2s ease-out;
@@ -937,30 +892,6 @@ footer {
     transform: scale(1);
   }
 }
-/* Custom Scrollbar for Chrome/Safari/Edge */
-::-webkit-scrollbar {
-  width: 10px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--dark-color);
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--primary-color);
-  border-radius: 5px;
-  border: 2px solid var(--dark-color);
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--accent-color);
-}
-
-/* Selection Color (When user highlights text) */
-::selection {
-  background: var(--primary-color);
-  color: var(--dark-color);
-}
 
 /* Scroll Reveal (Added a slight bounce for more life) */
 .scroll-reveal {
@@ -973,4 +904,3 @@ footer {
   opacity: 1;
   transform: translateY(0);
 }
-
