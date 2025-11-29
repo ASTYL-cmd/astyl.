@@ -163,7 +163,92 @@
     #next:hover, #prev:hover { opacity: 1; }
 
     #next { right: 100px; }
-    #prev { left: 100px; }
+    #prev { left: 100px; }/* --- TOUCH SWIPE SLIDER --- */
+.swipe-container {
+  width: 100%;
+  max-width: 1350px;
+  margin: 2rem auto; /* Spacing */
+  position: relative;
+  overflow: hidden;
+}
+
+.swipe-track {
+  display: flex;
+  gap: 15px; /* Space between slides */
+  overflow-x: auto; /* Enables horizontal scroll */
+  scroll-snap-type: x mandatory; /* The magic snapping effect */
+  scroll-behavior: smooth;
+  
+  /* Hide Scrollbar for Chrome, Safari and Opera */
+  -webkit-overflow-scrolling: touch; /* Smooth momentum on iOS */
+  padding-bottom: 20px;
+}
+
+/* Hide scrollbar visually but keep functionality */
+.swipe-track::-webkit-scrollbar {
+  height: 0px; 
+  background: transparent;
+}
+
+.swipe-card {
+  flex: 0 0 100%; /* Show 1 image at a time (100% width) */
+  height: 80vh; /* Takes 80% of screen height */
+  scroll-snap-align: center; /* Snaps image to center */
+  border-radius: 15px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.swipe-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures no stretching */
+  object-position: center 20%; /* Focus on faces */
+  pointer-events: none; /* Prevents dragging image file itself */
+}
+
+/* Optional Overlay text */
+.card-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 2rem;
+  background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+  color: var(--primary-color);
+  font-family: 'Playfair Display', serif;
+}
+
+.swipe-hint {
+  text-align: center;
+  margin-top: -10px;
+  font-size: 1.2rem;
+  color: var(--primary-color);
+  opacity: 0.7;
+  animation: float 2s infinite;
+}
+
+@keyframes float {
+  0% { transform: translateX(0); }
+  50% { transform: translateX(5px); }
+  100% { transform: translateX(0); }
+}
+
+/* --- MOBILE ADJUSTMENTS --- */
+@media (max-width: 768px) {
+  .swipe-card {
+    flex: 0 0 85%; /* Show slightly next slide on mobile */
+    height: 65vh;
+    margin-right: 10px;
+  }
+  
+  .swipe-track {
+    padding: 0 20px; /* Padding on sides so cards aren't edge-to-edge */
+    gap: 10px;
+  }
+}
+    
 
     /* ===== Social Section ===== */
     .social-section {
@@ -255,18 +340,36 @@
     <!-- ====== New 3D Slider Section ====== -->
     <div class="team-showcase">
       <h3>Meet the ASTYL Team</h3>
-      <div class="team-showcase">
-  <h3>Meet the ASTYL Team</h3>
-  <div class="slider">
-    <div class="item"><img src="https://i.ibb.co/MDss49PJ/ATUL-MISHRA-2-page-0001.jpg" alt="Atul Mishra"></div>
-    <div class="item"><img src="https://i.ibb.co/xK4H2gdw/IMG-20251104-113247.jpg" alt="ASTYL Member"></div>
-    <div class="item"><img src="https://i.ibb.co/bjNjB9Pp/ATUL-MISHRA-1-page-0001.jpg" alt="Atul Mishra Portrait"></div>
-    <div class="item"><img src="https://i.ibb.co/DH8S7v33/IMG-20251023-162216.jpg" alt="ASTYL Team Collaboration"></div>
-    <button id="prev">&#10094;</button>
-    <button id="next">&#10095;</button>
-  </div>
+    
+  
+<div class="swipe-container">
+  <div class="swipe-track">
+    
+    <div class="swipe-card">
+      <img src="https://i.ibb.co/MDss49PJ/ATUL-MISHRA-2-page-0001.jpg" alt="Model 1">
+      <div class="card-overlay">
+        <h3>New Arrival</h3>
       </div>
+    </div>
 
+    <div class="swipe-card">
+      <img src="https://i.ibb.co/xK4H2gdw/IMG-20251104-113247.jpg" alt="Model 2">
+    </div>
+
+    <div class="swipe-card">
+      <img src="https://i.ibb.co/bjNjB9Pp/ATUL-MISHRA-1-page-0001.jpg" alt="Model 3">
+    </div>
+
+    <div class="swipe-card">
+      <img src="https://i.ibb.co/DH8S7v33/IMG-20251023-162216.jpg" alt="Team">
+    </div>
+
+  </div>
+  
+  <div class="swipe-hint">Swipe <i class="fas fa-arrow-right"></i></div>
+</div>
+
+      
     <div class="social-section">
       <h2>Connect With Us</h2>
       <p>Follow our journey and stay updated with the latest collections, behind-the-scenes content, and exclusive offers!</p>
@@ -330,3 +433,4 @@
   </script>
 </body>
 </html>
+
