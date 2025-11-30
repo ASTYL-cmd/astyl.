@@ -456,15 +456,18 @@
   </div>
 
   <script>
-    const pricePerUnit = 299;
-    let quantity = 1;
-
+    // Get price from URL parameter, default to 299
     const urlParams = new URLSearchParams(window.location.search);
+    const pricePerUnit = parseInt(urlParams.get('price')) || 299;
     const productName = urlParams.get('product') || 'Premium T-Shirt';
     const productImage = urlParams.get('image') || 'https://images.pexels.com/photos/3621812/pexels-photo-3621812.jpeg?auto=compress&cs=tinysrgb&w=600';
+    
+    let quantity = 1;
 
+    // Update page with product info
     document.getElementById('productName').textContent = productName;
     document.getElementById('productImage').src = productImage;
+    document.getElementById('productPrice').textContent = '₹' + pricePerUnit;
 
     function updateQuantity(change) {
       quantity = Math.max(1, quantity + change);
@@ -476,6 +479,9 @@
       const total = pricePerUnit * quantity;
       document.getElementById('totalAmount').textContent = '₹' + total;
     }
+
+    // Initialize total
+    updateTotal();
 
     document.getElementById('orderForm').addEventListener('submit', function(e) {
       e.preventDefault();
@@ -495,29 +501,29 @@
       const recipient = 'contact.astyl@gmail.com';
       const subject = '🛍️ New Order - ASTYL Store';
       const body =
-        '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n' +
+        '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n' +
         '👤 CUSTOMER INFORMATION\n' +
-        '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n' +
+        '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n' +
         'Full Name: ' + fullName + '\n' +
         'Mobile Number: ' + mobile + '\n' +
         'Email ID: ' + email + '\n\n' +
         '📍 DELIVERY ADDRESS\n' +
-        '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n' +
+        '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n' +
         'Address: ' + address + '\n' +
         'City: ' + city + '\n' +
         'State: ' + state + '\n' +
         'Pincode: ' + pincode + '\n' +
         'Landmark: ' + landmark + '\n\n' +
-        '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n' +
+        '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n' +
         '👕 PRODUCT DETAILS\n' +
-        '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n' +
+        '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n' +
         'Product Name: ' + productName + '\n' +
         'Color: ' + color + '\n' +
         'Size: ' + size + '\n' +
         'Quantity: ' + quantity + '\n' +
         'Price (per unit): ₹' + pricePerUnit + '\n' +
         'Total Amount: ₹' + totalAmount + '\n\n' +
-        '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n' +
+        '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n' +
         'Thank you for choosing ASTYL!\n' +
         'Luxury in Every Thread\n\n' +
         '✨ We will contact you shortly to confirm your order.';
