@@ -164,7 +164,63 @@
     .hamburger.active .bar:nth-child(3) {
       transform: translateY(-9px) rotate(-45deg);
     }
+/* ================= NEWLY LAUNCHED PREMIUM GRID ================= */
 
+.newly-launched {
+  background: #ffffff;
+  margin-top: 4rem;
+}
+
+.launch-grid {
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+/* PREMIUM CARD */
+.product-card.premium {
+  border-radius: 22px;
+  transition: all 0.35s ease;
+}
+
+/* IMAGE RATIO FIX */
+.product-image {
+  aspect-ratio: 1 / 1;
+  background: #f3f3f3;
+}
+
+.product-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* FIXED tee stretching */
+}
+
+/* BADGE */
+.product-badge.new {
+  background: linear-gradient(135deg, #000, #333);
+}
+
+/* TAG */
+.product-tag {
+  display: inline-block;
+  font-size: 0.7rem;
+  letter-spacing: 1px;
+  color: #777;
+  margin-bottom: 0.6rem;
+  text-transform: uppercase;
+}
+
+/* HOVER UX */
+.product-card.premium:hover {
+  transform: translateY(-10px);
+}
+
+.product-card.premium:hover img {
+  transform: scale(1.05);
+}
+
+/* CTA REVEAL FEEL */
+.product-card.premium .buy-btn {
+  margin-top: 1rem;
+}
     /* --- HERO HEADER --- */
     .page-header {
       text-align: center;
@@ -436,69 +492,90 @@
       <a href="#products" onclick="toggleMenu()">Products</a>
     </div>
   </nav>
+<!-- ===================== NEWLY LAUNCHED SECTION ===================== -->
+<section class="products-section newly-launched" id="new-launch">
+  <h2 class="section-title">Newly Launched</h2>
 
+  <div class="products-grid launch-grid">
+
+    <!-- PRODUCT CARD -->
+    <article class="product-card premium">
+      <figure class="product-image">
+        <span class="product-badge new">NEW</span>
+        <img 
+          src="https://i.ibb.co/SwbPbjtD/image.png"
+          alt="ASTYL MOOSETAPE Black T-Shirt"
+          loading="lazy"
+          width="600"
+          height="600"
+        />
+      </figure>
+
+      <div class="product-info">
+        <h3 class="product-name">ASTYL MOOSETAPE</h3>
+        <span class="product-tag">JUST DROPPED</span>
+        <div class="price-tag">₹399</div>
+
+        <a href="order.html?product=ASTYL MOOSETAPE&price=399" class="buy-btn">
+          Buy Now <span class="arrow">→</span>
+        </a>
+      </div>
+    </article>
+    
+    <!-- PRODUCT CARD -->
+    <article class="product-card premium">
+      <figure class="product-image">
+        <span class="product-badge new">NEW</span>
+        <img 
+          src="https://i.ibb.co/SwbPbjtD/image.png"
+          alt="ASTYL MOOSETAPE Black T-Shirt"
+          loading="lazy"
+          width="600"
+          height="600"
+        />
+      </figure>
+
+      <div class="product-info">
+        <h3 class="product-name">ASTYL Wasted</h3>
+        <span class="product-tag"> Newly Launched</span>
+        <div class="price-tag">₹299</div>
+
+        <a href="order.html?product=ASTYL Wasted&image=https://i.ibb.co/SwbPbjtD/image.png&price=299" class="buy-btn">
+          Buy Now <span class="arrow">→</span>
+        </a>
+      </div>
+    </article>
+
+    <!-- DUPLICATE CARD STRUCTURE FOR MORE PRODUCTS -->
+    <article class="product-card premium">
+      <figure class="product-image">
+        <span class="product-badge new">NEW</span>
+        <img 
+          src="https://i.ibb.co/tTxPk47S/image.png"
+          alt="ASTYL Boss Black T-Shirt"
+          loading="lazy"
+          width="600"
+          height="600"
+        />
+      </figure>
+
+      <div class="product-info">
+        <h3 class="product-name">ASTYL Boss</h3>
+        <span class="product-tag">NEW ARRIVAL</span>
+        <div class="price-tag">₹299</div>
+
+        <a href="order.html?product=ASTYL Boss&price=299" class="buy-btn">
+          Buy Now <span class="arrow">→</span>
+        </a>
+      </div>
+    </article>
+
+  </div>
+</section>
   <header class="page-header">
     <h1>The Collection</h1>
     <p>Premium 100% cotton streetwear designed for comfort and style.<br>Exclusive drops at <strong>₹299</strong>.</p>
   </header>
-
-  <section class="products-section" id="products">
-    <div class="section-title">ASTYL</div>
-    <div class="products-grid">
-   <div class="product-card">
-        <div class="product-image">
-          <span class="product-badge">Newly Launched</span>
-          <img src="https://i.ibb.co/SwbPbjtD/image.png" alt="ASTYL Wasted" loading="lazy">
-        </div>
-        <div class="product-info">
-          <h3 class="product-name">ASTYL MOOSETAPE</h3>
-          <div class="product-meta">
-            <span>Color: Black</span>
-            <span>Sizes: S, M & L</span>
-          </div>
-          <div class="price-tag" style="margin-bottom: 1rem;">₹399</div>
-         <a href="https://ibb.co/fdpYgTrK"><img src="https://i.ibb.co/Jj7R1Srb/ASTYL-20260126-114706-0000.png" alt="ASTYL-20260126-114706-0000" class="buy-btn">
-            <span>Buy Now</span><span class="arrow">→</span>
-          </a>
-        </div>
-   </div>
-      
-      <div class="product-card">
-        <div class="product-image">
-          <span class="product-badge">Newly Launched</span>
-          <img src="https://i.ibb.co/SwbPbjtD/image.png" alt="ASTYL Wasted" loading="lazy">
-        </div>
-        <div class="product-info">
-          <h3 class="product-name">ASTYL Wasted</h3>
-          <div class="product-meta">
-            <span>Color: Black</span>
-            <span>Sizes: S, M</span>
-          </div>
-          <div class="price-tag" style="margin-bottom: 1rem;">₹299</div>
-          <a href="order.html?product=ASTYL Wasted&image=https://i.ibb.co/SwbPbjtD/image.png&price=299" class="buy-btn">
-            <span>Buy Now</span><span class="arrow">→</span>
-          </a>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <div class="product-image">
-          <span class="product-badge">Newly Launched</span>
-          <img src="https://i.ibb.co/tTxPk47S/image.png" alt="ASTYL Boss" loading="lazy">
-        </div>
-        <div class="product-info">
-          <h3 class="product-name">ASTYL Boss</h3>
-          <div class="product-meta">
-            <span>Color: Black</span>
-            <span>Sizes: S, M</span>
-          </div>
-          <div class="price-tag" style="margin-bottom: 1rem;">₹299</div>
-          <a href="order.html?product=ASTYL Boss&image=https://i.ibb.co/tTxPk47S/image.png&price=299" class="buy-btn">
-            <span>Buy Now</span><span class="arrow">→</span>
-          </a>
-        </div>
-      </div>
-
       <div class="product-card">
         <div class="product-image">
           <span class="product-badge">Best Seller</span>
