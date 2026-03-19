@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>ASTYL — Premium Streetwear</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+<style>
+:root{--ink:#0a0a0a;--smoke:#f0ede8;--cream:#faf9f6;--red:#d93025;--gold:#b8922a;--muted:#7a7570;--border:rgba(10,10,10,.1);--ease:cubic-bezier(.22,.61,.36,1);--shadow:0 4px 24px rgba(0,0,0,.08);--shadow-h:0 16px 48px rgba(0,0,0,.16)}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--smoke)}::-webkit-scrollbar-thumb{background:var(--ink);border-radius:4px}
+.nav{position:sticky;top:0;z-index:900;background:rgba(10,10,10,.97);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,.06)}
+.nav-inner{max-width:1340px;margin:0 auto;padding:0 2rem;height:64px;display:flex;align-items:center;justify-content:space-between;gap:2rem}
+.nav-logo img{height:44px;width:auto;filter:brightness(1.15);display:block;transition:opacity .2s}.nav-logo:hover img{opacity:.8}
+.nav-links{list-style:none;display:flex;gap:2.5rem;align-items:center}
+.nav-links a{color:rgba(255,255,255,.75);text-decoration:none;font-size:.78rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;transition:color .2s;position:relative;padding-bottom:3px}
+.nav-links a::after{content:'';position:absolute;left:0;bottom:0;width:0;height:1px;background:#fff;transition:width .3s var(--ease)}.nav-links a:hover{color:#fff}.nav-links a:hover::after{width:100%}
+.nav-cta{background:var(--red);color:#fff;border:none;padding:.5rem 1.1rem;border-radius:6px;font-size:.78rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;text-decoration:none;transition:background .2s,transform .15s;display:inline-block}.nav-cta:hover{background:#c0281f;transform:scale(1.03)}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;border:none;background:none}
+.hamburger span{display:block;width:22px;height:2px;background:#fff;transition:all .3s var(--ease);transform-origin:center}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}.hamburger.open span:nth-child(2){opacity:0}.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.mdrawer{position:fixed;top:64px;left:0;width:100%;background:rgba(10,10,10,.98);backdrop-filter:blur(12px);padding:1.5rem 2rem;display:flex;flex-direction:column;gap:1rem;transform:translateY(-8px);opacity:0;pointer-events:none;transition:all .3s var(--ease);z-index:899}
+.mdrawer.open{transform:translateY(0);opacity:1;pointer-events:all}.mdrawer a{color:rgba(255,255,255,.8);text-decoration:none;font-size:1rem;padding:.5rem 0;border-bottom:1px solid rgba(255,255,255,.07)}.mdrawer a:hover{color:#fff}
+.trust-bar{background:var(--ink);color:rgba(255,255,255,.6);font-size:.71rem;letter-spacing:.1em;text-transform:uppercase;padding:.5rem 0;overflow:hidden}
+.trust-scroll{display:flex;gap:3rem;animation:marquee 22s linear infinite;white-space:nowrap}
+.trust-item{display:inline-flex;align-items:center;gap:.4rem;flex-shrink:0}.trust-dot{width:5px;height:5px;border-radius:50%;background:var(--red);flex-shrink:0}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.hero{padding:5rem 2rem 4rem;text-align:center;background:var(--ink);color:#fff;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 110%,rgba(217,48,37,.18),transparent)}
+.hero-eye{font-size:.7rem;letter-spacing:.25em;text-transform:uppercase;color:var(--red);margin-bottom:1rem;font-weight:500}
+.hero-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(4rem,11vw,9rem);line-height:.9;letter-spacing:.02em;margin-bottom:1.5rem}
+.hero-title span{color:var(--red)}.hero-sub{font-size:1rem;color:rgba(255,255,255,.5);max-width:440px;margin:0 auto 2.5rem;line-height:1.7}
+.hero-stats{display:flex;justify-content:center;gap:3rem;flex-wrap:wrap;border-top:1px solid rgba(255,255,255,.08);padding-top:2rem}
+.stat-num{font-family:'Space Mono',monospace;font-size:1.5rem;font-weight:700}.stat-label{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.feats{background:var(--smoke);padding:3rem 2rem}.feats-inner{max-width:1340px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem}
+.feat{display:flex;flex-direction:column;gap:.5rem;padding:1.25rem;background:#fff;border-radius:10px;box-shadow:var(--shadow)}
+.feat-ico{width:36px;height:36px;background:var(--ink);border-radius:8px;display:flex;align-items:center;justify-content:center}
+.feat-ico svg{width:18px;height:18px;stroke:#fff;fill:none;stroke-width:1.8}
+.feat-title{font-size:.82rem;font-weight:700}.feat-desc{font-size:.73rem;color:var(--muted);line-height:1.5}
+.sec{padding:4.5rem 2rem;max-width:1340px;margin:0 auto}
+.sec-hdr{display:flex;align-items:flex-end;justify-content:space-between;gap:1rem;margin-bottom:3rem}
+.sec-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.2rem,5vw,3.5rem);letter-spacing:.04em;line-height:1}
+.sec-sub{font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:.3rem}
+.sec-count{font-family:'Space Mono',monospace;font-size:.7rem;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem}
+.card{background:#fff;border-radius:14px;overflow:hidden;box-shadow:var(--shadow);transition:transform .35s var(--ease),box-shadow .35s var(--ease);display:flex;flex-direction:column;position:relative}
+.card:hover{transform:translateY(-6px);box-shadow:var(--shadow-h)}
+.cimg{position:relative;width:100%;padding-top:100%;overflow:hidden;background:var(--smoke);cursor:zoom-in}
+.cimg img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .55s var(--ease)}
+.card:hover .cimg img.main{transform:scale(1.06)}.card:hover .cimg>img:only-child{transform:scale(1.06)}
+.wish{position:absolute;top:.75rem;right:.75rem;z-index:5;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.92);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.wish svg{width:16px;height:16px;stroke:var(--ink);fill:none;transition:all .2s}.wish.liked svg{stroke:var(--red);fill:var(--red)}
+.badge{position:absolute;top:.75rem;left:.75rem;z-index:5;font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.28rem .6rem;border-radius:4px;line-height:1}
+.b-new{background:var(--ink);color:#fff}.b-hot{background:var(--red);color:#fff}.b-trend{background:#1a5fbf;color:#fff}.b-sale{background:var(--gold);color:#fff}
+.stock{display:inline-flex;align-items:center;gap:.35rem;font-size:.65rem;font-weight:500}
+.sdot{width:6px;height:6px;border-radius:50%;flex-shrink:0}.sdot.in{background:#22c55e}.sdot.low{background:#f59e0b}
+.cbody{padding:1rem 1.1rem 1.1rem;display:flex;flex-direction:column;flex:1;gap:.6rem}
+.cmeta{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.3rem}
+.ctag{font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.cname{font-size:.92rem;font-weight:600;line-height:1.3}
+.prow{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap}
+.price{font-family:'Space Mono',monospace;font-size:.95rem;font-weight:700}
+.pwas{font-family:'Space Mono',monospace;font-size:.75rem;color:var(--muted);text-decoration:line-through}
+.psave{font-size:.6rem;font-weight:700;background:var(--smoke);color:var(--gold);padding:.15rem .4rem;border-radius:4px}
+.sizes{display:flex;gap:.35rem;flex-wrap:wrap}
+.sz{padding:.25rem .55rem;border:1px solid var(--border);border-radius:5px;font-size:.68rem;font-weight:600;cursor:pointer;transition:all .18s;background:transparent;color:var(--ink);font-family:inherit}
+.sz:hover,.sz.active{background:var(--ink);color:#fff;border-color:var(--ink)}
+.brow{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-top:auto}
+.btn{display:flex;align-items:center;justify-content:center;padding:.6rem .5rem;border-radius:7px;font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:all .2s;text-decoration:none;border:none;white-space:nowrap;font-family:inherit}
+.bc{background:var(--ink);color:#fff}.bc:hover{background:#2a2a2a;transform:scale(1.02)}
+.bb{background:var(--red);color:#fff}.bb:hover{background:#c0281f;transform:scale(1.02)}
+.srow{display:flex;gap:.45rem;align-items:center;padding-top:.5rem;border-top:1px solid var(--border)}
+.slabel{font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);flex:1}
+.sico{width:28px;height:28px;border-radius:50%;background:var(--smoke);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;text-decoration:none}
+.sico:hover{background:var(--ink)}.sico:hover svg{stroke:#fff}.sico svg{width:13px;height:13px;stroke:var(--muted);fill:none;stroke-width:1.8;transition:stroke .2s}
+.band{background:var(--ink);overflow:hidden;padding:1.5rem 0}
+.band-txt{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,5vw,3.5rem);letter-spacing:.08em;color:rgba(255,255,255,.1);white-space:nowrap;animation:stxt 20s linear infinite}
+@keyframes stxt{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.smoke-bg{background:var(--smoke)}
+.reviews{background:var(--smoke);padding:4rem 2rem}.rev-inner{max-width:1340px;margin:0 auto}
+.rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-top:2.5rem}
+.rcard{background:#fff;border-radius:12px;padding:1.5rem;box-shadow:var(--shadow)}
+.rtop{display:flex;align-items:center;gap:.8rem;margin-bottom:.9rem}
+.rav{width:40px;height:40px;border-radius:50%;background:var(--ink);color:#fff;font-family:'Space Mono',monospace;font-size:.8rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.rname{font-size:.85rem;font-weight:600}.rver{font-size:.6rem;color:#22c55e;letter-spacing:.08em;text-transform:uppercase;font-weight:600}
+.stars{color:#f59e0b;font-size:.85rem}.rtext{font-size:.82rem;color:#4a4a4a;line-height:1.65;margin-top:.6rem}
+.zoom{position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:9999;display:none;align-items:center;justify-content:center;padding:2rem;cursor:zoom-out}
+.zoom.open{display:flex}.zoom img{max-width:90vw;max-height:90vh;object-fit:contain;border-radius:8px}
+.zcls{position:absolute;top:1.5rem;right:1.5rem;width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.12);border:none;cursor:pointer;color:#fff;font-size:1.4rem;display:flex;align-items:center;justify-content:center}.zcls:hover{background:rgba(255,255,255,.25)}
+.btt{position:fixed;bottom:1.5rem;right:1.5rem;z-index:800;width:40px;height:40px;border-radius:50%;background:var(--ink);color:#fff;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;transform:translateY(12px);pointer-events:none;transition:all .3s var(--ease);box-shadow:0 4px 16px rgba(0,0,0,.25)}
+.btt.show{opacity:1;transform:translateY(0);pointer-events:all}.btt:hover{background:var(--red)}.btt svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2.5}
+footer{background:var(--ink);color:rgba(255,255,255,.45);padding:4rem 2rem 2rem}
+.fin{max-width:1340px;margin:0 auto;display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:3rem}
+.fb img{height:40px;margin-bottom:1rem;opacity:.7;display:block}.fb p{font-size:.8rem;line-height:1.7}
+.fc h4{font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:.9rem;font-weight:600}
+.fc a{display:block;color:rgba(255,255,255,.35);text-decoration:none;font-size:.8rem;margin-bottom:.55rem;transition:color .2s}.fc a:hover{color:#fff}
+.fbot{max-width:1340px;margin:3rem auto 0;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.06);display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.fbot p{font-size:.72rem}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .6s var(--ease),transform .6s var(--ease)}.reveal.in{opacity:1;transform:translateY(0)}
+@media(max-width:1100px){.grid{grid-template-columns:repeat(3,1fr)}.feats-inner{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:900px){.rev-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:768px){.hamburger{display:flex}.nav-links,.nav-cta{display:none}.hero{padding:3.5rem 1.5rem 3rem}.sec{padding:3rem 1.25rem}.sec-hdr{flex-direction:column;align-items:flex-start}.fin{grid-template-columns:1fr}}
+@media(max-width:760px){.grid{grid-template-columns:repeat(2,1fr);gap:.9rem}}
+@media(max-width:580px){.rev-grid{grid-template-columns:1fr}}
+@media(max-width:440px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="zoom" id="Z" onclick="czoom(event)"><button class="zcls" onclick="czoom()">&times;</button><img id="ZI" src="" alt=""/></div>
+<button class="btt" id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})"><svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg></button>
+
+<div class="trust-bar"><div class="trust-scroll">
+  <span class="trust-item"><span class="trust-dot"></span>Free Shipping above ₹499</span>
+  <span class="trust-item"><span class="trust-dot"></span>100% Authentic Streetwear</span>
+  <span class="trust-item"><span class="trust-dot"></span>Easy 7-Day Returns</span>
+  <span class="trust-item"><span class="trust-dot"></span>Secure UPI · Cards · Wallets</span>
+  <span class="trust-item"><span class="trust-dot"></span>2,000+ Happy Customers</span>
+  <span class="trust-item"><span class="trust-dot"></span>Free Shipping above ₹499</span>
+  <span class="trust-item"><span class="trust-dot"></span>100% Authentic Streetwear</span>
+  <span class="trust-item"><span class="trust-dot"></span>Easy 7-Day Returns</span>
+  <span class="trust-item"><span class="trust-dot"></span>Secure UPI · Cards · Wallets</span>
+  <span class="trust-item"><span class="trust-dot"></span>2,000+ Happy Customers</span>
+</div></div>
+
+<nav class="nav"><div class="nav-inner">
+  <a href="index.html" class="nav-logo"><img src="https://i.ibb.co/yFHvS870/7789-removebg-preview.png" alt="ASTYL"/></a>
+  <ul class="nav-links"><li><a href="index.html">Home</a></li><li><a href="about.html">About Us</a></li><li><a href="#products">Products</a></li></ul>
+  <a href="#products" class="nav-cta">Shop Now</a>
+  <button class="hamburger" id="HB"><span></span><span></span><span></span></button>
+</div>
+<div class="mdrawer" id="MD">
+  <a href="index.html">Home</a><a href="about.html">About Us</a><a href="#products">Products</a>
+</div></nav>
+
+<section class="hero" id="products">
+  <div class="hero-eye">Premium Indian Streetwear</div>
+  <h1 class="hero-title">ASTYL<br/><span>DROP</span></h1>
+  <p class="hero-sub">Bold graphics, premium fabric, designed for those who set the pace.</p>
+  <div class="hero-stats">
+    <div><div class="stat-num">2K+</div><div class="stat-label">Customers</div></div>
+    <div><div class="stat-num">4.9★</div><div class="stat-label">Rating</div></div>
+    <div><div class="stat-num">50+</div><div class="stat-label">Designs</div></div>
+    <div><div class="stat-num">₹179</div><div class="stat-label">Starting at</div></div>
+  </div>
+</section>
+
+<div class="feats"><div class="feats-inner reveal">
+  <div class="feat"><div class="feat-ico"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div><div class="feat-title">Free Shipping</div><div class="feat-desc">On all orders above ₹499. Pan India delivery.</div></div>
+  <div class="feat"><div class="feat-ico"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div class="feat-title">Authentic Quality</div><div class="feat-desc">Premium fabric, 100% original ASTYL designs.</div></div>
+  <div class="feat"><div class="feat-ico"><svg viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg></div><div class="feat-title">Easy Returns</div><div class="feat-desc">Hassle-free 7-day returns on all products.</div></div>
+  <div class="feat"><div class="feat-ico"><svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div><div class="feat-title">Secure Payment</div><div class="feat-desc">UPI, cards & wallets — all transactions encrypted.</div></div>
+</div></div>
+
+<!-- helper macros as JS template - cards generated via JS below -->
+<div id="products-root"></div>
+
+<div class="reviews"><div class="rev-inner">
+  <div class="sec-hdr reveal">
+    <div><div class="sec-title">What Customers Say</div><div class="sec-sub">Verified reviews · 4.9/5 average</div></div>
+    <div class="sec-count">★★★★★ 4.9</div>
+  </div>
+  <div class="rev-grid">
+    <div class="rcard reveal"><div class="rtop"><div class="rav">RK</div><div><div class="rname">Rahul K.</div><div class="rver">✓ Verified Purchase</div></div></div><div class="stars">★★★★★</div><p class="rtext">Absolutely love the Moosetape tee. Print quality is top-notch and fabric feels premium. Sizing is accurate — ordered M and it fits perfectly.</p></div>
+    <div class="rcard reveal"><div class="rtop"><div class="rav" style="background:#1a5fbf">PM</div><div><div class="rname">Priya M.</div><div class="rver">✓ Verified Purchase</div></div></div><div class="stars">★★★★★</div><p class="rtext">Got the Yellow Polo for my brother's birthday and he loves it! Super quick delivery and the packaging was great. Will definitely order again.</p></div>
+    <div class="rcard reveal"><div class="rtop"><div class="rav" style="background:#b8922a">AS</div><div><div class="rname">Arjun S.</div><div class="rver">✓ Verified Purchase</div></div></div><div class="stars">★★★★★</div><p class="rtext">Batman and Porsche tees both exceeded expectations. The graphic printing is crisp and hasn't faded after multiple washes. Real streetwear quality at an affordable price.</p></div>
+  </div>
+</div></div>
+
+<footer><div class="fin">
+  <div class="fb"><img src="https://i.ibb.co/N6j5FLjP/ASTYL.png" alt="ASTYL"/><p>Premium Indian streetwear designed for those who set the pace. Bold graphics, authentic quality.</p></div>
+  <div class="fc"><h4>Shop</h4><a href="#products">New Arrivals</a><a href="#products">Polo Tees</a><a href="#products">Cotton Tees</a><a href="#products">Graphic Tees</a></div>
+  <div class="fc"><h4>Company</h4><a href="index.html">Home</a><a href="about.html">About Us</a><a href="order.html">Orders</a></div>
+</div>
+<div class="fbot"><p>&copy; 2026 <strong style="color:rgba(255,255,255,.55)">ASTYL</strong> — All Rights Reserved</p><p>Designed by <strong style="color:rgba(255,255,255,.55)">Atul Mishra</strong></p></div>
+</footer>
+
+<div id="toast" style="position:fixed;bottom:5rem;left:50%;transform:translateX(-50%) translateY(20px);background:var(--ink);color:#fff;padding:.65rem 1.4rem;border-radius:8px;font-size:.8rem;font-weight:600;opacity:0;transition:all .3s;z-index:9998;pointer-events:none;white-space:nowrap"></div>
+
+<script>
+// ── DATA ──────────────────────────────────────────
+const SECTIONS = [
+  {
+    id:'new', title:'New Arrivals', sub:'Just dropped — limited stock', bg:'cream', count:3,
+    products:[
+      {name:'ASTYL Moosetape',tag:'Just Dropped',price:399,was:549,badge:'b-new',badgeTxt:'New',stock:'in',sizes:'S,M,L,XL',img:'https://i.ibb.co/Jj7R1Srb/ASTYL-20260126-114706-0000.png',order:'ASTYL MOOSETAPE&price=399'},
+      {name:'ASTYL Wasted',tag:'New Arrival',price:299,was:449,badge:'b-hot',badgeTxt:'Hot',stock:'low',sizes:'S,M,L,XL',img:'https://i.ibb.co/SwbPbjtD/image.png',order:'ASTYL Wasted&image=https://i.ibb.co/SwbPbjtD/image.png&price=299'},
+      {name:'ASTYL Boss',tag:'New Arrival',price:299,was:449,badge:'b-new',badgeTxt:'New',stock:'in',sizes:'S,M,L,XL',img:'https://i.ibb.co/tTxPk47S/image.png',order:'ASTYL Boss&price=299'},
+    ]
+  },
+  {
+    id:'polo', title:'Polo T-Shirts', sub:'Premium collar tees — colour editions', bg:'smoke', count:6,
+    products:[
+      {name:'ASTYL Snow White',tag:'White · Polo',price:449,stock:'in',sizes:'M,L,XL',img:'https://i.ibb.co/0pkMh54X/Screenshot-2026-03-19-14-38-05-38-2288eca97cc9ad507418a896463c7aa2.jpg',order:'ASTYL Snow White &image=https://i.ibb.co/0pkMh54X/Screenshot-2026-03-19-14-38-05-38-2288eca97cc9ad507418a896463c7aa2.jpg'},
+      {name:'Aeroplane Print Polo',tag:'White · Print',price:449,badge:'b-trend',badgeTxt:'Trending',stock:'in',sizes:'S,M,L,XL',img:'https://i.ibb.co/k664vbjw/Screenshot-2026-03-19-14-37-07-94-2288eca97cc9ad507418a896463c7aa2.jpg',order:'ASTYL Aeroplane Print Polo Tshirt&image=https://i.ibb.co/k664vbjw/Screenshot-2026-03-19-14-37-07-94-2288eca97cc9ad507418a896463c7aa2.jpg'},
+      {name:'Plain White Collar Tee',tag:'White · Collar',price:449,stock:'in',sizes:'S,M,L,XL',img:'https://i.ibb.co/PR3qnPM/Screenshot-2026-03-19-14-37-49-19-2288eca97cc9ad507418a896463c7aa2.jpg',order:'ASTYL Plain white collar tshirt&image=https://i.ibb.co/PR3qnPM/Screenshot-2026-03-19-14-37-49-19-2288eca97cc9ad507418a896463c7aa2.jpg'},
+      {name:'Plain Maroon Collar Tee',tag:'Maroon · Collar',price:449,stock:'in',sizes:'S,M,L,XL',img:'https://i.ibb.co/BKGYzFtK/Screenshot-2026-03-19-14-36-39-01-2288eca97cc9ad507418a896463c7aa2.jpg',order:'ASTYL Plain Maroon Collar Tshirt&image=https://i.ibb.co/BKGYzFtK/Screenshot-2026-03-19-14-36-39-01-2288eca97cc9ad507418a896463c7aa2.jpg'},
+      {name:'Plain Teal Blue Collar Tee',tag:'Teal Blue · Collar',price:449,stock:'low',sizes:'S,M,L,XL',img:'https://i.ibb.co/Xrv59Wtr/Screenshot-2026-03-19-16-23-24-75-2288eca97cc9ad507418a896463c7aa2.jpg',order:'ASTYL Plain Teal Blue collar tshirt&image=https://i.ibb.co/Xrv59Wtr/Screenshot-2026-03-19-16-23-24-75-2288eca97cc9ad507418a896463c7aa2.jpg'},
+      {name:'Yellow Polo Tee',tag:'Yellow · Polo',price:449,badge:'b-hot',badgeTxt:'Popular',stock:'in',sizes:'S,M,L,XL',img:'https://i.ibb.co/7dhYgbZs/Screenshot-2026-03-19-14-36-15-36-2288eca97cc9ad507418a896463c7aa2.jpg',order:'ASTYL Yellow Polo Tshirt&image=https://i.ibb.co/7dhYgbZs/Screenshot-2026-03-19-14-36-15-36-2288eca97cc9ad507418a896463c7aa2.jpg'},
+    ]
+  },
+  {
+    id:'cotton', title:'Cotton T-Shirts', sub:'Everyday comfort, streetwear soul', bg:'cream', count:5,
+    products:[
+      {name:'ASTYL Authentic Indigo',tag:'White · Cotton',price:219,stock:'low',stockTxt:'Only L Left',sizes:'L',img:'https://i.ibb.co/GfDrYtCW/Screenshot-2026-03-19-14-09-33-46-2288eca97cc9ad507418a896463c7aa2.jpg',order:'ASTYL Authentic Indigo&image=https://i.ibb.co/GfDrYtCW/Screenshot-2026-03-19-14-09-33-46-2288eca97cc9ad507418a896463c7aa2.jpg'},
+      {name:'ASTYL U-S-F Olive Tee',tag:'Olive · Cotton',price:329,stock:'in',sizes:'M,L,XL',img:'https://i.ibb.co/pvWZh9Xb/Screenshot-2026-03-19-14-07-28-14-2288eca97cc9ad507418a896463c7aa2.jpg',order:"ASTYL U-S-F White and Olive tshirt&image=https://i.ibb.co/pvWZh9Xb/Screenshot-2026-03-19-14-07-28-14-2288eca97cc9ad507418a896463c7aa2.jpg"},
+      {name:"ASTYL Rollin' In Luck",tag:'Black · Cotton',price:329,badge:'b-trend',badgeTxt:'2 Views',stock:'in',sizes:'S,M,L,XL',img:'https://i.ibb.co/Sw97mXpK/Screenshot-2026-03-19-16-40-56-00-2288eca97cc9ad507418a896463c7aa2.jpg',img2:'https://i.ibb.co/CpX1fvdW/Screenshot-2026-03-19-14-07-09-89-2288eca97cc9ad507418a896463c7aa2.jpg',order:"ASTYL Rollin' In Luck&image=https://i.ibb.co/Sw97mXpK/Screenshot-2026-03-19-16-40-56-00-2288eca97cc9ad507418a896463c7aa2.jpg"},
+      {name:'Bold Graphics — Navy',tag:'Navy · Print',price:339,stock:'in',sizes:'M,L,XL,2XL',img:'https://i.ibb.co/bgLVy6mJ/Screenshot-2026-03-19-13-58-41-82-2288eca97cc9ad507418a896463c7aa2.jpg',order:'ASTYL Bold Graphics print&image=https://i.ibb.co/bgLVy6mJ/Screenshot-2026-03-19-13-58-41-82-2288eca97cc9ad507418a896463c7aa2.jpg'},
+      {name:'Bold Graphics — Off White',tag:'Off White · Print',price:339,stock:'low',stockTxt:'Limited',sizes:'L,2XL',img:'https://i.ibb.co/ZRjx0YGk/Screenshot-2026-03-19-16-51-51-65-2288eca97cc9ad507418a896463c7aa2.jpg',order:'ASTYL Bold Graphics print&image=https://i.ibb.co/ZRjx0YGk/Screenshot-2026-03-19-16-51-51-65-2288eca97cc9ad507418a896463c7aa2.jpg'},
+    ]
+  },
+  {
+    id:'graphic', title:'Graphic &amp; Plain Tees', sub:'Statement prints from ₹179', bg:'smoke', count:9,
+    products:[
+      {name:'ASTYL Marvel',tag:'Black · Graphic',price:299,was:399,badge:'b-hot',badgeTxt:'Best Seller',stock:'low',sizes:'S,M',img:'https://i.ibb.co/7xVRWtHf/LS20251023131254.png',order:'ASTYL Marvel&image=https://i.ibb.co/7xVRWtHf/LS20251023131254.png&price=299'},
+      {name:'ASTYL Batman',tag:'Black · Graphic',price:299,was:399,badge:'b-trend',badgeTxt:'Trending',stock:'in',sizes:'S,M',img:'https://i.ibb.co/gLSTfm3x/LS20251023124704.png',order:'ASTYL Batman&image=https://i.ibb.co/gLSTfm3x/LS20251023124704.png&price=299'},
+      {name:'ASTYL Cool Boss',tag:'Black · Graphic',price:299,was:399,stock:'in',sizes:'S,M',img:'https://i.ibb.co/b52TZ7Vj/image.png',order:'ASTYL Cool Boss&image=https://i.ibb.co/b52TZ7Vj/image.png&price=299'},
+      {name:'Porsche 911 Edition',tag:'Black · Auto',price:299,was:399,stock:'in',sizes:'S,M',img:'https://i.ibb.co/MknVvs1X/LS20251023124801.png',order:'ASTYL Porsche 911&image=https://i.ibb.co/MknVvs1X/LS20251023124801.png&price=299'},
+      {name:'BMW M5 Power',tag:'Black · Auto',price:299,was:399,stock:'in',sizes:'S,M',img:'https://i.ibb.co/MxCMQkwh/LS20251023124811.png',order:'ASTYL BMW M5&image=https://i.ibb.co/MxCMQkwh/LS20251023124811.png&price=299'},
+      {name:'ASTYL Wolf',tag:'Black · Graphic',price:299,was:399,stock:'in',sizes:'S,M',img:'https://i.ibb.co/m5hG8mFf/LS20251023124806.png',order:'ASTYL Wolf&image=https://i.ibb.co/m5hG8mFf/LS20251023124806.png&price=299'},
+      {name:'Just Ride',tag:'Black · Graphic',price:299,was:399,stock:'in',sizes:'S,M',img:'https://i.ibb.co/Zz1Q78Vk/LS20251023124827.png',order:'ASTYL Just Ride&image=https://i.ibb.co/Zz1Q78Vk/LS20251023124827.png&price=299'},
+      {name:'Off-Roading',tag:'Black · Graphic',price:299,was:399,stock:'in',sizes:'S,M',img:'https://i.ibb.co/hJQtWGQ3/LS20251023124817.png',order:'ASTYL Off-roading&image=https://i.ibb.co/hJQtWGQ3/LS20251023124817.png&price=299'},
+      {name:'ASTYL Plain',tag:'Black · Plain',price:179,was:299,badge:'b-sale',badgeTxt:'₹179',stock:'in',sizes:'S,M',img:'https://i.ibb.co/bjFZYjHz/image.png',order:'ASTYL Plain&image=https://i.ibb.co/bjFZYjHz/image.png&price=179'},
+    ]
+  }
+];
+
+const BAND_LABELS = ['POLO TEES','COTTON TEES','GRAPHIC TEES'];
+
+function shareIcos(name,price){
+  const t=encodeURIComponent(`${name} ₹${price}`);
+  return `<a href="https://wa.me/?text=${t}" target="_blank" class="sico"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></a>
+  <a href="https://www.instagram.com/" target="_blank" class="sico"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+  <a href="https://twitter.com/intent/tweet?text=${t}" target="_blank" class="sico"><svg viewBox="0 0 24 24"><path d="M4 4l16 16M20 4L4 20"/></svg></a>`;
+}
+function heartSVG(){return `<svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>`;}
+
+function renderCard(p){
+  const savePct = p.was ? Math.round((1-p.price/p.was)*100) : 0;
+  const stockTxt = p.stockTxt || (p.stock==='in'?'In Stock':'Low Stock');
+  const sizesArr = p.sizes.split(',');
+  const sizeHTML = sizesArr.map((s,i)=>`<button class="sz${i===Math.min(1,sizesArr.length-1)?' active':''}" onclick="selSz(this)">${s.trim()}</button>`).join('');
+  const imgHTML = p.img2
+    ? `<img src="${p.img}" alt="${p.name}" loading="lazy" class="main" style="z-index:1;transition:opacity .4s ease"/><img src="${p.img2}" alt="${p.name} back" loading="lazy" class="hover-img" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .4s ease;z-index:2"/>`
+    : `<img src="${p.img}" alt="${p.name}" loading="lazy"/>`;
+  return `<div class="card reveal">
+    <div class="cimg" onclick="ozoom(this)">
+      ${imgHTML}
+      ${p.badge?`<span class="badge ${p.badge}" style="z-index:5">${p.badgeTxt}</span>`:''}
+      <button class="wish" style="z-index:5" onclick="ev=event;ev.stopPropagation();togWish(this)">${heartSVG()}</button>
+    </div>
+    <div class="cbody">
+      <div class="cmeta"><span class="ctag">${p.tag}</span><span class="stock"><span class="sdot ${p.stock}"></span>${stockTxt}</span></div>
+      <div class="cname">${p.name}</div>
+      <div class="prow"><span class="price">₹${p.price}</span>${p.was?`<span class="pwas">₹${p.was}</span><span class="psave">${savePct}% OFF</span>`:''}</div>
+      <div class="sizes">${sizeHTML}</div>
+      <div class="brow">
+        <button class="btn bc" onclick="addCart('${p.name.replace(/'/g,"\\'")}','${p.price}')">+ Cart</button>
+        <a href="order.html?product=${p.order}" class="btn bb">Buy Now →</a>
+      </div>
+      <div class="srow"><span class="slabel">Share</span>${shareIcos(p.name,p.price)}</div>
+    </div>
+  </div>`;
+}
+
+function renderSection(sec, bandLabel){
+  const bgClass = sec.bg==='smoke' ? 'smoke-bg' : '';
+  const bandHTML = bandLabel ? `<div class="band"><div class="band-txt">${Array(12).fill(bandLabel).join(' &nbsp;·&nbsp; ')} &nbsp;·&nbsp; </div></div>` : '';
+  const innerWrap = sec.bg==='smoke' ? `<div class="${bgClass}"><div class="sec">` : `<div class="sec">`;
+  const innerClose = sec.bg==='smoke' ? `</div></div>` : `</div>`;
+  return `${bandHTML}
+  ${innerWrap}
+    <div class="sec-hdr reveal">
+      <div><div class="sec-title">${sec.title}</div><div class="sec-sub">${sec.sub}</div></div>
+      <div class="sec-count">${String(sec.products.length).padStart(2,'0')} Products</div>
+    </div>
+    <div class="grid">${sec.products.map(renderCard).join('')}</div>
+  ${innerClose}`;
+}
+
+const root = document.getElementById('products-root');
+root.innerHTML = SECTIONS.map((sec,i)=>renderSection(sec, i>0?BAND_LABELS[i-1]:null)).join('');
+
+// ── HOVER swap for dual-image cards ─────────────
+document.querySelectorAll('.cimg').forEach(c=>{
+  const h=c.querySelector('.hover-img');
+  if(!h) return;
+  c.addEventListener('mouseenter',()=>h.style.opacity='1');
+  c.addEventListener('mouseleave',()=>h.style.opacity='0');
+});
+
+// ── ZOOM ────────────────────────────────────────
+function ozoom(container){
+  const hov=container.querySelector('.hover-img');
+  const src = (hov && parseFloat(hov.style.opacity)>0.5) ? hov.src : container.querySelector('img').src;
+  document.getElementById('ZI').src=src;
+  document.getElementById('Z').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function czoom(e){
+  if(!e||e.target===document.getElementById('Z')||e.target.closest('.zcls')){
+    document.getElementById('Z').classList.remove('open');
+    document.body.style.overflow='';
+  }
+}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')czoom({target:document.getElementById('Z')});});
+
+// ── WISHLIST ─────────────────────────────────────
+function togWish(b){b.classList.toggle('liked');showToast(b.classList.contains('liked')?'❤️ Added to wishlist':'🤍 Removed from wishlist');}
+
+// ── SIZE CHIPS ───────────────────────────────────
+function selSz(c){c.closest('.sizes').querySelectorAll('.sz').forEach(s=>s.classList.remove('active'));c.classList.add('active');}
+
+// ── ADD TO CART ──────────────────────────────────
+function addCart(n,p){showToast(`🛒 "${n}" added — ₹${p}`);}
+
+// ── TOAST ─────────────────────────────────────────
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.style.opacity='1';t.style.transform='translateX(-50%) translateY(0)';
+  clearTimeout(t._t);
+  t._t=setTimeout(()=>{t.style.opacity='0';t.style.transform='translateX(-50%) translateY(20px)';},2200);
+}
+
+// ── NAV HAMBURGER ─────────────────────────────────
+const HB=document.getElementById('HB'),MD=document.getElementById('MD');
+HB.addEventListener('click',()=>{HB.classList.toggle('open');MD.classList.toggle('open');});
+document.addEventListener('click',e=>{if(!HB.contains(e.target)&&!MD.contains(e.target)){HB.classList.remove('open');MD.classList.remove('open');}});
+
+// ── BACK TO TOP ───────────────────────────────────
+const btt=document.getElementById('btt');
+window.addEventListener('scroll',()=>btt.classList.toggle('show',window.scrollY>500));
+
+// ── SCROLL REVEAL ─────────────────────────────────
+const obs=new IntersectionObserver(en=>{en.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target);}});},{threshold:0.07});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
