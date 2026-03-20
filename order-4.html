@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Checkout — ASTYL</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+<!-- EmailJS -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<style>
+:root{
+  --ink:#0a0a0a;--smoke:#f0ede8;--cream:#faf9f6;--white:#fff;
+  --red:#d93025;--gold:#b8922a;--muted:#7a7570;--green:#16a34a;
+  --border:rgba(10,10,10,.1);--ease:cubic-bezier(.22,.61,.36,1);
+  --shadow:0 4px 24px rgba(0,0,0,.08);--shadow-h:0 16px 48px rgba(0,0,0,.16);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--smoke);color:var(--ink);min-height:100vh;-webkit-font-smoothing:antialiased}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--smoke)}::-webkit-scrollbar-thumb{background:var(--ink);border-radius:4px}
+
+/* NAV */
+.nav{background:rgba(10,10,10,.97);backdrop-filter:blur(16px);padding:0;position:sticky;top:0;z-index:900;border-bottom:1px solid rgba(255,255,255,.06)}
+.nav-inner{max-width:1200px;margin:0 auto;padding:0 2rem;height:64px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo img{height:42px;filter:brightness(1.2);display:block}
+.nav-links{list-style:none;display:flex;gap:2rem}
+.nav-links a{color:rgba(255,255,255,.7);text-decoration:none;font-size:.78rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;transition:color .2s}.nav-links a:hover{color:#fff}
+.back-btn{display:inline-flex;align-items:center;gap:.4rem;color:rgba(255,255,255,.6);font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;font-weight:500;transition:color .2s}.back-btn:hover{color:#fff}
+.back-btn svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2.5}
+@media(max-width:600px){.nav-links{display:none}}
+
+/* PAGE LAYOUT */
+.page{max-width:1100px;margin:0 auto;padding:3rem 1.5rem 5rem;display:grid;grid-template-columns:1fr 380px;gap:2rem;align-items:start}
+@media(max-width:900px){.page{grid-template-columns:1fr;padding:2rem 1.25rem 4rem}}
+
+/* SECTION CARD */
+.card{background:var(--white);border-radius:16px;padding:2rem;box-shadow:var(--shadow);margin-bottom:1.25rem}
+.card:last-child{margin-bottom:0}
+.card-title{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:.06em;margin-bottom:1.5rem;display:flex;align-items:center;gap:.6rem}
+.card-title .step{width:28px;height:28px;border-radius:50%;background:var(--ink);color:#fff;font-family:'Space Mono',monospace;font-size:.7rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+
+/* PRODUCT PREVIEW */
+.prod-row{display:flex;gap:1.25rem;align-items:flex-start}
+.prod-img-wrap{width:110px;height:110px;border-radius:14px;overflow:hidden;background:var(--smoke);flex-shrink:0;border:2px solid var(--border);box-shadow:0 4px 12px rgba(0,0,0,.1)}
+.prod-img-wrap img{width:100%;height:100%;object-fit:cover;transition:transform .3s var(--ease)}
+.prod-img-wrap:hover img{transform:scale(1.05)}
+.prod-info{flex:1;min-width:0}
+.prod-name{font-size:1rem;font-weight:700;margin-bottom:.25rem;line-height:1.3}
+.prod-tag{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.4rem}
+.prod-price{font-family:'Space Mono',monospace;font-size:1.15rem;font-weight:700;color:#fff;background:var(--ink);display:inline-block;padding:.28rem .65rem;border-radius:7px;margin-top:.1rem}
+.prod-badge{display:inline-flex;align-items:center;gap:.3rem;font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:#f0fdf4;color:var(--green);border:1px solid #bbf7d0;border-radius:20px;padding:.2rem .55rem;margin-bottom:.4rem}
+.prod-badge svg{width:10px;height:10px;stroke:currentColor;fill:none;stroke-width:3}
+.no-product-warn{display:none;text-align:center;padding:1.5rem 1rem;background:#fffbeb;border:1.5px dashed #fde68a;border-radius:12px;margin-bottom:1.25rem}
+.no-product-warn p{font-size:.82rem;color:#92400e;font-weight:500;line-height:1.6}
+.no-product-warn strong{display:block;font-size:1rem;margin-bottom:.35rem;color:#78350f}
+
+/* SIZE SELECTOR */
+.size-grid{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.75rem}
+.size-opt{padding:.35rem .7rem;border:2px solid var(--border);border-radius:6px;font-size:.78rem;font-weight:600;cursor:pointer;transition:all .18s;background:transparent;color:var(--ink);font-family:inherit}
+.size-opt:hover{border-color:var(--ink)}.size-opt.active{background:var(--ink);color:#fff;border-color:var(--ink)}
+.size-label{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:.4rem;margin-top:.75rem;display:block}
+
+/* QUANTITY */
+.qty-wrap{display:inline-flex;align-items:center;gap:0;border:2px solid var(--border);border-radius:10px;overflow:hidden;margin-top:.75rem}
+.qty-btn{width:38px;height:38px;border:none;background:var(--smoke);cursor:pointer;font-size:1.1rem;font-weight:700;color:var(--ink);transition:background .18s;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.qty-btn:hover{background:var(--ink);color:#fff}
+.qty-num{width:44px;text-align:center;font-family:'Space Mono',monospace;font-size:.9rem;font-weight:700;border:none;background:#fff;outline:none;color:var(--ink)}
+
+/* FORM */
+.form-grid{display:grid;gap:1rem}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media(max-width:540px){.form-row{grid-template-columns:1fr}}
+.fg{display:flex;flex-direction:column;gap:.35rem}
+.fg.full{grid-column:1/-1}
+.flabel{font-size:.72rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.flabel .req{color:var(--red);margin-left:2px}
+.finput,.fselect,.ftextarea{padding:.75rem 1rem;border:2px solid var(--border);border-radius:10px;font-family:'DM Sans',sans-serif;font-size:.92rem;background:var(--cream);color:var(--ink);transition:all .2s;width:100%}
+.finput:focus,.fselect:focus,.ftextarea:focus{outline:none;border-color:var(--ink);background:#fff;box-shadow:0 0 0 3px rgba(10,10,10,.06)}
+.finput.error,.fselect.error,.ftextarea.error{border-color:var(--red);background:#fff8f8}
+.ftextarea{min-height:90px;resize:vertical}
+.err-msg{font-size:.72rem;color:var(--red);font-weight:500;display:none}
+.err-msg.show{display:block}
+
+/* PAYMENT OPTIONS */
+.pay-opts{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-top:.25rem}
+@media(max-width:380px){.pay-opts{grid-template-columns:1fr}}
+.pay-opt{display:flex;align-items:center;gap:.75rem;padding:1rem;border:2px solid var(--border);border-radius:12px;cursor:pointer;transition:all .2s;position:relative}
+.pay-opt:hover{border-color:var(--ink)}.pay-opt.selected{border-color:var(--ink);background:var(--ink)}
+.pay-opt input[type=radio]{position:absolute;opacity:0;pointer-events:none}
+.pay-ico{width:36px;height:36px;border-radius:8px;background:var(--smoke);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .2s}
+.pay-opt.selected .pay-ico{background:rgba(255,255,255,.15)}
+.pay-ico svg{width:18px;height:18px;stroke:var(--ink);fill:none;stroke-width:1.8;transition:stroke .2s}
+.pay-opt.selected .pay-ico svg{stroke:#fff}
+.pay-text{flex:1}.pay-name{font-size:.85rem;font-weight:700;transition:color .2s}
+.pay-opt.selected .pay-name{color:#fff}
+.pay-desc{font-size:.7rem;color:var(--muted);transition:color .2s}
+.pay-opt.selected .pay-desc{color:rgba(255,255,255,.6)}
+.pay-check{width:18px;height:18px;border-radius:50%;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s}
+.pay-opt.selected .pay-check{background:var(--red);border-color:var(--red)}
+.pay-check::after{content:'';width:6px;height:6px;border-radius:50%;background:#fff;opacity:0;transition:opacity .2s}
+.pay-opt.selected .pay-check::after{opacity:1}
+
+/* ORDER SUMMARY SIDEBAR */
+.summary-sticky{position:sticky;top:80px}
+.summary-line{display:flex;justify-content:space-between;align-items:center;padding:.6rem 0;border-bottom:1px solid var(--border);font-size:.88rem}
+.summary-line:last-of-type{border-bottom:none}
+.summary-line .label{color:var(--muted)}
+.summary-line .val{font-weight:600;font-family:'Space Mono',monospace;font-size:.82rem}
+.summary-total{display:flex;justify-content:space-between;align-items:center;margin-top:1rem;padding:1rem;background:var(--ink);color:#fff;border-radius:12px}
+.summary-total .tl{font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;opacity:.7}
+.summary-total .tv{font-family:'Space Mono',monospace;font-size:1.3rem;font-weight:700}
+.free-ship{display:inline-flex;align-items:center;gap:.35rem;font-size:.72rem;font-weight:600;color:var(--green);margin-top:.75rem}
+.free-ship svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2.5}
+
+/* SUBMIT BUTTON */
+.submit-btn{width:100%;padding:1rem;margin-top:1.25rem;background:var(--red);color:#fff;border:none;border-radius:12px;font-family:'DM Sans',sans-serif;font-size:.88rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:all .25s var(--ease);display:flex;align-items:center;justify-content:center;gap:.6rem}
+.submit-btn:hover:not(:disabled){background:#c0281f;transform:translateY(-2px);box-shadow:0 8px 24px rgba(217,48,37,.35)}
+.submit-btn:active:not(:disabled){transform:translateY(0)}
+.submit-btn:disabled{opacity:.6;cursor:not-allowed;transform:none}
+.spin{width:18px;height:18px;border:2.5px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* TRUST BADGES */
+.trust-row{display:flex;gap:.75rem;flex-wrap:wrap;margin-top:1rem}
+.trust-badge{display:inline-flex;align-items:center;gap:.35rem;font-size:.7rem;color:var(--muted);font-weight:500}
+.trust-badge svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2}
+
+/* SUCCESS OVERLAY */
+.success-overlay{position:fixed;inset:0;background:rgba(10,10,10,.6);backdrop-filter:blur(8px);z-index:9999;display:none;align-items:center;justify-content:center;padding:2rem}
+.success-overlay.show{display:flex}
+.success-box{background:#fff;border-radius:20px;padding:3rem 2.5rem;max-width:440px;width:100%;text-align:center;box-shadow:0 24px 64px rgba(0,0,0,.3);animation:popIn .4s var(--ease)}
+@keyframes popIn{from{opacity:0;transform:scale(.9) translateY(20px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.success-icon{width:72px;height:72px;background:#f0fdf4;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem}
+.success-icon svg{width:36px;height:36px;stroke:var(--green);fill:none;stroke-width:2.5}
+.success-title{font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:.06em;margin-bottom:.5rem;color:var(--ink)}
+.success-msg{font-size:.9rem;color:var(--muted);line-height:1.65;margin-bottom:1.5rem}
+.success-order{font-family:'Space Mono',monospace;font-size:.78rem;background:var(--smoke);padding:.5rem 1rem;border-radius:8px;color:var(--ink);margin-bottom:1.5rem;display:inline-block}
+.redirect-bar{height:3px;background:var(--smoke);border-radius:3px;overflow:hidden;margin-bottom:1rem}
+.redirect-fill{height:100%;background:var(--green);border-radius:3px;width:0%;transition:width 3s linear}
+.redirect-note{font-size:.72rem;color:var(--muted)}
+
+/* MISC */
+.page-header{text-align:center;margin-bottom:2rem;padding-top:1rem}
+.page-header h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.2rem,5vw,3.2rem);letter-spacing:.06em;line-height:1}
+.page-header p{font-size:.85rem;color:var(--muted);margin-top:.4rem}
+.divider{height:1px;background:var(--border);margin:1.25rem 0}
+.section-label{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:.75rem;display:flex;align-items:center;gap:.5rem}
+.section-label::after{content:'';flex:1;height:1px;background:var(--border)}
+</style>
+</head>
+<body>
+
+<!-- SUCCESS OVERLAY -->
+<div class="success-overlay" id="successOverlay">
+  <div class="success-box">
+    <div class="success-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+    <div class="success-title">Order Placed!</div>
+    <p class="success-msg">Thank you for your order! Your order has been placed successfully. We'll contact you shortly to confirm delivery.</p>
+    <div class="success-order" id="successOrderId"></div>
+    <div class="redirect-bar"><div class="redirect-fill" id="redirectFill"></div></div>
+    <div class="redirect-note">Redirecting you back to products…</div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="product.html" class="nav-logo"><img src="https://i.ibb.co/yFHvS870/7789-removebg-preview.png" alt="ASTYL"/></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="product.html">Products</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+    <a href="product.html" class="back-btn"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg> Back to Shop</a>
+  </div>
+</nav>
+
+<!-- PAGE -->
+<div class="page">
+
+  <!-- LEFT COLUMN -->
+  <div>
+    <div class="page-header">
+      <h1>Checkout</h1>
+      <p>Fill in your details and place your order</p>
+    </div>
+
+    <!-- NO PRODUCT WARNING -->
+    <div class="no-product-warn" id="noProductWarn">
+      <strong>⚠️ No product selected</strong>
+      <p>It looks like you arrived here directly. Please go back to the shop and click <b>"Buy Now"</b> on a product to place your order.</p>
+      <a href="product.html" style="display:inline-block;margin-top:.75rem;padding:.55rem 1.2rem;background:var(--ink);color:#fff;border-radius:8px;font-size:.8rem;font-weight:700;text-decoration:none;letter-spacing:.08em">← Back to Shop</a>
+    </div>
+
+    <form id="orderForm" novalidate>
+
+      <!-- PRODUCT SUMMARY (mobile) -->
+      <div class="card" id="mobileProductCard" style="display:none">
+        <div class="card-title"><span class="step">✦</span> Your Item</div>
+        <div class="prod-row">
+          <div class="prod-img-wrap"><img id="mProdImg" src="" alt="Product"/></div>
+          <div class="prod-info">
+            <div class="prod-badge"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> In Stock</div>
+            <div class="prod-name" id="mProdName">—</div>
+            <div class="prod-tag" id="mProdTag">Premium Streetwear</div>
+            <div class="prod-price" id="mProdPrice">—</div>
+          </div>
+        </div>
+        <span class="size-label">Select Size</span>
+        <div class="size-grid" id="mSizeGrid"></div>
+        <span class="size-label">Quantity</span>
+        <div class="qty-wrap">
+          <button type="button" class="qty-btn" onclick="changeQty(-1)">−</button>
+          <input class="qty-num" id="qtyDisplay" value="1" readonly/>
+          <button type="button" class="qty-btn" onclick="changeQty(1)">+</button>
+        </div>
+      </div>
+
+      <!-- PERSONAL INFO -->
+      <div class="card">
+        <div class="card-title"><span class="step">1</span> Personal Information</div>
+        <div class="form-grid">
+          <div class="form-row">
+            <div class="fg">
+              <label class="flabel">Full Name <span class="req">*</span></label>
+              <input type="text" class="finput" id="fullName" placeholder="Your full name" autocomplete="name"/>
+              <span class="err-msg" id="e-fullName">Please enter your name</span>
+            </div>
+            <div class="fg">
+              <label class="flabel">Phone Number <span class="req">*</span></label>
+              <input type="tel" class="finput" id="phone" placeholder="10-digit number" autocomplete="tel" maxlength="10"/>
+              <span class="err-msg" id="e-phone">Enter a valid 10-digit number</span>
+            </div>
+          </div>
+          <div class="fg">
+            <label class="flabel">Email Address <span style="color:var(--muted);font-size:.65rem">(optional)</span></label>
+            <input type="email" class="finput" id="email" placeholder="you@example.com" autocomplete="email"/>
+            <span class="err-msg" id="e-email">Enter a valid email</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- DELIVERY ADDRESS -->
+      <div class="card">
+        <div class="card-title"><span class="step">2</span> Delivery Address</div>
+        <div class="form-grid">
+          <div class="fg full">
+            <label class="flabel">Complete Address <span class="req">*</span></label>
+            <textarea class="ftextarea" id="address" placeholder="House No., Street, Area, Colony…" autocomplete="street-address"></textarea>
+            <span class="err-msg" id="e-address">Please enter your full address</span>
+          </div>
+          <div class="form-row">
+            <div class="fg">
+              <label class="flabel">City <span class="req">*</span></label>
+              <input type="text" class="finput" id="city" placeholder="Your city" autocomplete="address-level2"/>
+              <span class="err-msg" id="e-city">Enter your city</span>
+            </div>
+            <div class="fg">
+              <label class="flabel">State <span class="req">*</span></label>
+              <input type="text" class="finput" id="state" placeholder="Your state" autocomplete="address-level1"/>
+              <span class="err-msg" id="e-state">Enter your state</span>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="fg">
+              <label class="flabel">Pincode <span class="req">*</span></label>
+              <input type="text" class="finput" id="pincode" placeholder="6-digit pincode" maxlength="6" autocomplete="postal-code"/>
+              <span class="err-msg" id="e-pincode">Enter valid 6-digit pincode</span>
+            </div>
+            <div class="fg">
+              <label class="flabel">Landmark <span style="color:var(--muted);font-size:.65rem">(optional)</span></label>
+              <input type="text" class="finput" id="landmark" placeholder="Nearby landmark"/>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PAYMENT METHOD -->
+      <div class="card">
+        <div class="card-title"><span class="step">3</span> Payment Method</div>
+        <div class="pay-opts">
+          <label class="pay-opt selected" id="pay-cod" onclick="selectPay('cod')">
+            <input type="radio" name="payment" value="cod" checked/>
+            <div class="pay-ico"><svg viewBox="0 0 24 24"><path d="M17 9V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2m2 4h10a2 2 0 0 0 2-2v-6a2 2 0 0 0-2-2H9a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2zm7-5a2 2 0 1 1-4 0 2 2 0 0 1 4 0z"/></svg></div>
+            <div class="pay-text"><div class="pay-name">Cash on Delivery</div><div class="pay-desc">Pay when delivered</div></div>
+            <div class="pay-check"></div>
+          </label>
+          <label class="pay-opt" id="pay-online" onclick="selectPay('online')">
+            <input type="radio" name="payment" value="online"/>
+            <div class="pay-ico"><svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div>
+            <div class="pay-text"><div class="pay-name">Online Payment</div><div class="pay-desc">UPI · Cards · Wallets</div></div>
+            <div class="pay-check"></div>
+          </label>
+        </div>
+        <div id="onlineNote" style="display:none;margin-top:.75rem;padding:.75rem 1rem;background:#fffbeb;border:1px solid #fde68a;border-radius:8px;font-size:.78rem;color:#92400e">
+          💳 Our team will send you a payment link via WhatsApp after confirming your order.
+        </div>
+      </div>
+
+    </form>
+  </div>
+
+  <!-- RIGHT SIDEBAR -->
+  <div class="summary-sticky">
+
+    <!-- Product card (desktop) -->
+    <div class="card" id="desktopProductCard">
+      <div class="card-title" style="margin-bottom:1rem"><span class="step">✦</span> Your Item</div>
+      <div class="prod-row">
+        <div class="prod-img-wrap"><img id="dProdImg" src="" alt="Product"/></div>
+        <div class="prod-info">
+            <div class="prod-badge"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> In Stock</div>
+          <div class="prod-name" id="dProdName">—</div>
+            <div class="prod-tag" id="dProdTag">Premium Streetwear</div>
+          <div class="prod-price" id="dProdPrice">—</div>
+        </div>
+      </div>
+      <span class="size-label">Select Size</span>
+      <div class="size-grid" id="dSizeGrid"></div>
+      <span class="size-label">Quantity</span>
+      <div class="qty-wrap">
+        <button type="button" class="qty-btn" onclick="changeQty(-1)">−</button>
+        <input class="qty-num" id="qtyDisplay2" value="1" readonly/>
+        <button type="button" class="qty-btn" onclick="changeQty(1)">+</button>
+      </div>
+    </div>
+
+    <!-- Price breakdown -->
+    <div class="card">
+      <div class="card-title" style="font-size:1.3rem;margin-bottom:1rem">Order Summary</div>
+      <div class="summary-line"><span class="label">Product</span><span class="val" id="sumProduct">—</span></div>
+      <div class="summary-line"><span class="label">Qty</span><span class="val" id="sumQty">1</span></div>
+      <div class="summary-line"><span class="label">Subtotal</span><span class="val" id="sumSubtotal">—</span></div>
+      <div class="summary-line"><span class="label">Delivery</span><span class="val" id="sumDelivery" style="color:var(--green)">FREE</span></div>
+      <div class="summary-total">
+        <span class="tl">Total</span>
+        <span class="tv" id="sumTotal">—</span>
+      </div>
+      <div class="free-ship"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Free delivery on this order!</div>
+
+      <div class="divider"></div>
+
+      <button type="button" class="submit-btn" id="submitBtn" onclick="submitOrder()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 12V22H4V12"/><path d="M22 7H2v5h20V7z"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
+        Place Order
+      </button>
+
+      <div class="trust-row">
+        <span class="trust-badge"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Secure</span>
+        <span class="trust-badge"><svg viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg> Easy Returns</span>
+        <span class="trust-badge"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.99 12 19.79 19.79 0 0 1 1.95 3.26 2 2 0 0 1 3.92 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 5.99 6l1.17-1.17a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Support</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════
+// 1. EmailJS CONFIG — replace with your credentials
+// ═══════════════════════════════════════════════════
+const EMAILJS_PUBLIC_KEY  = 'YOUR_PUBLIC_KEY';   // from emailjs.com → Account → API Keys
+const EMAILJS_SERVICE_ID  = 'YOUR_SERVICE_ID';   // from emailjs.com → Email Services
+const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';  // from emailjs.com → Email Templates
+
+// Set to false until you configure EmailJS; orders will still show success
+const EMAILJS_CONFIGURED = false;
+
+// ═══════════════════════════════════════════════════
+// 2. URL PARAMS
+// ═══════════════════════════════════════════════════
+const params   = new URLSearchParams(window.location.search);
+const PROD_NAME  = params.get('product') || 'ASTYL Premium Tee';
+const PROD_PRICE = parseInt(params.get('price')) || 299;
+const PROD_IMG   = params.get('image')   || 'https://i.ibb.co/Jj7R1Srb/ASTYL-20260126-114706-0000.png';
+const PROD_SIZES = (params.get('sizes')  || 'S,M,L,XL').split(',').map(s=>s.trim()).filter(Boolean);
+
+// Set browser tab title to product name
+document.title = 'Order — ' + PROD_NAME + ' | ASTYL';
+
+let qty        = 1;
+let selSize    = PROD_SIZES[0] || 'M';
+let payMethod  = 'cod';
+const DELIVERY = 0;
+
+// ═══════════════════════════════════════════════════
+// 3. INIT PAGE
+// ═══════════════════════════════════════════════════
+(function init(){
+  if(EMAILJS_CONFIGURED){
+    emailjs.init(EMAILJS_PUBLIC_KEY);
+  }
+
+  // Responsive: show mobile card on small screens
+  const isMobile = window.innerWidth < 900;
+  document.getElementById('mobileProductCard').style.display = isMobile ? 'block' : 'none';
+  document.getElementById('desktopProductCard').style.display = isMobile ? 'none' : 'block';
+  window.addEventListener('resize', ()=>{
+    const m = window.innerWidth < 900;
+    document.getElementById('mobileProductCard').style.display = m ? 'block' : 'none';
+    document.getElementById('desktopProductCard').style.display = m ? 'none' : 'block';
+  });
+
+  // Show warning if no product was passed via URL
+  const hasProduct = params.get('product');
+  if(!hasProduct){
+    document.getElementById('noProductWarn').style.display = 'block';
+  }
+
+  // Set product info in both mobile + desktop cards
+  ['m','d'].forEach(p=>{
+    document.getElementById(p+'ProdImg').src  = PROD_IMG;
+    document.getElementById(p+'ProdImg').alt  = PROD_NAME;
+    document.getElementById(p+'ProdName').textContent = PROD_NAME;
+    document.getElementById(p+'ProdPrice').textContent = '₹'+PROD_PRICE;
+    const tagEl = document.getElementById(p+'ProdTag');
+    if(tagEl) tagEl.textContent = params.get('category') || 'Premium Streetwear';
+    buildSizeGrid(p+'SizeGrid');
+  });
+
+  updateSummary();
+})();
+
+function buildSizeGrid(containerId){
+  const c = document.getElementById(containerId);
+  c.innerHTML = '';
+  PROD_SIZES.forEach((s,i)=>{
+    const b = document.createElement('button');
+    b.type='button'; b.className='size-opt'+(i===0?' active':'');
+    b.textContent=s;
+    b.dataset.size=s;
+    b.onclick = ()=> selectSize(s);
+    c.appendChild(b);
+  });
+}
+
+// ═══════════════════════════════════════════════════
+// 4. INTERACTIONS
+// ═══════════════════════════════════════════════════
+function selectSize(s){
+  selSize = s;
+  document.querySelectorAll('.size-opt').forEach(b=>{
+    b.classList.toggle('active', b.dataset.size===s);
+  });
+}
+
+function changeQty(d){
+  qty = Math.max(1, Math.min(10, qty+d));
+  document.getElementById('qtyDisplay').value  = qty;
+  document.getElementById('qtyDisplay2').value = qty;
+  updateSummary();
+}
+
+function selectPay(v){
+  payMethod = v;
+  document.getElementById('pay-cod').classList.toggle('selected', v==='cod');
+  document.getElementById('pay-online').classList.toggle('selected', v==='online');
+  document.getElementById('onlineNote').style.display = v==='online' ? 'block' : 'none';
+  document.querySelectorAll('input[name=payment]').forEach(r=>r.checked = r.value===v);
+}
+
+function updateSummary(){
+  const sub = PROD_PRICE * qty;
+  document.getElementById('sumProduct').textContent   = PROD_NAME.length>22 ? PROD_NAME.slice(0,22)+'…' : PROD_NAME;
+  document.getElementById('sumQty').textContent       = qty;
+  document.getElementById('sumSubtotal').textContent  = '₹'+sub;
+  document.getElementById('sumTotal').textContent     = '₹'+(sub+DELIVERY);
+}
+
+// ═══════════════════════════════════════════════════
+// 5. VALIDATION
+// ═══════════════════════════════════════════════════
+function clearErrors(){
+  document.querySelectorAll('.finput,.fselect,.ftextarea').forEach(el=>el.classList.remove('error'));
+  document.querySelectorAll('.err-msg').forEach(el=>el.classList.remove('show'));
+}
+
+function showErr(fieldId, msgId){
+  document.getElementById(fieldId).classList.add('error');
+  document.getElementById('e-'+msgId).classList.add('show');
+}
+
+function validateForm(){
+  clearErrors();
+  let ok = true;
+
+  const name  = document.getElementById('fullName').value.trim();
+  const phone = document.getElementById('phone').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const addr  = document.getElementById('address').value.trim();
+  const city  = document.getElementById('city').value.trim();
+  const state = document.getElementById('state').value.trim();
+  const pin   = document.getElementById('pincode').value.trim();
+
+  if(!name){showErr('fullName','fullName');ok=false;}
+  if(!/^[6-9]\d{9}$/.test(phone)){showErr('phone','phone');ok=false;}
+  if(email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){showErr('email','email');ok=false;}
+  if(!addr){showErr('address','address');ok=false;}
+  if(!city){showErr('city','city');ok=false;}
+  if(!state){showErr('state','state');ok=false;}
+  if(!/^\d{6}$/.test(pin)){showErr('pincode','pincode');ok=false;}
+
+  if(!ok){
+    // Scroll to first error
+    const firstErr = document.querySelector('.finput.error,.ftextarea.error');
+    if(firstErr) firstErr.scrollIntoView({behavior:'smooth',block:'center'});
+  }
+  return ok;
+}
+
+// ═══════════════════════════════════════════════════
+// 6. ORDER SUBMISSION
+// ═══════════════════════════════════════════════════
+function submitOrder(){
+  if(!validateForm()) return;
+
+  const btn = document.getElementById('submitBtn');
+  btn.disabled = true;
+  btn.innerHTML = `<div class="spin"></div> Placing Order…`;
+
+  const name     = document.getElementById('fullName').value.trim();
+  const phone    = document.getElementById('phone').value.trim();
+  const email    = document.getElementById('email').value.trim() || 'Not provided';
+  const addr     = document.getElementById('address').value.trim();
+  const city     = document.getElementById('city').value.trim();
