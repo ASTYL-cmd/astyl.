@@ -1,0 +1,92 @@
+      ${imgHTML}
+      ${p.badge?`<span class="badge ${p.badge}" style="z-index:5">${p.badgeTxt}</span>`:''}
+      <button class="wish" style="z-index:5" onclick="ev=event;ev.stopPropagation();togWish(this)">${heartSVG()}</button>
+    </div>
+    <div class="cbody">
+      <div class="cmeta"><span class="ctag">${p.tag}</span><span class="stock"><span class="sdot ${p.stock}"></span>${stockTxt}</span></div>
+      <div class="cname">${p.name}</div>
+      <div class="prow"><span class="price">₹${p.price}</span>${p.was?`<span class="pwas">₹${p.was}</span><span class="psave">${savePct}% OFF</span>`:''}</div>
+      <div class="sizes">${sizeHTML}</div>
+      <div class="brow">
+        <button class="btn bc" onclick="addCart('${p.name.replace(/'/g,"\\'")}','${p.price}')">+ Cart</button>
+        <a href="order.html?product=${p.order}" class="btn bb">Buy Now →</a>
+      </div>
+      <div class="srow"><span class="slabel">Share</span>${shareIcos(p.name,p.price)}</div>
+    </div>
+  </div>`;
+}
+
+function renderSection(sec, bandLabel){
+  const bgClass = sec.bg==='smoke' ? 'smoke-bg' : '';
+  const bandHTML = bandLabel ? `<div class="band"><div class="band-txt">${Array(12).fill(bandLabel).join(' &nbsp;·&nbsp; ')} &nbsp;·&nbsp; </div></div>` : '';
+  const innerWrap = sec.bg==='smoke' ? `<div class="${bgClass}"><div class="sec">` : `<div class="sec">`;
+  const innerClose = sec.bg==='smoke' ? `</div></div>` : `</div>`;
+  return `${bandHTML}
+  ${innerWrap}
+    <div class="sec-hdr reveal">
+      <div><div class="sec-title">${sec.title}</div><div class="sec-sub">${sec.sub}</div></div>
+      <div class="sec-count">${String(sec.products.length).padStart(2,'0')} Products</div>
+    </div>
+    <div class="grid">${sec.products.map(renderCard).join('')}</div>
+  ${innerClose}`;
+}
+
+const root = document.getElementById('products-root');
+root.innerHTML = SECTIONS.map((sec,i)=>renderSection(sec, i>0?BAND_LABELS[i-1]:null)).join('');
+
+// ── HOVER swap for dual-image cards ─────────────
+document.querySelectorAll('.cimg').forEach(c=>{
+  const h=c.querySelector('.hover-img');
+  if(!h) return;
+  c.addEventListener('mouseenter',()=>h.style.opacity='1');
+  c.addEventListener('mouseleave',()=>h.style.opacity='0');
+});
+
+// ── ZOOM ────────────────────────────────────────
+function ozoom(container){
+  const hov=container.querySelector('.hover-img');
+  const src = (hov && parseFloat(hov.style.opacity)>0.5) ? hov.src : container.querySelector('img').src;
+  document.getElementById('ZI').src=src;
+  document.getElementById('Z').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function czoom(e){
+  if(!e||e.target===document.getElementById('Z')||e.target.closest('.zcls')){
+    document.getElementById('Z').classList.remove('open');
+    document.body.style.overflow='';
+  }
+}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')czoom({target:document.getElementById('Z')});});
+
+// ── WISHLIST ─────────────────────────────────────
+function togWish(b){b.classList.toggle('liked');showToast(b.classList.contains('liked')?'❤️ Added to wishlist':'🤍 Removed from wishlist');}
+
+// ── SIZE CHIPS ───────────────────────────────────
+function selSz(c){c.closest('.sizes').querySelectorAll('.sz').forEach(s=>s.classList.remove('active'));c.classList.add('active');}
+
+// ── ADD TO CART ──────────────────────────────────
+function addCart(n,p){showToast(`🛒 "${n}" added — ₹${p}`);}
+
+// ── TOAST ─────────────────────────────────────────
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.style.opacity='1';t.style.transform='translateX(-50%) translateY(0)';
+  clearTimeout(t._t);
+  t._t=setTimeout(()=>{t.style.opacity='0';t.style.transform='translateX(-50%) translateY(20px)';},2200);
+}
+
+// ── NAV HAMBURGER ─────────────────────────────────
+const HB=document.getElementById('HB'),MD=document.getElementById('MD');
+HB.addEventListener('click',()=>{HB.classList.toggle('open');MD.classList.toggle('open');});
+document.addEventListener('click',e=>{if(!HB.contains(e.target)&&!MD.contains(e.target)){HB.classList.remove('open');MD.classList.remove('open');}});
+
+// ── BACK TO TOP ───────────────────────────────────
+const btt=document.getElementById('btt');
+window.addEventListener('scroll',()=>btt.classList.toggle('show',window.scrollY>500));
+
+// ── SCROLL REVEAL ─────────────────────────────────
+const obs=new IntersectionObserver(en=>{en.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target);}});},{threshold:0.07});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
