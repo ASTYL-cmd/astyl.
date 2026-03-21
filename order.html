@@ -165,13 +165,13 @@ body{font-family:'DM Sans',sans-serif;background:var(--smoke);color:var(--ink);m
 <!-- NAV -->
 <nav class="nav">
   <div class="nav-inner">
-    <a href="product.html" class="nav-logo"><img src="https://i.ibb.co/yFHvS870/7789-removebg-preview.png" alt="ASTYL"/></a>
+    <a href="product-3.html" class="nav-logo"><img src="https://i.ibb.co/yFHvS870/7789-removebg-preview.png" alt="ASTYL"/></a>
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
-      <li><a href="product.html">Products</a></li>
+      <li><a href="product-3.html">Products</a></li>
       <li><a href="about.html">About</a></li>
     </ul>
-    <a href="product.html" class="back-btn"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg> Back to Shop</a>
+    <a href="product-3.html" class="back-btn"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg> Back to Shop</a>
   </div>
 </nav>
 
@@ -189,32 +189,32 @@ body{font-family:'DM Sans',sans-serif;background:var(--smoke);color:var(--ink);m
     <div class="no-product-warn" id="noProductWarn">
       <strong>⚠️ No product selected</strong>
       <p>It looks like you arrived here directly. Please go back to the shop and click <b>"Buy Now"</b> on a product to place your order.</p>
-      <a href="product.html" style="display:inline-block;margin-top:.75rem;padding:.55rem 1.2rem;background:var(--ink);color:#fff;border-radius:8px;font-size:.8rem;font-weight:700;text-decoration:none;letter-spacing:.08em">← Back to Shop</a>
+      <a href="product-3.html" style="display:inline-block;margin-top:.75rem;padding:.55rem 1.2rem;background:var(--ink);color:#fff;border-radius:8px;font-size:.8rem;font-weight:700;text-decoration:none;letter-spacing:.08em">← Back to Shop</a>
+    </div>
+
+    <!-- PRODUCT SUMMARY (mobile) - must be outside form to prevent button conflicts -->
+    <div class="card" id="mobileProductCard" style="display:none">
+      <div class="card-title"><span class="step">✦</span> Your Item</div>
+      <div class="prod-row">
+        <div class="prod-img-wrap"><img id="mProdImg" src="" alt="Product"/></div>
+        <div class="prod-info">
+          <div class="prod-badge"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> In Stock</div>
+          <div class="prod-name" id="mProdName">—</div>
+          <div class="prod-tag" id="mProdTag">Premium Streetwear</div>
+          <div class="prod-price" id="mProdPrice">—</div>
+        </div>
+      </div>
+      <span class="size-label">Select Size</span>
+      <div class="size-grid" id="mSizeGrid"></div>
+      <span class="size-label">Quantity</span>
+      <div class="qty-wrap">
+        <button type="button" class="qty-btn" onclick="changeQty(-1)">−</button>
+        <span class="qty-num" id="qtyDisplay">1</span>
+        <button type="button" class="qty-btn" onclick="changeQty(1)">+</button>
+      </div>
     </div>
 
     <form id="orderForm" novalidate>
-
-      <!-- PRODUCT SUMMARY (mobile) -->
-      <div class="card" id="mobileProductCard" style="display:none">
-        <div class="card-title"><span class="step">✦</span> Your Item</div>
-        <div class="prod-row">
-          <div class="prod-img-wrap"><img id="mProdImg" src="" alt="Product"/></div>
-          <div class="prod-info">
-            <div class="prod-badge"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> In Stock</div>
-            <div class="prod-name" id="mProdName">—</div>
-            <div class="prod-tag" id="mProdTag">Premium Streetwear</div>
-            <div class="prod-price" id="mProdPrice">—</div>
-          </div>
-        </div>
-        <span class="size-label">Select Size</span>
-        <div class="size-grid" id="mSizeGrid"></div>
-        <span class="size-label">Quantity</span>
-        <div class="qty-wrap">
-          <button type="button" class="qty-btn" onclick="changeQty(-1)">−</button>
-          <input class="qty-num" id="qtyDisplay" value="1" readonly/>
-          <button type="button" class="qty-btn" onclick="changeQty(1)">+</button>
-        </div>
-      </div>
 
       <!-- PERSONAL INFO -->
       <div class="card">
@@ -300,7 +300,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--smoke);color:var(--ink);m
     </form>
   </div>
 
-  <!-- RIGHT SIDEBAR -->
+<!-- RIGHT SIDEBAR -->
   <div class="summary-sticky">
 
     <!-- Product card (desktop) -->
@@ -320,7 +320,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--smoke);color:var(--ink);m
       <span class="size-label">Quantity</span>
       <div class="qty-wrap">
         <button type="button" class="qty-btn" onclick="changeQty(-1)">−</button>
-        <input class="qty-num" id="qtyDisplay2" value="1" readonly/>
+        <span class="qty-num" id="qtyDisplay2">1</span>
         <button type="button" class="qty-btn" onclick="changeQty(1)">+</button>
       </div>
     </div>
@@ -372,14 +372,17 @@ const EMAILJS_CONFIGURED = false;
 const params   = new URLSearchParams(window.location.search);
 const PROD_NAME  = params.get('product') || 'ASTYL Premium Tee';
 const PROD_PRICE = parseInt(params.get('price')) || 299;
+// URLSearchParams.get() already decodes percent-encoding, so image URL is clean
 const PROD_IMG   = params.get('image')   || 'https://i.ibb.co/Jj7R1Srb/ASTYL-20260126-114706-0000.png';
 const PROD_SIZES = (params.get('sizes')  || 'S,M,L,XL').split(',').map(s=>s.trim()).filter(Boolean);
+const PROD_SEL_SIZE = params.get('selsize') || '';
+const PROD_WAS   = parseInt(params.get('was')) || 0;
 
 // Set browser tab title to product name
 document.title = 'Order — ' + PROD_NAME + ' | ASTYL';
 
 let qty        = 1;
-let selSize    = PROD_SIZES[0] || 'M';
+let selSize    = PROD_SEL_SIZE || PROD_SIZES[0] || 'M';
 let payMethod  = 'cod';
 const DELIVERY = 0;
 
@@ -408,14 +411,36 @@ const DELIVERY = 0;
   }
 
   // Set product info in both mobile + desktop cards
-  ['m','d'].forEach(p=>{
-    document.getElementById(p+'ProdImg').src  = PROD_IMG;
-    document.getElementById(p+'ProdImg').alt  = PROD_NAME;
-    document.getElementById(p+'ProdName').textContent = PROD_NAME;
-    document.getElementById(p+'ProdPrice').textContent = '₹'+PROD_PRICE;
-    const tagEl = document.getElementById(p+'ProdTag');
+  ['m','d'].forEach(prefix=>{
+    const imgEl = document.getElementById(prefix+'ProdImg');
+    if(imgEl){
+      imgEl.src = PROD_IMG;
+      imgEl.alt = PROD_NAME;
+      // Fallback if image fails to load
+      imgEl.onerror = function(){ this.src='https://i.ibb.co/Jj7R1Srb/ASTYL-20260126-114706-0000.png'; this.onerror=null; };
+    }
+    const nameEl = document.getElementById(prefix+'ProdName');
+    if(nameEl) nameEl.textContent = PROD_NAME;
+
+    const priceEl = document.getElementById(prefix+'ProdPrice');
+    if(priceEl){
+      priceEl.textContent = '₹'+PROD_PRICE;
+      // Show original price + savings badge if discounted
+      if(PROD_WAS && PROD_WAS > PROD_PRICE){
+        const savePct = Math.round((1 - PROD_PRICE/PROD_WAS)*100);
+        const wasSpan = document.createElement('span');
+        wasSpan.style.cssText = 'font-family:Space Mono,monospace;font-size:.75rem;color:var(--muted);text-decoration:line-through;margin-left:.4rem;font-weight:400;background:none;padding:0';
+        wasSpan.textContent = '₹'+PROD_WAS;
+        const saveBadge = document.createElement('span');
+        saveBadge.style.cssText = 'font-size:.6rem;font-weight:700;background:#f0fdf4;color:var(--green);border:1px solid #bbf7d0;border-radius:4px;padding:.15rem .4rem;margin-left:.4rem';
+        saveBadge.textContent = savePct+'% OFF';
+        priceEl.insertAdjacentElement('afterend', saveBadge);
+        priceEl.insertAdjacentElement('afterend', wasSpan);
+      }
+    }
+    const tagEl = document.getElementById(prefix+'ProdTag');
     if(tagEl) tagEl.textContent = params.get('category') || 'Premium Streetwear';
-    buildSizeGrid(p+'SizeGrid');
+    buildSizeGrid(prefix+'SizeGrid');
   });
 
   updateSummary();
@@ -423,12 +448,16 @@ const DELIVERY = 0;
 
 function buildSizeGrid(containerId){
   const c = document.getElementById(containerId);
+  if(!c) return;
   c.innerHTML = '';
-  PROD_SIZES.forEach((s,i)=>{
+  PROD_SIZES.forEach((s)=>{
     const b = document.createElement('button');
-    b.type='button'; b.className='size-opt'+(i===0?' active':'');
-    b.textContent=s;
-    b.dataset.size=s;
+    b.type='button';
+    // Pre-select the size that was active on the product page
+    const isActive = s === selSize;
+    b.className = 'size-opt' + (isActive ? ' active' : '');
+    b.textContent = s;
+    b.dataset.size = s;
     b.onclick = ()=> selectSize(s);
     c.appendChild(b);
   });
@@ -446,8 +475,6 @@ function selectSize(s){
 
 function changeQty(d){
   qty = Math.max(1, Math.min(10, qty+d));
-  document.getElementById('qtyDisplay').value  = qty;
-  document.getElementById('qtyDisplay2').value = qty;
   updateSummary();
 }
 
@@ -461,10 +488,23 @@ function selectPay(v){
 
 function updateSummary(){
   const sub = PROD_PRICE * qty;
-  document.getElementById('sumProduct').textContent   = PROD_NAME.length>22 ? PROD_NAME.slice(0,22)+'…' : PROD_NAME;
-  document.getElementById('sumQty').textContent       = qty;
-  document.getElementById('sumSubtotal').textContent  = '₹'+sub;
-  document.getElementById('sumTotal').textContent     = '₹'+(sub+DELIVERY);
+  const total = sub + DELIVERY;
+
+  const sumProduct = document.getElementById('sumProduct');
+  const sumQty     = document.getElementById('sumQty');
+  const sumSub     = document.getElementById('sumSubtotal');
+  const sumTotal   = document.getElementById('sumTotal');
+
+  if(sumProduct) sumProduct.textContent = PROD_NAME.length > 22 ? PROD_NAME.slice(0,22)+'…' : PROD_NAME;
+  if(sumQty)     sumQty.textContent     = qty;
+  if(sumSub)     sumSub.textContent     = '₹'+sub;
+  if(sumTotal)   sumTotal.textContent   = '₹'+total;
+
+  // Keep both quantity displays in sync
+  const q1 = document.getElementById('qtyDisplay');
+  const q2 = document.getElementById('qtyDisplay2');
+  if(q1) q1.textContent = qty;
+  if(q2) q2.textContent = qty;
 }
 
 // ═══════════════════════════════════════════════════
