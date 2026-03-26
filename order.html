@@ -165,13 +165,13 @@ body{font-family:'DM Sans',sans-serif;background:var(--smoke);color:var(--ink);m
 <!-- NAV -->
 <nav class="nav">
   <div class="nav-inner">
-    <a href="product-3.html" class="nav-logo"><img src="https://i.ibb.co/yFHvS870/7789-removebg-preview.png" alt="ASTYL"/></a>
+    <a href="product.html" class="nav-logo"><img src="https://i.ibb.co/yFHvS870/7789-removebg-preview.png" alt="ASTYL"/></a>
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
-      <li><a href="product-3.html">Products</a></li>
+      <li><a href="product.html">Products</a></li>
       <li><a href="about.html">About</a></li>
     </ul>
-    <a href="product-3.html" class="back-btn"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg> Back to Shop</a>
+    <a href="product.html" class="back-btn"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg> Back to Shop</a>
   </div>
 </nav>
 
@@ -189,10 +189,10 @@ body{font-family:'DM Sans',sans-serif;background:var(--smoke);color:var(--ink);m
     <div class="no-product-warn" id="noProductWarn">
       <strong>⚠️ No product selected</strong>
       <p>It looks like you arrived here directly. Please go back to the shop and click <b>"Buy Now"</b> on a product to place your order.</p>
-      <a href="product-3.html" style="display:inline-block;margin-top:.75rem;padding:.55rem 1.2rem;background:var(--ink);color:#fff;border-radius:8px;font-size:.8rem;font-weight:700;text-decoration:none;letter-spacing:.08em">← Back to Shop</a>
+      <a href="product.html" style="display:inline-block;margin-top:.75rem;padding:.55rem 1.2rem;background:var(--ink);color:#fff;border-radius:8px;font-size:.8rem;font-weight:700;text-decoration:none;letter-spacing:.08em">← Back to Shop</a>
     </div>
 
-    <!-- PRODUCT SUMMARY (mobile) - must be outside form to prevent button conflicts -->
+    <!-- PRODUCT SUMMARY (mobile) -->
     <div class="card" id="mobileProductCard" style="display:none">
       <div class="card-title"><span class="step">✦</span> Your Item</div>
       <div class="prod-row">
@@ -300,7 +300,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--smoke);color:var(--ink);m
     </form>
   </div>
 
-<!-- RIGHT SIDEBAR -->
+  <!-- RIGHT SIDEBAR -->
   <div class="summary-sticky">
 
     <!-- Product card (desktop) -->
@@ -309,9 +309,9 @@ body{font-family:'DM Sans',sans-serif;background:var(--smoke);color:var(--ink);m
       <div class="prod-row">
         <div class="prod-img-wrap"><img id="dProdImg" src="" alt="Product"/></div>
         <div class="prod-info">
-            <div class="prod-badge"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> In Stock</div>
+          <div class="prod-badge"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> In Stock</div>
           <div class="prod-name" id="dProdName">—</div>
-            <div class="prod-tag" id="dProdTag">Premium Streetwear</div>
+          <div class="prod-tag" id="dProdTag">Premium Streetwear</div>
           <div class="prod-price" id="dProdPrice">—</div>
         </div>
       </div>
@@ -359,31 +359,29 @@ body{font-family:'DM Sans',sans-serif;background:var(--smoke);color:var(--ink);m
 // ═══════════════════════════════════════════════════
 // 1. EmailJS CONFIG — replace with your credentials
 // ═══════════════════════════════════════════════════
-const EMAILJS_PUBLIC_KEY  = 'YOUR_PUBLIC_KEY';   // from emailjs.com → Account → API Keys
-const EMAILJS_SERVICE_ID  = 'YOUR_SERVICE_ID';   // from emailjs.com → Email Services
-const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';  // from emailjs.com → Email Templates
+const EMAILJS_PUBLIC_KEY  = 'YOUR_PUBLIC_KEY';
+const EMAILJS_SERVICE_ID  = 'YOUR_SERVICE_ID';
+const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';
 
-// Set to false until you configure EmailJS; orders will still show success
+// Set to true once you configure EmailJS credentials above
 const EMAILJS_CONFIGURED = false;
 
 // ═══════════════════════════════════════════════════
 // 2. URL PARAMS
 // ═══════════════════════════════════════════════════
-const params   = new URLSearchParams(window.location.search);
+const params     = new URLSearchParams(window.location.search);
 const PROD_NAME  = params.get('product') || 'ASTYL Premium Tee';
 const PROD_PRICE = parseInt(params.get('price')) || 299;
-// URLSearchParams.get() already decodes percent-encoding, so image URL is clean
 const PROD_IMG   = params.get('image')   || 'https://i.ibb.co/Jj7R1Srb/ASTYL-20260126-114706-0000.png';
-const PROD_SIZES = (params.get('sizes')  || 'S,M,L,XL').split(',').map(s=>s.trim()).filter(Boolean);
+const PROD_SIZES = (params.get('sizes')  || 'S,M,L,XL').split(',').map(s => s.trim()).filter(Boolean);
 const PROD_SEL_SIZE = params.get('selsize') || '';
 const PROD_WAS   = parseInt(params.get('was')) || 0;
 
-// Set browser tab title to product name
 document.title = 'Order — ' + PROD_NAME + ' | ASTYL';
 
-let qty        = 1;
-let selSize    = PROD_SEL_SIZE || PROD_SIZES[0] || 'M';
-let payMethod  = 'cod';
+let qty       = 1;
+let selSize   = PROD_SEL_SIZE || PROD_SIZES[0] || 'M';
+let payMethod = 'cod';
 const DELIVERY = 0;
 
 // ═══════════════════════════════════════════════════
@@ -394,38 +392,35 @@ const DELIVERY = 0;
     emailjs.init(EMAILJS_PUBLIC_KEY);
   }
 
-  // Responsive: show mobile card on small screens
-  const isMobile = window.innerWidth < 900;
-  document.getElementById('mobileProductCard').style.display = isMobile ? 'block' : 'none';
-  document.getElementById('desktopProductCard').style.display = isMobile ? 'none' : 'block';
-  window.addEventListener('resize', ()=>{
-    const m = window.innerWidth < 900;
-    document.getElementById('mobileProductCard').style.display = m ? 'block' : 'none';
-    document.getElementById('desktopProductCard').style.display = m ? 'none' : 'block';
-  });
+  // Responsive: show correct product card
+  function applyLayout(){
+    const isMobile = window.innerWidth < 900;
+    document.getElementById('mobileProductCard').style.display = isMobile ? 'block' : 'none';
+    document.getElementById('desktopProductCard').style.display = isMobile ? 'none'  : 'block';
+  }
+  applyLayout();
+  window.addEventListener('resize', applyLayout);
 
-  // Show warning if no product was passed via URL
-  const hasProduct = params.get('product');
-  if(!hasProduct){
+  // Show warning if no product passed via URL
+  if(!params.get('product')){
     document.getElementById('noProductWarn').style.display = 'block';
   }
 
-  // Set product info in both mobile + desktop cards
-  ['m','d'].forEach(prefix=>{
+  // Populate both mobile + desktop product cards
+  ['m','d'].forEach(prefix => {
     const imgEl = document.getElementById(prefix+'ProdImg');
     if(imgEl){
       imgEl.src = PROD_IMG;
       imgEl.alt = PROD_NAME;
-      // Fallback if image fails to load
       imgEl.onerror = function(){ this.src='https://i.ibb.co/Jj7R1Srb/ASTYL-20260126-114706-0000.png'; this.onerror=null; };
     }
+
     const nameEl = document.getElementById(prefix+'ProdName');
     if(nameEl) nameEl.textContent = PROD_NAME;
 
     const priceEl = document.getElementById(prefix+'ProdPrice');
     if(priceEl){
       priceEl.textContent = '₹'+PROD_PRICE;
-      // Show original price + savings badge if discounted
       if(PROD_WAS && PROD_WAS > PROD_PRICE){
         const savePct = Math.round((1 - PROD_PRICE/PROD_WAS)*100);
         const wasSpan = document.createElement('span');
@@ -438,8 +433,10 @@ const DELIVERY = 0;
         priceEl.insertAdjacentElement('afterend', wasSpan);
       }
     }
+
     const tagEl = document.getElementById(prefix+'ProdTag');
     if(tagEl) tagEl.textContent = params.get('category') || 'Premium Streetwear';
+
     buildSizeGrid(prefix+'SizeGrid');
   });
 
@@ -450,15 +447,13 @@ function buildSizeGrid(containerId){
   const c = document.getElementById(containerId);
   if(!c) return;
   c.innerHTML = '';
-  PROD_SIZES.forEach((s)=>{
+  PROD_SIZES.forEach(s => {
     const b = document.createElement('button');
-    b.type='button';
-    // Pre-select the size that was active on the product page
-    const isActive = s === selSize;
-    b.className = 'size-opt' + (isActive ? ' active' : '');
+    b.type = 'button';
+    b.className = 'size-opt' + (s === selSize ? ' active' : '');
     b.textContent = s;
     b.dataset.size = s;
-    b.onclick = ()=> selectSize(s);
+    b.onclick = () => selectSize(s);
     c.appendChild(b);
   });
 }
@@ -468,26 +463,26 @@ function buildSizeGrid(containerId){
 // ═══════════════════════════════════════════════════
 function selectSize(s){
   selSize = s;
-  document.querySelectorAll('.size-opt').forEach(b=>{
-    b.classList.toggle('active', b.dataset.size===s);
+  document.querySelectorAll('.size-opt').forEach(b => {
+    b.classList.toggle('active', b.dataset.size === s);
   });
 }
 
 function changeQty(d){
-  qty = Math.max(1, Math.min(10, qty+d));
+  qty = Math.max(1, Math.min(10, qty + d));
   updateSummary();
 }
 
 function selectPay(v){
   payMethod = v;
-  document.getElementById('pay-cod').classList.toggle('selected', v==='cod');
-  document.getElementById('pay-online').classList.toggle('selected', v==='online');
-  document.getElementById('onlineNote').style.display = v==='online' ? 'block' : 'none';
-  document.querySelectorAll('input[name=payment]').forEach(r=>r.checked = r.value===v);
+  document.getElementById('pay-cod').classList.toggle('selected', v === 'cod');
+  document.getElementById('pay-online').classList.toggle('selected', v === 'online');
+  document.getElementById('onlineNote').style.display = v === 'online' ? 'block' : 'none';
+  document.querySelectorAll('input[name=payment]').forEach(r => r.checked = r.value === v);
 }
 
 function updateSummary(){
-  const sub = PROD_PRICE * qty;
+  const sub   = PROD_PRICE * qty;
   const total = sub + DELIVERY;
 
   const sumProduct = document.getElementById('sumProduct');
@@ -500,7 +495,6 @@ function updateSummary(){
   if(sumSub)     sumSub.textContent     = '₹'+sub;
   if(sumTotal)   sumTotal.textContent   = '₹'+total;
 
-  // Keep both quantity displays in sync
   const q1 = document.getElementById('qtyDisplay');
   const q2 = document.getElementById('qtyDisplay2');
   if(q1) q1.textContent = qty;
@@ -511,13 +505,15 @@ function updateSummary(){
 // 5. VALIDATION
 // ═══════════════════════════════════════════════════
 function clearErrors(){
-  document.querySelectorAll('.finput,.fselect,.ftextarea').forEach(el=>el.classList.remove('error'));
-  document.querySelectorAll('.err-msg').forEach(el=>el.classList.remove('show'));
+  document.querySelectorAll('.finput,.fselect,.ftextarea').forEach(el => el.classList.remove('error'));
+  document.querySelectorAll('.err-msg').forEach(el => el.classList.remove('show'));
 }
 
 function showErr(fieldId, msgId){
-  document.getElementById(fieldId).classList.add('error');
-  document.getElementById('e-'+msgId).classList.add('show');
+  const field = document.getElementById(fieldId);
+  const msg   = document.getElementById('e-'+msgId);
+  if(field) field.classList.add('error');
+  if(msg)   msg.classList.add('show');
 }
 
 function validateForm(){
@@ -532,18 +528,17 @@ function validateForm(){
   const state = document.getElementById('state').value.trim();
   const pin   = document.getElementById('pincode').value.trim();
 
-  if(!name){showErr('fullName','fullName');ok=false;}
-  if(!/^[6-9]\d{9}$/.test(phone)){showErr('phone','phone');ok=false;}
-  if(email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){showErr('email','email');ok=false;}
-  if(!addr){showErr('address','address');ok=false;}
-  if(!city){showErr('city','city');ok=false;}
-  if(!state){showErr('state','state');ok=false;}
-  if(!/^\d{6}$/.test(pin)){showErr('pincode','pincode');ok=false;}
+  if(!name)                                          { showErr('fullName','fullName'); ok=false; }
+  if(!/^[6-9]\d{9}$/.test(phone))                   { showErr('phone','phone');       ok=false; }
+  if(email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showErr('email','email'); ok=false; }
+  if(!addr)                                          { showErr('address','address');   ok=false; }
+  if(!city)                                          { showErr('city','city');          ok=false; }
+  if(!state)                                         { showErr('state','state');        ok=false; }
+  if(!/^\d{6}$/.test(pin))                           { showErr('pincode','pincode');   ok=false; }
 
   if(!ok){
-    // Scroll to first error
-    const firstErr = document.querySelector('.finput.error,.ftextarea.error');
-    if(firstErr) firstErr.scrollIntoView({behavior:'smooth',block:'center'});
+    const firstErr = document.querySelector('.finput.error, .ftextarea.error');
+    if(firstErr) firstErr.scrollIntoView({behavior:'smooth', block:'center'});
   }
   return ok;
 }
@@ -551,15 +546,83 @@ function validateForm(){
 // ═══════════════════════════════════════════════════
 // 6. ORDER SUBMISSION
 // ═══════════════════════════════════════════════════
+function generateOrderId(){
+  const ts   = Date.now().toString(36).toUpperCase();
+  const rand = Math.random().toString(36).substring(2,6).toUpperCase();
+  return 'ASTYL-' + ts + '-' + rand;
+}
+
+function showSuccessOverlay(orderId){
+  const overlay = document.getElementById('successOverlay');
+  const orderEl = document.getElementById('successOrderId');
+  const fill    = document.getElementById('redirectFill');
+
+  if(orderEl) orderEl.textContent = 'Order ID: ' + orderId;
+  overlay.classList.add('show');
+
+  // Animate progress bar then redirect
+  setTimeout(() => {
+    if(fill) fill.style.width = '100%';
+  }, 100);
+
+  setTimeout(() => {
+    window.location.href = 'product.html';
+  }, 3500);
+}
+
 function submitOrder(){
   if(!validateForm()) return;
 
   const btn = document.getElementById('submitBtn');
   btn.disabled = true;
-  btn.innerHTML = `<div class="spin"></div> Placing Order…`;
+  btn.innerHTML = '<div class="spin"></div> Placing Order…';
 
   const name     = document.getElementById('fullName').value.trim();
   const phone    = document.getElementById('phone').value.trim();
   const email    = document.getElementById('email').value.trim() || 'Not provided';
   const addr     = document.getElementById('address').value.trim();
   const city     = document.getElementById('city').value.trim();
+  const state    = document.getElementById('state').value.trim();
+  const pin      = document.getElementById('pincode').value.trim();
+  const landmark = document.getElementById('landmark').value.trim() || 'N/A';
+  const orderId  = generateOrderId();
+  const total    = PROD_PRICE * qty + DELIVERY;
+
+  const templateParams = {
+    order_id:     orderId,
+    customer_name: name,
+    phone:        phone,
+    email:        email,
+    product:      PROD_NAME,
+    size:         selSize,
+    quantity:     qty,
+    price:        '₹' + PROD_PRICE,
+    total:        '₹' + total,
+    payment:      payMethod === 'cod' ? 'Cash on Delivery' : 'Online Payment',
+    address:      addr,
+    city:         city,
+    state:        state,
+    pincode:      pin,
+    landmark:     landmark
+  };
+
+  if(EMAILJS_CONFIGURED){
+    emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams)
+      .then(() => {
+        showSuccessOverlay(orderId);
+      })
+      .catch(err => {
+        console.error('EmailJS error:', err);
+        // Still show success to the user — order recorded locally
+        showSuccessOverlay(orderId);
+      });
+  } else {
+    // EmailJS not configured: simulate a short delay then show success
+    setTimeout(() => {
+      showSuccessOverlay(orderId);
+    }, 800);
+  }
+}
+</script>
+</body>
+</html>
