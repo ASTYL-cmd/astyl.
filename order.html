@@ -586,7 +586,7 @@ function submitOrder(){
 
   const name     = document.getElementById('fullName').value.trim();
   const phone    = document.getElementById('phone').value.trim();
-  const email    = document.getElementById('email').value.trim() || 'Not provided';
+  const email    = document.getElementById('email').value.trim()
   const addr     = document.getElementById('address').value.trim();
   const city     = document.getElementById('city').value.trim();
   const state    = document.getElementById('state').value.trim();
@@ -626,6 +626,35 @@ function submitOrder(){
       }
       errBanner.textContent = '❌ Failed to send order. Please check your connection and try again.';
     });
+  function confirmOrder() {
+  // 1. Get the value of the email input
+  const emailInput = document.getElementById("email").value.trim();
+  const errorMessage = document.getElementById("e-email");
+
+  // 2. Check if the email is empty
+  if (emailInput === "") {
+    // Show the error message (assuming you use CSS to make it visible)
+    errorMessage.style.display = "block"; 
+    errorMessage.innerText = "Email is required to confirm the order.";
+    
+    // STOP the function here so the order does NOT process
+    return; 
+  } else {
+    // Hide the error message if they typed something
+    errorMessage.style.display = "none";
+  }
+
+  // 3. Optional: Check if it's an actual valid email format
+  if (!emailInput.includes("@")) {
+    errorMessage.style.display = "block";
+    errorMessage.innerText = "Please enter a valid email address.";
+    return;
+  }
+
+  // --- YOUR EXISTING ORDER SUBMISSION CODE GOES HERE ---
+  // console.log("Order confirmed!");
+  }
+  
 }
 </script>
 </body>
